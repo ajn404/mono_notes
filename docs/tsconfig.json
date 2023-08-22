@@ -10,6 +10,7 @@
     "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
     "allowJs": true,
+    "strictNullChecks": true,
     "paths": {
       "@components/*": ["src/components/*"],
       "@/*": ["src/*"]
