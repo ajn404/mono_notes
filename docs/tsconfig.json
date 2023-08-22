@@ -1,3 +1,17 @@
 {
-  "extends": "astro/tsconfigs/strict"
+  "extends": "astro/tsconfigs/base",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ],
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "allowJs": true
+  },
+  "paths": {
+    "@components/*": ["src/components/*"]
+  }
 }
