@@ -1,17 +1,15 @@
 <template>
-    <div>
+    <div class="vue">
         vue demo
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-console.log('vue');
-const value = ref(0)
-console.log(value.value);
-
+console.log('vue yes');
 </script>
 
-<style lang="" scoped>
-
+<style lang="css" scoped>
+.vue {
+    text-shadow: 1px 1px 1px red;
+}
 </style>

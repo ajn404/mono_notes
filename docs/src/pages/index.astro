@@ -1,9 +1,10 @@
 ---
 import Vuedemo from "../components/vueDemo.vue";
 import ReactDemo from "../components/reactDemo.tsx";
+import MySiteLayout from "@/layouts/demoLayout.astro";
 ---
 
-<html lang="en">
+<!-- <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -13,7 +14,11 @@ import ReactDemo from "../components/reactDemo.tsx";
   </head>
   <body>
     <h1>Astro</h1>
-    <Vuedemo client:load />
-    <ReactDemo client:load />
+   
   </body>
-</html>
+</html> -->
+<MySiteLayout title="Home Page">
+  <p>我的页面内容，被包裹在一个布局中！</p>
+  <Vuedemo client:load />
+  <ReactDemo client:load />
+</MySiteLayout>

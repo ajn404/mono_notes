@@ -1,0 +1,28 @@
+---
+const { title } = Astro.props;
+---
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <nav>
+      <a href="#">主页</a>
+      <a href="#">文章</a>
+      <a href="#">联系</a>
+    </nav>
+
+
+    <h1>{title}</h1>
+    <article>
+      <slot />
+      <!-- 你的内容会被插入到这里 -->
+    </article>
+  </body>
+</html>

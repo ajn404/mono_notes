@@ -9,9 +9,11 @@
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
-    "allowJs": true
-  },
-  "paths": {
-    "@components/*": ["src/components/*"]
+    "allowJs": true,
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@/*": ["src/*"]
+    },
+    "baseUrl": "."
   }
 }
