@@ -64,6 +64,8 @@ contents = value.map((v) => v);
   $closeBtnLineDelay: 0.15s;
   $fullExpandAT: $moveAT + $expandDelay + $expandAT;
   $contentFadeinAT: 0.5s;
+    $elW: calc((100% - $elMrg * ($numOfEls - 1)) / $numOfEls);
+
   @mixin elHover {
     .el:hover & {
       @content;
@@ -100,6 +102,10 @@ contents = value.map((v) => v);
         background-image: url("/imgs/hutao#{$i + 3}.webp");
         background-blend-mode: overlay;
       }
+
+        .el-#{$i}:not(.s--active)  .el__bg::before{
+            left:$elW * $i!important;
+        }
     }
 
     &__inner {
@@ -113,7 +119,6 @@ contents = value.map((v) => v);
   }
 
   .el {
-    $elW: calc((100% - $elMrg * ($numOfEls - 1)) / $numOfEls);
     $elMrgRel: percentage(calc($elMrg / $elW));
 
     position: absolute;
@@ -401,12 +406,17 @@ contents = value.map((v) => v);
           transition-delay: $initDelayStep * $i;
         }
 
+        &.s--active{
+        .el__bg ::before    {  
+            left: 0!important;;
+         }
+
+        }
+
         .el__bg {   
           transform: translate3d($elW * $i * -1, 0, 0);
             
-
-
-          &:before {
+          &::before {
             transition-delay: 0.1s * $i;
             background-image: url("/imgs/hutao#{$i + 3}.webp");
           }

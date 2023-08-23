@@ -3,8 +3,8 @@ import { defineCollection, z } from "astro:content";
 const philosophy = defineCollection({
   // Type-check frontmatter using a schema
   schema: z.object({
-    title: z.string(),
-    description: z.string(),
+    title: z.string().optional(),
+    description: z.string().optional(),
   }),
 });
 
