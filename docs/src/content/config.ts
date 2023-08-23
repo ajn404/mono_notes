@@ -8,4 +8,12 @@ const philosophy = defineCollection({
   }),
 });
 
-export const collections = { philosophy };
+const reactLearning = defineCollection({
+  // Type-check frontmatter using a schema
+  schema: z.object({
+    title: z.string().optional(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { philosophy, reactLearning };
