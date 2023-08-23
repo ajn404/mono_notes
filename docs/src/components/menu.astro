@@ -1,9 +1,11 @@
 ---
-
 import { getCollection } from "astro:content";
-const {collection} = Astro.props;
+interface Props {
+  collection: "philosophy";
+}
+const collection = Astro.props.collection;
 const posts = await getCollection(collection);
-let contents: any[] = [];
+let contents: unknown[] = [];
 const postsAll = posts.map((post) => post.render());
 const value = await Promise.all(postsAll);
 contents = value.map((v) => v);
@@ -13,18 +15,18 @@ contents = value.map((v) => v);
   <div class="cont__inner">
     {
       posts.map((item, index) => (
-        <div class="el">
+        <div class={`el el-${index}`}>
           <div class="el__overflow">
             <div class="el__inner">
-              <div class="el__bg"></div>
+              <div class="el__bg" />
               <div class="el__preview-cont">
                 <h2 class="el__heading">{item.data.title}</h2>
               </div>
               <div class="el__content">
                 <div class="el__text">
                   <article>
-                    {<contents[index].Content></contents[index].Content>}
-                  </article>
+                    { <contents[index].Content></contents[index].Content>}
+                    </article>
                 </div>
                 <div class="el__close-btn" />
               </div>
@@ -91,7 +93,14 @@ contents = value.map((v) => v);
     overflow: hidden;
     height: 100vh;
     padding: $vertPad $sidePad;
-    background: #1f1f1f;
+    background-size: cover;
+    background-position: center center;
+    @for $i from 0 to $numOfEls {
+      &:has(.el-#{$i}.s--active) {
+        background-image: url("/imgs/hutao#{$i + 3}.webp");
+        background-blend-mode: overlay;
+      }
+    }
 
     &__inner {
       position: relative;
@@ -140,7 +149,6 @@ contents = value.map((v) => v);
 
     &__bg {
       position: relative;
-      width: calc(100vw - #{$sidePad * 2});
       height: 100%;
       transition: transform $moveAT $expandAT;
       will-change: transform;
@@ -380,12 +388,12 @@ contents = value.map((v) => v);
         $x: (100% + $elMrgRel) * $i;
         transform: translate3d($x, 0, 0);
         transform-origin: $x + 50% 50%;
-
         @include contElActive {
           &:not(.s--active) {
             transform: scale(0.5) translate3d($x, 0, 0);
             opacity: 0;
             transition: transform $fadeoutAT, opacity $fadeoutAT;
+
           }
         }
 
@@ -393,12 +401,14 @@ contents = value.map((v) => v);
           transition-delay: $initDelayStep * $i;
         }
 
-        .el__bg {
+        .el__bg {   
           transform: translate3d($elW * $i * -1, 0, 0);
+            
+
 
           &:before {
             transition-delay: 0.1s * $i;
-            background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-#{$i + 3}.jpg");
+            background-image: url("/imgs/hutao#{$i + 3}.webp");
           }
         }
       }
@@ -448,10 +458,9 @@ contents = value.map((v) => v);
 </style>
 
 <script>
- 
-    var $cont = document.querySelector(".cont");
-  var $elsArr = [].slice.call(document.querySelectorAll(".el"));
-  var $closeBtnsArr = [].slice.call(
+  let $cont = document.querySelector(".cont");
+  let $elsArr = [].slice.call(document.querySelectorAll(".el"));
+  let $closeBtnsArr = [].slice.call(
     document.querySelectorAll(".el__close-btn")
   );
 
