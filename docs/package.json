@@ -12,12 +12,18 @@
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",
     "@astrojs/react": "^2.3.2",
+    "@astrojs/tailwind": "^4.0.0",
     "@astrojs/ts-plugin": "^1.1.1",
     "@astrojs/vue": "^2.2.1",
+    "@nextui-org/react": "^2.1.5",
+    "@nextui-org/system": "^2.0.5",
+    "@nextui-org/theme": "^2.1.2",
     "astro": "^2.10.12",
+    "framer-motion": "^10.16.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.66.1",
+    "tailwindcss": "^3.3.3",
     "vue": "^3.3.4"
   }
 }

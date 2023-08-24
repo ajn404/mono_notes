@@ -1,4 +1,4 @@
-const reactDemo = () => {
+const ReactDemo = () => {
   return (
     <div>
       <h1>Hedy Lamarr's Todos</h1>
@@ -7,4 +7,4 @@ const reactDemo = () => {
     </div>
   );
 };
-export default reactDemo;
+export default ReactDemo;
