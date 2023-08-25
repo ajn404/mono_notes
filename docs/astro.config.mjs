@@ -13,4 +13,5 @@ export default defineConfig({
       configFile: "./tailwind.config.cjs",
     }),
   ],
+  server: { port: 3333 },
 });

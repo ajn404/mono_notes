@@ -1,14 +1,17 @@
 ---
+
 import { getCollection } from "astro:content";
 interface Props {
   collection: "philosophy"|"reactLearning";
 }
 const collection = Astro.props.collection;
+
 const posts = await getCollection(collection);
 let contents: unknown[] = [];
 const postsAll = posts.map((post) => post.render());
 const value = await Promise.all(postsAll);
 contents = value.map((v) => v);
+
 ---
 
 <div class="cont s--inactive">
