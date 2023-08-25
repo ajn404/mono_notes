@@ -1,0 +1,21 @@
+---
+import MySiteLayout from "@/layouts/demoLayout.astro";
+import { reactLearningPages } from "@/utils/content";
+export async function getStaticPaths() {
+  return reactLearningPages.map((page) => {
+    return {
+      props: page,
+      params: {
+        slug: page.slug,
+      },
+    };
+  });
+}
+
+const { data, render } = Astro.props;
+const { Content, headings } = await render();
+---
+
+<MySiteLayout title="Home Page" {...{ data, headings }}>
+  <Content />
+</MySiteLayout>
