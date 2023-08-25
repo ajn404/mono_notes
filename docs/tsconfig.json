@@ -8,13 +8,14 @@
     ],
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "allowJs": true,
     "strictNullChecks": true,
     "paths": {
       "@components/*": ["src/components/*"],
       "@/*": ["src/*"]
     },
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": ["astro/client"]
   }
 }

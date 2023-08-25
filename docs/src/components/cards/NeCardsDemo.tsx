@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, CardHeader, CardFooter, Image, Button } from "@nextui-org/react";
-
 export default function App() {
   return (
     <div className="max-w-[900px] gap-2 grid grid-cols-12 grid-rows-2 px-8">
