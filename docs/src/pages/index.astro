@@ -1,8 +1,12 @@
 ---
 import MySiteLayout from "@/layouts/demoLayout.astro";
+import Cards from "@components/cards/NeCardsDemo.tsx";
+import "@/styles/base.css";
 import Menu from "@components/menu.astro";
 ---
 
 <MySiteLayout title="Home Page">
   <Menu collection="philosophy" />
 </MySiteLayout>
+
+<Cards client:load />

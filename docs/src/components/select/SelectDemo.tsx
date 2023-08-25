@@ -8,7 +8,6 @@ import { animals } from "./data";
 
 const SelectDemo = () => {
   return (
-    //@ts-ignore
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
       <Select label="Select an animal" className="max-w-xs">
         {animals.map((animal) => (
