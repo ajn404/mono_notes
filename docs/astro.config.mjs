@@ -11,7 +11,6 @@ export default defineConfig({
         port: 3333
     },
     base: '/mono_notes',
-    trailingSlash: 'always',
     build: {
         assets: 'static',
         inlineStylesheets: 'always'
