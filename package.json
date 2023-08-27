@@ -5,8 +5,32 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "pnpm  -F @notes/docs dev"
+    "docs": "pnpm  -F @notes/docs dev",
+    "cz": "cz",
+    "prepare": "husky install",
+    "format:check": "prettier --plugin-search-dir=. --check .",
+    "format": "prettier --plugin-search-dir=. --write ."
   },
   "author": "ajn404",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "commitizen": "^4.3.0",
+    "prettier": "^2.8.8",
+    "eslint": "^8.40.0",
+    "eslint-plugin-astro": "^0.27.0",
+    "prettier-plugin-tailwindcss": "^0.2.8"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,mdx,json}": [
+      "prettier --plugin-search-dir=. --write"
+    ]
+  }
 }

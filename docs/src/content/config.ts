@@ -1,19 +1,8 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { blogSchema } from "./_schemas";
 
-const philosophy = defineCollection({
-  // Type-check frontmatter using a schema
-  schema: z.object({
-    title: z.string().optional(),
-    description: z.string().optional(),
-  }),
+const blog = defineCollection({
+  schema: blogSchema,
 });
 
-const reactLearning = defineCollection({
-  // Type-check frontmatter using a schema
-  schema: z.object({
-    title: z.string().optional(),
-    description: z.string().optional(),
-  }),
-});
-
-export const collections = { philosophy, reactLearning };
+export const collections = { blog };
