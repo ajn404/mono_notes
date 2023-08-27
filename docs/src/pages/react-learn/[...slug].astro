@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 
 const { data, render } = Astro.props;
 const { Content, headings } = await render();
+console.log(headings);
 ---
 
 <MySiteLayout title="Home Page" {...{ data, headings }}>

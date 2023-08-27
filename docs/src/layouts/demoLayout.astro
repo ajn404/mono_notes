@@ -1,6 +1,5 @@
 ---
 import BaseHead from "@components/BaseHead.astro";
-import { Example } from "@components/menu/Example";
 ---
 
 <html lang="en">
@@ -8,7 +7,7 @@ import { Example } from "@components/menu/Example";
     <BaseHead />
   </head>
   <body>
-    <Example client:load />
+    <h1>{Astro.props.title}</h1>
     <slot />
   </body>
 </html>
