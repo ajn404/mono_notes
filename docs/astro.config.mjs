@@ -7,6 +7,9 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+    server: {
+        port:3333
+    },
   site: "https://astro-paper.pages.dev/", // replace this with your deployed domain
   integrations: [
     tailwind({
