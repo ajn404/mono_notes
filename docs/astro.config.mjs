@@ -8,43 +8,44 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
     server: {
-        port:3333
+        port: 3333
     },
     base: '/mono_notes',
     trailingSlash: 'always',
-     build: {
-    assets: 'static'
-  },
-  
-  site: "https://ajn404.github.io/mono_notes/", // replace this with your deployed domain
-  integrations: [
-    tailwind({
-      config: {
-        applyBaseStyles: false,
-      },
-    }),
-    react(),
-    sitemap(),
-  ],
-  markdown: {
-    remarkPlugins: [
-      remarkToc,
-      [
-        remarkCollapse,
-        {
-          test: "Table of contents",
-        },
-      ],
+    build: {
+        assets: 'static',
+        inlineStylesheets: 'always'
+    },
+
+    site: "https://ajn404.github.io/mono_notes/", // replace this with your deployed domain
+    integrations: [
+        tailwind({
+            config: {
+                applyBaseStyles: false,
+            },
+        }),
+        react(),
+        sitemap(),
     ],
-    shikiConfig: {
-      theme: "one-dark-pro",
-      wrap: true,
+    markdown: {
+        remarkPlugins: [
+            remarkToc,
+            [
+                remarkCollapse,
+                {
+                    test: "Table of contents",
+                },
+            ],
+        ],
+        shikiConfig: {
+            theme: "one-dark-pro",
+            wrap: true,
+        },
+        extendDefaultPlugins: true,
     },
-    extendDefaultPlugins: true,
-  },
-  vite: {
-    optimizeDeps: {
-      exclude: ["@resvg/resvg-js"],
+    vite: {
+        optimizeDeps: {
+            exclude: ["@resvg/resvg-js"],
+        },
     },
-  },
 });
