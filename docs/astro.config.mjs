@@ -12,6 +12,9 @@ export default defineConfig({
     },
     base: '/mono_notes',
     trailingSlash: 'always',
+     build: {
+    assets: 'static'
+  },
   
   site: "https://ajn404.github.io/mono_notes/", // replace this with your deployed domain
   integrations: [
