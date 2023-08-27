@@ -43,7 +43,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-       - name: Build VuePress site
+      - name: Build VuePress site
         run: pnpm  -F @notes/docs build
 
       - name: Deploy to GitHub Pages
