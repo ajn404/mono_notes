@@ -10,6 +10,7 @@ export default defineConfig({
     server: {
         port:3333
     },
+  base:'/mono_notes',
   site: "https://astro-paper.pages.dev/", // replace this with your deployed domain
   integrations: [
     tailwind({
