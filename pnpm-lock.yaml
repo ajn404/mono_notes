@@ -33,12 +33,14 @@ importers:
       '@resvg/resvg-js': ^2.4.1
       '@tailwindcss/typography': ^0.5.9
       '@types/github-slugger': ^1.3.0
+      '@types/p5': ^1.7.0
       '@types/react': ^18.2.6
       '@typescript-eslint/parser': ^5.59.5
       astro: ^2.4.5
       astro-eslint-parser: ^0.14.0
       fuse.js: ^6.6.2
       github-slugger: ^2.0.0
+      p5: ^1.7.0
       react: ^18.2.0
       react-dom: ^18.2.0
       remark-collapse: ^0.1.2
@@ -49,9 +51,11 @@ importers:
       '@astrojs/mdx': 0.19.7_astro@2.10.12
       '@astrojs/rss': 2.4.4
       '@resvg/resvg-js': 2.4.1
+      '@types/p5': 1.7.0
       astro: 2.10.12
       fuse.js: 6.6.2
       github-slugger: 2.0.0
+      p5: 1.7.0
       remark-collapse: 0.1.2
       remark-toc: 8.0.1
       satori: 0.8.1
@@ -1517,6 +1521,10 @@ packages:
     resolution: {integrity: sha512-bUBrPjEry2QUTsnuEjzjbS7voGWCc30W0qzgMf90GPeDGFRakvrz47ju+oqDAKCXLUCe39u57/ORMl/O/04/9g==}
     dev: true
     optional: true
+
+  /@types/p5/1.7.0:
+    resolution: {integrity: sha512-6AnjmW98/edgXB+pYDBx7t6QbCogIG6NUzey93JpGTZA4096C+KjSN8y0sj43QRd9XtblrAhoRXHj1pFZ2vsCg==}
+    dev: false
 
   /@types/parse5/6.0.3:
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
@@ -4877,6 +4885,10 @@ packages:
   /p-try/2.2.0:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
     engines: {node: '>=6'}
+    dev: false
+
+  /p5/1.7.0:
+    resolution: {integrity: sha512-qrbT/44Dwm63ZtOKX/mp61pw+5yj6ijYLOmRv7p6zcfjbo83Vb0gVFEvW0kTLFu7hceWCig0HONo9F1bSlqbsQ==}
     dev: false
 
   /pako/0.2.9:
