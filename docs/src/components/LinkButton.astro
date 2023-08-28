@@ -12,7 +12,7 @@ const { href, className, ariaLabel, title, disabled = false } = Astro.props;
 ---
 
 <a
-  href={disabled ? "#" : href}
+  href={disabled ? "#" : (import.meta.env.BASE_URL+href)}
   tabindex={disabled ? "-1" : "0"}
   class={`group inline-block ${className}`}
   aria-label={ariaLabel}
