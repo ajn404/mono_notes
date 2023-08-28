@@ -1,9 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import Tag from "@components/Tag.astro";
-import Datetime from "@components/Datetime";
+import Header from "@components/UI/Header.astro";
+import Footer from "@components/UI/Footer.astro";
+import Tag from "@components/UI/Tag.astro";
+import Datetime from "@components/UI/Datetime";
 import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 
@@ -28,7 +28,7 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
       class="focus-outline mb-2 mt-8 flex hover:opacity-75"
       onclick="
       history.back()
-"
+      "
     >
       <svg xmlns="http://www.w3.org/2000/svg"
         ><path

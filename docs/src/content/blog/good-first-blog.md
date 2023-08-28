@@ -1,0 +1,17 @@
+---
+title: 第一篇博客
+author: ajn404
+pubDatetime: 2023-08-28 02:49:58
+postSlug: 第一篇博客
+featured: false
+draft: false
+tags:
+  - astro
+description:
+  "first-blog"
+---
+
+## 旅途开始
+
+### 原来的note部分迁移（类似vue=>react）
+
