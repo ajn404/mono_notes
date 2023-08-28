@@ -28,4 +28,27 @@ import Text from '@components/UI/Text.tsx'
 <Text client:load>文字渐变色背景使用</Text>
 
 
+### framer-motion useScroll
+
+```tsx
+import "./styles.css";
+import { motion, useScroll } from "framer-motion";
+
+export default function App() {
+  const { scrollYProgress } = useScroll();
+  return (
+    <>
+      <motion.div
+        className="progress-bar"
+        style={{ scaleX: scrollYProgress }}
+      />
+    </>
+  );
+}
+
+```
+import MotionScroll from '@components/UI/motionScroll.tsx'
+
+<MotionScroll client:load></MotionScroll>
+
 ### 相关链接
