@@ -1,5 +1,4 @@
 import type { ReactElement, ReactNode } from 'react';
-import './text.scss'
 interface Props {
     children: ReactNode
 }

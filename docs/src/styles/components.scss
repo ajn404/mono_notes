@@ -1,22 +1,27 @@
 
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: #ff0055;
+  transform-origin: 0%;
+}
+
+
 .text-container{
-    /*
- * Animation module with all animation code
- */
+
  .anim-text-flow,
 .anim-text-flow-hover:hover {
-  /*
-   * Animation variables
-   */
+
   $animationSteps: 20;
   $animationDuration: 50;
   $animationElement: span;
   $animationElementsCount: 100;
   $delayBetweenLetters: 0.2;
 
-  /*
-   * Elements settings
-   */
+
   #{$animationElement} {
     animation-name: anim-text-flow-keys;
     animation-duration: #{$animationDuration}s;
@@ -25,9 +30,6 @@
     animation-fill-mode: forwards;
   }
 
-  /*
-   * Keyframe loop
-   */
   @keyframes anim-text-flow-keys {
     @for $i from 0 through $animationSteps {
       #{percentage($i * calc(1 / $animationSteps))} {
@@ -36,9 +38,6 @@
     }
   }
 
-  /*
-   * Element animation delay loop
-   */
   $totalDelayTime: $animationElementsCount * $delayBetweenLetters;
 
   @for $i from 1 through $animationElementsCount {
@@ -48,9 +47,6 @@
   }
 }
 
-////////////////////////////
-// DEMO CODE 
-///////////////////////////
 
 
 

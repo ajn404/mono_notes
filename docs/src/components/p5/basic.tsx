@@ -37,19 +37,23 @@ const Basic = () => {
         })
     }
 
-    useEffect(() => {
-        start()
-    })
+    // useEffect(() => {
+    //     start()
+    // })
     const stop = () => {
         if (arr.length>0) {
             arr.pop()?.remove()
         }
     }
     return (
-        <div ref={container} id="container" className='relative flex flex-wrap  w-full min-h-10 content-center cursor-none'>
+
+        <div className='relative flex flex-col  justify-center items-center'>
             <button className='w-[100px] h-[100px]' style={{color:'rgba(var(--color-text-base), var(--tw-text-opacity)) !important'}}  onClick={stop}>-1</button>
-            <button className='w-[100px] h-[100px]'  style={{color:'rgba(var(--color-text-base), var(--tw-text-opacity)) !important'}}   onClick={start}>+7</button>
+            <button className='w-[100px] h-[100px]' style={{ color: 'rgba(var(--color-text-base), var(--tw-text-opacity)) !important' }} onClick={start}>+7</button>
+        <div ref={container} id="container" className=' flex flex-wrap  w-full min-h-10 content-center cursor-none'>
+          
         </div>
+          </div>
     )
 }
 

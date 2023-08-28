@@ -1,4 +1,3 @@
-import "./motionScroll.css";
 import { motion, useScroll } from "framer-motion";
 
 export default function App() {
@@ -8,7 +7,7 @@ export default function App() {
     <>
       <motion.div
         className="progress-bar"
-        style={{ scaleX: scrollYProgress }}
+        style={{ scaleX: scrollYProgress,position:'fixed' }}
       />
       </>
   );
