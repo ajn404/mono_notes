@@ -11,16 +11,17 @@ import SearchBar from "@components/UI/Search";
 const posts = await getCollection("blog", ({ data }) => !data.draft);
 
 // List of items to search in
-const searchList = posts.map(({ data }) => ({
+const searchList = posts.map(({ data,body }) => ({
   title: data.title,
   description: data.description,
   data,
+  body
 }));
 ---
 
 <Layout title={`Search | ${SITE.title}`}>
   <Header activeNav="search" />
-  <Main pageTitle="Search" pageDesc="Search any article ...">
+  <Main pageTitle="Search" pageDesc="搜索文章 ...">
     <SearchBar client:load searchList={searchList} />
   </Main>
   <Footer />

@@ -5,7 +5,7 @@
   left: 0.75em;
   right: 0;
   height: 10px;
-  background: #ff0055;
+  background: linear-gradient(to right,rgb(255, 0, 85) 0%, #e0e 50%, rgb(255, 0, 85) 100%);
   transform-origin: 50%;
   z-index: 9999;
 }

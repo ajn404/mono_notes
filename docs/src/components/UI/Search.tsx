@@ -20,6 +20,7 @@ interface SearchResult {
 }
 
 export default function SearchBar({ searchList }: Props) {
+    
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputVal, setInputVal] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[] | null>(
@@ -33,7 +34,7 @@ export default function SearchBar({ searchList }: Props) {
   const fuse = useMemo(
     () =>
       new Fuse(searchList, {
-        keys: ["title", "description"],
+        keys: ["title", "description","body"],
         includeMatches: true,
         minMatchCharLength: 2,
         threshold: 0.5,
@@ -111,7 +112,7 @@ export default function SearchBar({ searchList }: Props) {
         {searchResults &&
           searchResults.map(({ item, refIndex }) => (
             <Card
-              href={`/posts/${slugify(item.data)}`}
+              href={`${import.meta.env.BASE_URL}posts/${slugify(item.data)}`}
               frontmatter={item.data}
               key={`${refIndex}-${slugify(item.data)}`}
             />
