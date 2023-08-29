@@ -67,40 +67,43 @@ import Noise from '@components/doodle/noise.tsx';
 
 ```tsx
 import 'css-doodle';
-import {useRef,useEffect,useState} from 'react';
+import {
+    useEffect, useState, type ReactNode, type ReactElement, useRef
+} from 'react';
 
-const Noise: React.FunctionComponent = () => {
-    const doodle = useRef(null);
-    let [show,setShow] = useState(false)
+interface Props {
+    children: ReactNode,
+    download?: Boolean
+}
 
-    let [sync] = useState(`@place-cell: center;
-    @size: calc(@i * 1.5%);
-    :doodle {
-        width: 50vmax; 
-        height: 50vmax;
-    }
-    z-index: calc(999 - @i);
-    border-radius: 60%;
-    border: 1px @p(dashed, solid, double) hsl(@rn(255), 70%, @rn(60, 90%));
-    border-bottom-color: transparent;
-    border-left-color: transparent;
-    transform: 
-        rotate(@rn(-720deg, 720deg))
-        scale(@rn(.8, 1.2, 3));`)
+const Doodle: React.FunctionComponent<Props> = ({ children, download }) => {
+    let value = (children as ReactElement).props.value;
+    let doodle = useRef<any>(null)
+    let [show, setShow] = useState(false)
     const click = () => {
         setShow(show => !show);
     }
     useEffect(() => {
         setShow(true)
     })
-  return (
-    show&&<css-doodle onClick={click} ref={doodle} grid="20x5">
-      {sync}
-    </css-doodle>
-  );
+    const downloadClick = () => {
+        doodle.current &&
+            doodle.current.export({
+                scale: 8,
+                download: true
+            });
+    }
+    return (
+        <div>
+            {show && <css-doodle ref={doodle} onClick={click}>
+                {value}
+            </css-doodle>}
+            {download && <button onClick={downloadClick}>下载</button>}
+        </div>
+    );
 };
 
-export default Noise;
+export default Doodle;
 ```
 import Common from '@components/doodle/common.tsx';
 
@@ -115,7 +118,7 @@ border: 1px solid hsla(
 );
 </Common>
 
-<Common  client:load>
+<Common  client:load download={true}>
 @grid: 14 / 50vmax;
 @random \{
 border-left: 1px solid #5d81bc
