@@ -6,6 +6,12 @@
       "name": "run docs",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "command": "pnpm run cz",
+      "name": "commit-cz",
+      "request": "launch",
+      "type": "node-terminal"
     }
   ]
 }
