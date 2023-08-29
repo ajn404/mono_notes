@@ -7,12 +7,12 @@ export interface Props {
   disabled?: boolean;
 }
 
-const { href, className, ariaLabel, title, disabled = false } = Astro.props;
-
+let { href, className, ariaLabel, title, disabled = false } = Astro.props;
+href = href.indexOf('http')!==-1?href:import.meta.env.BASE_URL+href
 ---
 
 <a
-  href={disabled ? "#" : (import.meta.env.BASE_URL+href)}
+  href={disabled ? "#" : href}
   tabindex={disabled ? "-1" : "0"}
   class={`group inline-block ${className}`}
   aria-label={ariaLabel}

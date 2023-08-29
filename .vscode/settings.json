@@ -4,6 +4,6 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "files.associations": {
-    "*.mdx": "markdown"
-  }
+    "*.mdx": "mdx"
+}
 }
