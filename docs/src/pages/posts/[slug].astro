@@ -6,6 +6,7 @@ import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import slugify from "@utils/slugify";
 import { SITE } from "@config";
+import MotionScroll from '@components/UI/motionScroll'
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -45,6 +46,8 @@ const startPost = lastPost - SITE.postPerPage;
 const paginatedPosts = sortedPosts.slice(startPost, lastPost);
 ---
 
+
+
 {
   post ? (
     <PostDetails post={post} />
@@ -56,3 +59,5 @@ const paginatedPosts = sortedPosts.slice(startPost, lastPost);
     />
   )
 }
+
+<MotionScroll client:load></MotionScroll>

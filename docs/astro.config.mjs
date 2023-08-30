@@ -23,7 +23,8 @@ export default defineConfig({
                 applyBaseStyles: false,
             },
         }),
-        react(),
+        react({
+        }),
         sitemap(),
         mdx()
     ],

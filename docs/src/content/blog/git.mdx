@@ -17,3 +17,10 @@ description:
 ssh-keygen -t rsa -C "你的邮箱地址"
 ```
 
+## 变更gitignore需要执行
+```shell
+git rm -r --cached .
+git add .
+git commit -m "change .gitignore"
+git push
+```

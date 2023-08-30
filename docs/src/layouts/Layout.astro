@@ -27,6 +27,14 @@ const socialImageURL = new URL(
 ).href;
 ---
 
+<script>
+import barba from '@barba/core';
+
+barba.init({
+  // ...
+});
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -78,7 +86,7 @@ const socialImageURL = new URL(
 
     <script is:inline src=`${import.meta.env.BASE_URL}toggle-theme.js`></script>
   </head>
-  <body>
+  <body data-barba="wrapper">
     <slot />
   </body>
 </html>
