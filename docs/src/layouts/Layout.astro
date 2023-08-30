@@ -2,7 +2,6 @@
 import { SITE } from "@config";
 import "@styles/base.css";
 import "@styles/components.scss";
-
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export interface Props {
@@ -27,13 +26,7 @@ const socialImageURL = new URL(
 ).href;
 ---
 
-<script>
-import barba from '@barba/core';
 
-barba.init({
-  // ...
-});
-</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +79,29 @@ barba.init({
 
     <script is:inline src=`${import.meta.env.BASE_URL}toggle-theme.js`></script>
   </head>
-  <body data-barba="wrapper">
-    <slot />
+  <body >
+        <slot  />
   </body>
 </html>
+
+<!-- <script>
+import barba from '@barba/core';
+import gsap from "gsap"
+
+
+barba.init({
+  transitions: [{
+    name: 'opacity-transition',
+    leave:(data)=> {
+      gsap.to(data.current.container, {
+        opacity: 0
+      });
+    },
+    enter(data) {
+       gsap.from(data.next.container, {
+        opacity: 0
+      });
+    }
+  }]
+});
+</script> -->
