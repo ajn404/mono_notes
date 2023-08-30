@@ -9,16 +9,16 @@ function activate(context) {
     "extension.helloWorld",
     function () {
       // 在编辑器右下角展示一个message box
-      vscode.window.showInformationMessage("宁辉岳 nb!");
+      vscode.window.showInformationMessage("鸡哥nb!");
     }
   );
 
   vscode.languages.registerHoverProvider("typescript", {
     provideHover(document, position, token) {
-      const md = new vscode.MarkdownString(
-        `![](https://ajn404.gitee.io/note/images/logo.svg)`
-      );
-
+      const md = new vscode.MarkdownString(``);
+          md.isTrusted = true;
+          md.supportHtml = true;
+          md.appendMarkdown(`鸡哥温馨提示，下面的才是类型提示哟！`)
       return {
         contents: [md],
       };

@@ -12,6 +12,14 @@
       "name": "commit-cz",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "name": "Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/ajn404-vscode-extension"
+      ]
     }
   ]
 }

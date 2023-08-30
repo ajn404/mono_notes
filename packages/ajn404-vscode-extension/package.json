@@ -3,7 +3,7 @@
   "displayName": "ajn404",
   "publisher": "ajn404",
   "description": "first extension demo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.81.0"
   },
@@ -15,7 +15,7 @@
 	"url": "https://github.com/ajn404/mono_notes"
   },
   "vsce": {
-    "baseImagesUrl": "https://ajn404.gitee.io/note/images/logo.svg",
+    "baseImagesUrl": "https://ajn404.gitee.io/note/images/logo.webp",
     "dependencies": true,
     "yarn": false
   },

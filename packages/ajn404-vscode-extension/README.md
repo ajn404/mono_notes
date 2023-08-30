@@ -1,4 +1,5 @@
 # command
-- ctrl+. message("宁辉岳nb !")
+- ctrl+.
 # typescript
-- 类型提示添加爱坤之像
+todos:
+- 类型提示更替为小说阅读
