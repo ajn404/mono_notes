@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "pnpm  -F @notes/docs dev",
-    "cz": "cz",
+    "cz": "git add .&&cz&&git push",
     "prepare": "husky install",
     "format:check": "prettier --plugin-search-dir=. --check .",
     "format": "prettier --plugin-search-dir=. --write ."
