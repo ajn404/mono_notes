@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 
 const App = () => {
     const items = ['color-warm-frame', 'color-spring-warmth', 'color-night-fade']
-
     useEffect(() => {
         import('gsap/ScrollTrigger').then(res => {
             const ScrollTrigger = res.default
@@ -17,17 +16,14 @@ const App = () => {
                     end: "top 100px",
                     scrub: true,
                     markers: true,
-                    id: "box3"
+                    id: "box3",
                 }
             })
-
             const anim = gsap.to(`.${items[0]}`, {
-                x: 400,
+                x: '40vmin',
                 rotation: 360,
                 duration: 3
             });
-
-
             ScrollTrigger.create({
                 trigger: `.${items[0]}`,
                 animation: anim,
@@ -41,7 +37,7 @@ const App = () => {
         })
     })
     return <div>
-        <ul className="grid grid-cols-1 gap-5 content-center">
+        <ul className="grid grid-cols-1 gap-5">
             {items.map((item, index) => (
                 <li key={index} className={`min-h-[40vmin] max-w-[40vmin] rounded-md flex items-center hover:scale-105 transition-all justify-center ${item}`}>box{index + 1}</li>
             ))}

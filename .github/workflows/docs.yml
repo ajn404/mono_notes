@@ -1,4 +1,4 @@
-name: Release
+name: Docs
 
 on:
   push:
@@ -11,7 +11,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: Stable Release / Version PR
+    name: Build Docs / astro赛高
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build VuePress site
+      - name: Build Astro site
         run: pnpm  -F @notes/docs build
 
       - name: Deploy to GitHub Pages
