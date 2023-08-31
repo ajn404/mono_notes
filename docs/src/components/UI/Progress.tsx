@@ -6,7 +6,7 @@ export default function App() {
   return (
     <>
       <motion.div
-        className="progress-bar backdrop-blur-3xl bg-gradient-to-r from-purple-500 to-pink-500 "
+        className="progress-bar"
         style={{ scaleX: scrollYProgress,position:'fixed' }}
       />
       </>

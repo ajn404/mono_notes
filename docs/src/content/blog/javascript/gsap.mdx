@@ -1,0 +1,71 @@
+---
+title:  玩转gsap
+author: ajn404
+pubDatetime: 2023-08-31T06:44:27Z
+postSlug: gsap
+featured: false
+draft: false
+tags:
+  - npm
+  - gsap
+description:
+  "gsap"
+---
+import ScrollTriger from '@components/gsap/ScrollTriger';
+
+### gsap
+
+GSAP（GreenSock Animation Platform）是一个专业级的JavaScript动画库，用于现代Web动画。它可以对JavaScript可以操作的所有内容进行动画处理（CSS属性，SVG，React，画布，通用对象等），同时解决了不同浏览器上存在的兼容性问题，而且速度极快（比jQuery 快20倍）¹。大约有1000万个站点和许多主要品牌都使用 GSAP³。
+
+> (1) GSAP - GreenSock. https://greensock.com/gsap/.
+
+> (2) GSAP（GreenSock）：最健全的web动画库之一 - 知乎. https://zhuanlan.zhihu.com/p/145332205.
+
+> (3) gsap - npm. https://www.npmjs.com/package/gsap.
+
+
+### scrollTriger
+
+<ScrollTriger client:load></ScrollTriger>
+
+
+
+```tsx
+import gsap from 'gsap';
+import { useEffect } from 'react';
+
+
+const App = () => {
+    const items = ['color-warm-frame', 'color-spring-warmth', 'color-night-fade']
+    
+    useEffect(() => {
+        import('gsap/ScrollTrigger').then(res => {
+            const ScrollTrigger = res.default
+            gsap.registerPlugin(ScrollTrigger)
+            gsap.to(`.${items[items.length - 1]}`, {
+            x: "20vmin", duration: 3, rotation: 360,
+         scrollTrigger: {
+    trigger: `.${items[items.length - 1]}`,
+    start: "top center",
+    end: "top 100px",
+    scrub: true,
+    markers: true,
+    id: "scrub"
+  }
+        })
+
+        })
+
+        
+    })
+    return <div>
+        <ul className="grid grid-cols-1 gap-5">
+  {items.map((item,index) => (
+    <li key={index} className={`min-h-[40vmin] max-w-[40vmin] rounded-md flex items-center hover:scale-105 transition-all justify-center ${item}`}>box{index}</li>
+  ))}
+</ul>
+    </div>
+}
+
+export default App;
+```

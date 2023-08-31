@@ -1,6 +1,5 @@
+## pnpm monorepo 单独向某个子 repo 中添加依赖
 
-
-## pnpm monorepo单独向某个子repo中添加依赖 
 ```
 //add vue
 pnpm --filter @notes/docs i @astrojs/vue vue -r

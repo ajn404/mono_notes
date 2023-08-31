@@ -10,7 +10,7 @@ tags:
   - barbajs
   - 路由切换
 description:
-  "Barba.js is a small (7kb minified and compressed) and easy-to-use library that helps you create fluid and smooth transitions between your website’s pages. It makes your website run like a SPA (Single Page Application) and help reduce the delay between your pages, minimize browser HTTP requests and enhance your user’s web experience."
+  "Barba.js is a small (7kb minified and compressed) and easy-to-use library that helps you create fluid and smooth transitions between your website’s pages. "
 ---
 
 ## install
@@ -43,19 +43,24 @@ html
 ```
 js
 ```js
+import barba from '@barba/core';
+import gsap from "gsap"
 barba.init({
   transitions: [{
-    name: 'default-transition',
-    leave() {
-      // create your stunning leave animation here
+    name: 'opacity-transition',
+    leave:(data)=> {
+      gsap.to(data.current.container, {
+        opacity: 0
+      });
     },
-    enter() {
-      // create your amazing enter animation here
+    enter(data) {
+       gsap.from(data.next.container, {
+        opacity: 0
+      });
     }
   }]
 });
 ```
-
 
 ## 相关链接
 
