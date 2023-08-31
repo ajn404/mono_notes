@@ -60,9 +60,7 @@ export default function App() {
 }
 
 ```
-import MotionScroll from '@components/UI/motionScroll.tsx'
 
-<MotionScroll client:load></MotionScroll>
 
 ### css-doodle 
 
@@ -74,9 +72,11 @@ import Doodle from '@components/doodle/basic.tsx';
 
 #### noise 
 
+todo:这个组件会使滑动卡卡的,分析原因
+```tsx
 import Noise from '@components/doodle/noise.tsx';
-
 <Noise  client:load/>
+```
 
 ```tsx
 import 'css-doodle';

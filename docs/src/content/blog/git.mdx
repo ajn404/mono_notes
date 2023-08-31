@@ -24,3 +24,31 @@ git add .
 git commit -m "change .gitignore"
 git push
 ```
+
+## [git check-ignore](https://git-scm.com/docs/git-check-ignore)
+
+```shell
+git check-ignore -v path/to/check
+```
+
+## [git cherry-pick](https://git-scm.com/docs/git-cherry-pick)
+
+```shell
+a - b - c - d  Main
+         \
+          e - f - g  Feature
+```
+
+```shell
+git checkout Main
+git cherry-pick f
+
+```
+
+```shell
+a - b - c - d - f  Main
+         \
+          e - f - g  Feature
+
+
+```
