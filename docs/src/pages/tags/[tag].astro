@@ -42,12 +42,12 @@ const sortTagsPost = getSortedPosts(tagPosts);
   <Header activeNav="tags" />
   <Main
     pageTitle={`Tag:${tag}`}
-    pageDesc={`All the articles with the tag "${tag}".`}
+    pageDesc={`所有标签为 "${tag}" 的文章`}
   >
     <ul>
       {
         sortTagsPost.map(({ data }) => (
-          <Card href={`/posts/${slugify(data)}`} frontmatter={data} />
+          <Card href={`${import.meta.env.BASE_URL}posts/${slugify(data)}/`} frontmatter={data} />
         ))
       }
     </ul>

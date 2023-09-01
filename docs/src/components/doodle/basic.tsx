@@ -1,8 +1,8 @@
 import 'css-doodle';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
 const Doodle: React.FunctionComponent = () => {
-    let [sync] = useState(` @grid: 18 / 50vmax / #0a0c27;
+    let [sync] = useState(` @grid: 18 / 50vmin / #0a0c27;
       --hue: calc(180 + 1.5 * @x * @y);
       background: hsl(var(--hue), 50%, 70%);
       margin: -.5px;
@@ -14,19 +14,19 @@ const Doodle: React.FunctionComponent = () => {
         '100% 0, 100% 100%, 0 100%'
       ));
    `)
-    
-    let [show,setShow] = useState(false)
-     const click = () => {
+
+    let [show, setShow] = useState(false)
+    const click = () => {
         setShow(show => !show);
     }
     useEffect(() => {
         setShow(true)
     })
-  return (
-      show&& <css-doodle onClick={click}>
-      {sync}
-    </css-doodle>
-  );
+    return (
+        show && <css-doodle onClick={click}>
+            {sync}
+        </css-doodle>
+    );
 };
 
 export default Doodle;

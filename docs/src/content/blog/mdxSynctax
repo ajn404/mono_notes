@@ -1,0 +1,29 @@
+---
+title: mdx语法
+author: ajn404
+pubDatetime: 2023-09-01T03:36:16Z
+postSlug: 语法
+featured: false
+draft: false
+tags:
+  - synctax
+description:
+  "mdx语法大纲"
+---
+
+### 折叠
+
+<details>
+<summary>summary</summary>
+content****
+</details>
+
+
+### 代码块
+
+
+```js
+console.log('js')
+```
+
+

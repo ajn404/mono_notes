@@ -30,7 +30,7 @@ const Doodle: React.FunctionComponent<Props> = ({ children, download }) => {
             {show && <css-doodle ref={doodle} onClick={click}>
                 {value}
             </css-doodle>}
-            {download && <button className='w-full pt-5 decoration-sky-500 text-xl hover:drop-shadow-md' onClick={downloadClick}>下载</button>}
+            {download && <button className='w-[50vmin] pt-1 text-skin-base text-l hover:drop-shadow-md' onClick={downloadClick}>下载</button>}
         </div>
     );
 };

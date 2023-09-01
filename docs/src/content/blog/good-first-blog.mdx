@@ -121,7 +121,7 @@ export default Doodle;
 import Common from '@components/doodle/common.tsx';
 
 <Common  client:load>
-@grid: 50x1 / 50vmax;
+@grid: 50x1 / 50vmin;
 @place: center;
 @size: calc(75% / @I * @i);
 transform: rotate(calc(@i * 5deg));
@@ -132,7 +132,7 @@ border: 1px solid hsla(
 </Common>
 
 <Common  client:load download={true}>
-@grid: 14 / 50vmax;
+@grid: 14 / 50vmin;
 @random \{
 border-left: 1px solid #5d81bc
 }
@@ -156,7 +156,7 @@ border-left: 1px solid #5d81bc
 import Common from '@components/doodle/common.tsx';
 
 <Common  client:load>
-@grid: 14 / 50vmax;
+@grid: 14 / 50vmin;
 @random \{
 border-left: 1px solid #5d81bc
 }

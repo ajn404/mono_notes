@@ -1,15 +1,15 @@
 import 'css-doodle';
-import {useRef,useEffect,useState} from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 const Noise: React.FunctionComponent = () => {
     const doodle = useRef(null);
-    let [show,setShow] = useState(false)
+    let [show, setShow] = useState(false)
 
     let [sync] = useState(`@place-cell: center;
     @size: calc(@i * 1.5%);
     :doodle {
-        width: 50vmax; 
-        height: 50vmax;
+        width: 50vmin; 
+        height: 50vmin;
     }
     z-index: calc(999 - @i);
     border-radius: 60%;
@@ -25,11 +25,11 @@ const Noise: React.FunctionComponent = () => {
     useEffect(() => {
         setShow(true)
     })
-  return (
-    show&&<css-doodle onClick={click} ref={doodle} grid="20x5">
-      {sync}
-    </css-doodle>
-  );
+    return (
+        show && <css-doodle onClick={click} ref={doodle} grid="20x5">
+            {sync}
+        </css-doodle>
+    );
 };
 
 export default Noise;
