@@ -15,7 +15,7 @@ export default function Heap(): React.JSX.Element {
         const rate = 60;
         p.setup = () => {
             i = 0;
-            p.createCanvas(articleWidth as number | 100, 100);
+            p.createCanvas(articleWidth as number | 100, (articleWidth as number | 100) / 2);
             p.frameRate(rate);
             values = new Array(Math.round(p.width / width));
             for (let n = 0; n < values.length; n++) {
@@ -37,7 +37,9 @@ export default function Heap(): React.JSX.Element {
         };
 
         p.mouseClicked = () => {
-            p.setup()
+            p.setup();
+            p.loop()
+
         }
         p.keyPressed = () => {
             if (p.key === 's') {
