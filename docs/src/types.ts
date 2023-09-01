@@ -41,6 +41,8 @@ export type SocialMedia =
   | "Telegram"
   | "Mastodon";
 
+
+
 declare global {
  namespace JSX {
       interface IntrinsicElements {
@@ -48,5 +50,7 @@ declare global {
               grid?:string
           }
     }
-  }
+ }
+    
 }
+

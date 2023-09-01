@@ -7,7 +7,7 @@ const App = () => {
             const MotionPathPlugin = res.default;
             gsap.registerPlugin(MotionPathPlugin);
             gsap.set(".astronaut", { scale: 0.5, autoAlpha: 1 });
-            gsap.to(".astronaut", {
+            const anim = gsap.to(".astronaut", {
                 duration: 5,
                 ease: "power1.inOut",
                 immediateRender: true,
@@ -18,6 +18,22 @@ const App = () => {
                     autoRotate: 90
                 }
             });
+
+            import('gsap/ScrollTrigger').then(res => {
+                const ScrollTrigger = res.default;
+                ScrollTrigger.create({
+                    trigger: `.astronaut`,
+                    animation: anim,
+                    start: "top 400px",
+                    end: "top 150px",
+                    scrub: true,
+                    markers: true,
+                    id: "astronaut"
+
+                })
+            })
+
+
         })
     })
     return <div>

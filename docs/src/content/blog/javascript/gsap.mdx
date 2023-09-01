@@ -85,3 +85,41 @@ export default App;
 import MotionPath from '@components/gsap/MotionPath';
 
 <MotionPath client:load/>
+
+
+```tsx
+ useEffect(() => {
+        import('gsap/MotionPathPlugin').then(res => {
+            const MotionPathPlugin = res.default;
+            gsap.registerPlugin(MotionPathPlugin);
+            gsap.set(".astronaut", { scale: 0.5, autoAlpha: 1 });
+            const anim = gsap.to(".astronaut", {
+                duration: 5,
+                ease: "power1.inOut",
+                immediateRender: true,
+                motionPath: {
+                    path: "#path",
+                    align: "#path",
+                    alignOrigin: [0.5, 0.5],
+                    autoRotate: 90
+                }
+            });
+
+            import('gsap/ScrollTrigger').then(res => {
+                const ScrollTrigger = res.default;
+                ScrollTrigger.create({
+                    trigger: `.astronaut`,
+                    animation: anim,
+                    start: "top 400px",
+                    end: "top 150px",
+                    scrub: true,
+                    markers: true,
+                    id: "astronaut"
+
+                })
+            })
+
+
+        })
+    })
+```
