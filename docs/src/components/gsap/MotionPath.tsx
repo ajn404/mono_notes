@@ -27,7 +27,7 @@ const App = () => {
                     start: "top 400px",
                     end: "top 150px",
                     scrub: true,
-                    markers: true,
+                    // markers: true,
                     id: "astronaut"
 
                 })

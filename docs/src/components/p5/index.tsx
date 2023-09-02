@@ -1,6 +1,6 @@
 
 import type p5 from 'p5';
-import { useEffect, useRef } from 'react';
+import { DOMAttributes, ReactPropTypes, useEffect, useRef } from 'react';
 
 type Sketch = (p: p5) => void
 
@@ -44,7 +44,6 @@ const Basic = ({
     }
     const stop = () => {
         while (collection.length > 0) collection.pop()?.remove()
-
     }
 
 
@@ -56,7 +55,7 @@ const Basic = ({
     })
 
 
-    return <div ref={container} id="container" className=' flex flex-wrap  w-full min-h-10 content-center cursor-none'>
+    return <div ref={container} id="container" className=' flex flex-wrap  w-full min-h-10 content-center'>
     </div>
 }
 

@@ -15,7 +15,7 @@ const App = () => {
                     start: "top center",
                     end: "top 100px",
                     scrub: true,
-                    markers: true,
+                    // markers: true,
                     id: "box3",
                 }
             })
@@ -30,8 +30,8 @@ const App = () => {
                 start: "top 500px",
                 end: "top 50px",
                 scrub: true,
-                markers: true,
-                id: "box1"
+                // markers: true,
+                id: "box1",
 
             })
         })

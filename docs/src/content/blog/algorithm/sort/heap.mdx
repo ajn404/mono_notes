@@ -15,6 +15,21 @@ description:
 
 ## 堆排序
 
+> nlgn
+
+> 空间原址
+
+```
+HEAPSORT(A)
+    BUILD-MAX-HEAP(A)
+    FOR i = A.length - 1 downto 1
+        SWAP A[1] with A[i]
+        A.heapSize = A.heapSize - 1
+        MAX-HEAPIFY(A, 0, i)
+```
+
+
+
 
 import Heap from "@components/p5/Heap.tsx"
 
@@ -28,7 +43,7 @@ export const heapSort = (array:number[]) => {
   // 交换堆顶元素到数组末尾，并调整堆
   for (let i = array.length - 1; i > 0; i--) {
     swap(array, 0, i);
-      maxHeapify(array, 0, i);
+    maxHeapify(array, 0, i);
   }
   return array;
 }

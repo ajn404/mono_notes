@@ -13,8 +13,13 @@ export default function Heap(): React.JSX.Element {
         let values: number[] = [];
         const width: number = 1;
         const rate = 60;
+        let g = 0;
+        let dark = false;
+
         p.setup = () => {
             i = 0;
+            g = p.random(255);
+            dark = document.querySelector("html")?.dataset.theme === "dark"
             p.createCanvas(articleWidth as number | 100, (articleWidth as number | 100) / 2);
             p.frameRate(rate);
             values = new Array(Math.round(p.width / width));
@@ -24,7 +29,6 @@ export default function Heap(): React.JSX.Element {
             i = values.length - 1
             buildMaxHeap(values);
         }
-        const g = p.random(255);
         const drawLine = () => {
             for (let m = 0; m < values.length; m++) {
                 const color = (m / values.length) * 255;
@@ -48,7 +52,9 @@ export default function Heap(): React.JSX.Element {
         }
         p.draw = () => {
             p.translate(0.5 * width, 0);
-            p.background(0);
+            p.background(50);
+            if (dark)
+                p.background(200);
             if (i > 0) {
                 swap(values, 0, i);
                 maxHeapify(values, 0, i);
