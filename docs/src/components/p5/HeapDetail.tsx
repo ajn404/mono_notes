@@ -1,21 +1,51 @@
 import type p5 from "p5";
-import heapSort, { buildMaxHeap, swap, maxHeapify } from "./heap";
+import { buildMaxHeap, swap } from "./heap";
 import Basic from "./index";
+let articleWidth: number | undefined = 100;
+let width: number = 100;
+//维护最大堆的性质
+const maxHeapify = (array: number[], i: number, heapSize: number, p?: p5) => {
+    const left = 2 * i + 1;
+    const right = 2 * i + 2;
+    let largest = i;
+
+    // 找到左右子节点中最大的节点
+    if (left < heapSize && array[left] > array[largest]) {
+        largest = left;
+    }
+    if (right < heapSize && array[right] > array[largest]) {
+        largest = right;
+    }
+
+    // 如果最大节点不是当前节点，则交换节点并递归调整堆
+    if (largest !== i) {
+
+        // if (p) {
+        //     p.fill(255);
+        //     p.strokeWeight(0);
+        //     p.text("largest" + array[largest], largest * (width || 100), p.height - array[largest] + 16);
+        // }
+        swap(array, i, largest);
+        maxHeapify(array, largest, heapSize);
+    }
+}
+
 
 export default function HeapDetail(): React.JSX.Element {
 
-    let articleWidth: number | undefined = 100;
 
     const sketch = (p: p5) => {
         articleWidth = document.querySelector('article')?.clientWidth;
+        width = articleWidth && articleWidth / 50 || 100;
         let i = 0;
         let values: number[] = [];
-        const width: number = articleWidth && articleWidth / 50 || 100;
         const rate = 1;
         let g = 0;
         let dark = false;
 
         p.setup = () => {
+
+
             i = 0;
             g = p.random(255);
             dark = document.querySelector("html")?.dataset.theme === "dark"
@@ -40,9 +70,11 @@ export default function HeapDetail(): React.JSX.Element {
                 p.strokeWeight(width);
                 const line_height = p.height - values[m];
                 p.rect(m * width, line_height, width, p.height - line_height);
-
-
             }
+
+            p.fill(255);
+            p.strokeWeight(0);
+            p.text(values[i + 1], i * width, p.height - values[i + 1])
         };
 
         p.mouseClicked = () => {
@@ -65,9 +97,7 @@ export default function HeapDetail(): React.JSX.Element {
             if (i > 0) {
 
                 swap(values, 0, i);
-                maxHeapify(values, 0, i);
-                p.text(values[i], 10, 10)
-
+                maxHeapify(values, 0, i, p);
                 i--
             } else {
                 p.noLoop();
