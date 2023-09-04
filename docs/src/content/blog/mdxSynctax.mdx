@@ -13,7 +13,14 @@ description:
 
 ## 目录
 
-### 折叠
+## 折叠
+
+```html
+<details>
+<summary>summary</summary>
+content****
+</details>
+```
 
 <details>
 <summary>summary</summary>
@@ -21,11 +28,34 @@ content****
 </details>
 
 
-### 代码块
-
+## 代码块
 
 ```js
 console.log('js')
 ```
 
+## 使用变量
 
+export const title = {
+    text:'MDX变量'
+}
+
+```ts
+export const title = {
+    text:'MDX变量'
+}
+```
+> {title.text}
+
+## 获取formatter的变量
+
+```mdx
+> {frontmatter.title}
+```
+> {frontmatter.title}
+
+> {frontmatter.description}
+
+> {frontmatter.tags}
+
+> {frontmatter.pubDatetime}

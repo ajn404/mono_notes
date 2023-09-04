@@ -15,7 +15,7 @@ const { post } = Astro.props;
 
 const { title, author, description, ogImage, canonicalURL, pubDatetime, tags } = post.data;
 
-const { Content } = await post.render();
+const { Content, remarkPluginFrontmatter  } = await post.render();
 
 const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
   .href;
@@ -47,7 +47,17 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
     <ul class="tags-container">
       {tags.map(tag => <Tag name={slugifyStr(tag)} />)}
     </ul>
+    
+    <div class="flex flex-col">
+        <span>
+            阅读时长：{remarkPluginFrontmatter.minutesRead}
+        </span>
+        <span>
+            阅读字数：{remarkPluginFrontmatter.wordsRead}
+        </span>
+    </div>
   </main>
+  
   <Footer />
 </Layout>
 

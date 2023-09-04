@@ -40,9 +40,11 @@ export default function Heap(): React.JSX.Element {
             }
         };
 
-        p.mouseClicked = () => {
-            p.setup();
-            p.loop()
+        p.mouseClicked = (e: PointerEvent) => {
+            if (e?.target === p['canvas']) {
+                p.setup();
+                p.loop();
+            }
 
         }
         p.keyPressed = () => {

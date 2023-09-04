@@ -44,8 +44,6 @@ export default function HeapDetail(): React.JSX.Element {
         let dark = false;
 
         p.setup = () => {
-
-
             i = 0;
             g = p.random(255);
             dark = document.querySelector("html")?.dataset.theme === "dark"
@@ -61,8 +59,6 @@ export default function HeapDetail(): React.JSX.Element {
 
         }
         const drawLine = () => {
-
-
             for (let m = 0; m < values.length; m++) {
                 const color = (m / values.length) * 255;
                 const reverseColor = 255 - color;
@@ -77,10 +73,12 @@ export default function HeapDetail(): React.JSX.Element {
             p.text(values[i + 1], i * width, p.height - values[i + 1])
         };
 
-        p.mouseClicked = () => {
-            p.setup();
-            p.loop()
-
+        p.mouseClicked = (e: PointerEvent) => {
+            // @ts-ignore
+            if (e?.target === p['canvas']) {
+                p.setup();
+                p.loop();
+            }
         }
         p.keyPressed = () => {
             if (p.key === 's') {
@@ -90,8 +88,6 @@ export default function HeapDetail(): React.JSX.Element {
         p.draw = () => {
             p.translate(0.5 * width, 0);
             p.background(50);
-
-
             if (dark)
                 p.background(200);
             if (i > 0) {

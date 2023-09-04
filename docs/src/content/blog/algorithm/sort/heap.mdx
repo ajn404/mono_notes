@@ -1,7 +1,7 @@
 ---
 title: heap sort
 author: ajn404
-pubDatetime: 2023-09-01T03:36:16Z
+pubDatetime: 2023-09-04T07:00:32Z
 postSlug: heap-sort
 featured: false
 draft: false
@@ -12,21 +12,6 @@ description:
   "堆排序"
 ---
 
-
-## 堆排序
-
-> nlgn
-
-> 空间原址
-
-```
-HEAPSORT(A)
-    BUILD-MAX-HEAP(A)
-    FOR i = A.length - 1 downto 1
-        SWAP A[1] with A[i]
-        A.heapSize = A.heapSize - 1
-        MAX-HEAPIFY(A, 0, i)
-```
 import Heap from "@components/p5/Heap.tsx"
 
 <Heap  client:load/>
@@ -85,6 +70,123 @@ import HeapDetail from "@components/p5/HeapDetail.tsx"
 <HeapDetail  client:load/>
 
 
+### 维护最大堆的性质MAX-HEAPIFY
 
-### 维护堆的性质
+```js
+MAX-HEAPIFY(A,i)
+    l = LEFT(i)
+    r = RIGHT(i)
+    if(l<=A.heap-size and A[i]<A[l])
+        largest = l
+    if(r<A.heap-size and A[i]<A[r])
+        largest = r
+    if(largest!==i)
+        exchange A[i] with A[largest]
+        MAX-HEAPIFY(A,largest)
+```
 
+时间复杂度
+```
+T(n)<=T(2/3 n)+O(1)
+T(n) = O(lgn)
+```
+
+```js
+> 主定理
+令a>=1和b>1是常熟，f(n)是一个函数，T(n)是定义在非负整数上的递归式:
+    **T(n) = aT(n/b)+f(n)**,
+其中我们将n/b解释为⌈n/b⌉或⌊n/b⌋。那么T(n)有如下渐近界:
+- 1.若对某个常数ℇ>0 有f(n)= O(n^logb(a-ℇ))，则T(n)=Ɵ(n^logb(a))
+- 2.若f(n)= O(n^logb(a))，则 T(n) = Ɵ(n^logb(a)z*log2(n))
+- 3.若对某个常数ℇ>0 有f(n)= O(n^logb(a+ℇ))，且对某个常数c<1和所有足够大的n有a*f(n/b)<=c*f(n),则T(n)=Ɵ(f(n))
+```
+
+
+```js
+T(n)<=T(2/3 n)+O(1)
+则对应情况2
+a=1,b=3/2,f(n)=1;
+T(n)=n^log3/2(1)*log2(n)=log2(n)即lg(n)即堆的高度h
+```
+
+### 建堆 BUILD-MAX-HEAP(A)
+
+```js
+6.1.7 当用数组表示存储n个元素的堆时，叶结点下标分别是[n/2+1],[n/2+2]...n
+因为
+2^(h-2)- (n-2(h-1))/2+n-2^(h-1) = n/2
+```
+
+这些都是叶结点，对堆中的其他结点都调用一次MAX-HEAPIFY:
+
+```js
+BUILD-MAX-HEAP(A)
+    A.heap-size = A.length
+    for i = [A.lenght/2] downto 1
+        MAX-HEAPIFY(A,i)
+```
+
+> T(n)=Ɵ(n)
+
+> 我们可以在线性时间内，把一个无序数组构造成最大堆
+
+### 堆排序 HEAPSORT(A)
+
+> nlgn
+
+> 空间原址
+
+```js
+HEAPSORT(A)
+    BUILD-MAX-HEAP(A)
+    FOR i = A.length downto 2
+        exchange A[1] with A[i]
+        A.heapSize = A.heapSize - 1
+        MAX-HEAPIFY(A,1)
+```
+
+### 优先队列
+
+```js
+function priority_queue(arr)
+   create a new empty list called heap
+   for each element in arr
+       insert the element into the heap
+   end for
+end function
+
+function insert(heap, value)
+   insert the value at the end of the heap
+   bubble up the value to maintain the heap property
+end function
+
+function bubble_up(heap, index)
+   while index > 0 and heap[index] > heap[(index - 1) / 2]
+       swap heap[index] and heap[(index - 1) / 2]
+       index = (index - 1) / 2
+   end while
+end function
+
+function extract_max(heap)
+   if the heap is empty
+       return -1
+   else
+       store the maximum value in the heap's root node
+       remove the maximum value from the heap
+       bubble down the root node to maintain the heap property
+       return the maximum value
+   end if
+end function
+
+function bubble_down(heap, index)
+   while 2 * index + 1 < length(heap)
+       max_child = max(heap[2 * index + 1], heap[2 * index + 2])
+       if heap[index] < max_child
+           swap heap[index] and heap[max_child]
+           index = max_child
+       else
+           break
+       end if
+   end while
+end function
+```
