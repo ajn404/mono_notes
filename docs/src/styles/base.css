@@ -152,3 +152,32 @@
 }
 
 
+
+
+blockquote {
+  margin: 0;
+}
+
+blockquote p {
+  padding: 15px;
+  background: #eee;
+  border-radius: 5px;
+}
+
+blockquote p::before {
+  content: '\201C';
+}
+
+blockquote p::after {
+  content: '\201D';
+}
+
+blockquote footer cite{
+    text-align:right;
+    width: 100%;
+    -webkit-text-stroke:2px;
+}
+
+blockquote footer cite::before {
+  content: '----';
+}

@@ -10,12 +10,9 @@ import Socials from "@components/UI/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import slugify from "@utils/slugify";
 import { SOCIALS } from "@config";
-import Tree from '@components/d3/tree'
 const posts = await getCollection("blog");
-
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
@@ -41,7 +38,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       </a>
 
       <p>
-        记录个人成长的文章
+        记录个人成长以及知识仓库
       </p>
     
       {
@@ -103,7 +100,6 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           </svg>
         </LinkButton>
       </div>
-      <Tree client:load/>
     </section>
   </main>
 

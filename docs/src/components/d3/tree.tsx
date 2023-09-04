@@ -2,26 +2,12 @@ import * as d3 from "d3";
 import type { SimulationNodeDatum, SimulationLinkDatum } from 'd3'
 import { useEffect, useRef } from "react"
 import data from './tree.json'
-import { getCollection } from "astro:content";
-
-import getUniqueTags from "@utils/getUniqueTags";
 const Circle = () => {
     const ref = useRef<SVGSVGElement | null>(null);
     const tagsData: any = {
         name: 'tags',
         children: []
     }
-    // if (1) {
-    //     const posts = await getCollection("blog");
-    //     let tags = getUniqueTags(posts);
-
-    //     tags.forEach((tag: any) => {
-    //         tagsData.children.push({
-    //             name: tag
-    //         })
-    //     })
-    // }
-
     useEffect(() => {
         const svgElement = d3.select(ref.current);
         const width = 928;
@@ -68,7 +54,7 @@ const Circle = () => {
         // Create the container SVG.
         svgElement
             .attr("viewBox", [-width / 2, -height / 2, width, height])
-            .attr("style", `width:${width}px;max-width: 100%; height: ${height}px`)
+            .attr("style", `width:${100}vw;max-width: 100%; height: calc( 100vh - 100px);position:absolute;left:0;top:100px;z-index:0`)
 
         // Append links.
         const link = svgElement.append("g")
@@ -88,7 +74,7 @@ const Circle = () => {
             .join("circle")
             .attr("fill", (d: any) => d.children ? null : "#000 ")
             .attr("stroke", (d: any) => d.children ? null : "#fff")
-            .attr("r", 4).call(drag, simulation);
+            .attr("r", 5.5).call(drag, simulation);
 
         simulation.on("tick", () => {
             link
@@ -103,7 +89,6 @@ const Circle = () => {
 
         node.append("title")
             .text((d: any) => d.data.name);
-
 
         node.on('click', async (event: PointerEvent, d: any) => {
             // window.location.href = `${import.meta.env.BASE_URL}${d.data.name}`
