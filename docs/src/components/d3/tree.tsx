@@ -2,8 +2,25 @@ import * as d3 from "d3";
 import type { SimulationNodeDatum, SimulationLinkDatum } from 'd3'
 import { useEffect, useRef } from "react"
 import data from './tree.json'
+import { getCollection } from "astro:content";
+
+import getUniqueTags from "@utils/getUniqueTags";
 const Circle = () => {
-    const ref = useRef<SVGSVGElement | null>(null)
+    const ref = useRef<SVGSVGElement | null>(null);
+    const tagsData: any = {
+        name: 'tags',
+        children: []
+    }
+    // if (1) {
+    //     const posts = await getCollection("blog");
+    //     let tags = getUniqueTags(posts);
+
+    //     tags.forEach((tag: any) => {
+    //         tagsData.children.push({
+    //             name: tag
+    //         })
+    //     })
+    // }
 
     useEffect(() => {
         const svgElement = d3.select(ref.current);
@@ -11,7 +28,10 @@ const Circle = () => {
         const height = 600;
 
         // Compute the graph and start the force simulation.
-        const root = d3.hierarchy(data);
+        let root = d3.hierarchy(data);
+
+
+
         const links = root.links();
         const nodes = root.descendants();
 
@@ -83,6 +103,11 @@ const Circle = () => {
 
         node.append("title")
             .text((d: any) => d.data.name);
+
+
+        node.on('click', async (event: PointerEvent, d: any) => {
+            // window.location.href = `${import.meta.env.BASE_URL}${d.data.name}`
+        })
 
 
     })
