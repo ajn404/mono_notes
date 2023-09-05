@@ -1,7 +1,6 @@
 
 
 import * as d3 from "d3";
-import type { SimulationNodeDatum, SimulationLinkDatum } from 'd3'
 import { useEffect, useRef } from "react"
 
 
@@ -38,7 +37,6 @@ const Gear = () => {
         const x = Math.sin(2 * Math.PI / 3);
         const y = Math.cos(2 * Math.PI / 3);
         const svgElement = d3.select(ref.current);
-        console.log(svgElement);
 
         const svg = svgElement
             .attr("width", 640)
@@ -90,6 +88,9 @@ const Gear = () => {
                 }
                 else {
                     cancelAnimationFrame(id);
+                    // setTimeout(() => {
+                    //     animate();
+                    // }, 2000)
                 }
             }
             id = requestAnimationFrame(draw)
