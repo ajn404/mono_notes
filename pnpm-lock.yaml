@@ -95,6 +95,9 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
 
+  packages/ajn404-vscode-extension:
+    specifiers: {}
+
 packages:
 
   /@aashutoshrathi/word-wrap/1.2.6:
