@@ -180,3 +180,12 @@ blockquote footer cite{
 blockquote footer cite::before {
   content: '----';
 }
+
+
+.katex-html{
+    display:none;
+}
+
+.math.math-display{
+    padding-top:1em;
+}

@@ -13,7 +13,7 @@ export const blogSchema = z
     description: z.string(),
       canonicalURL: z.string().optional(),
       minutesRead: z.string().optional(),
-    wordsRead: z.string().optional()
+    wordsRead: z.number().optional()
   })
   .strict();
 

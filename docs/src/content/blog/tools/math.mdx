@@ -1,0 +1,109 @@
+---
+title:  markdown中使用数学公式
+author: ajn404
+pubDatetime: 2023-09-05T03:15:34Z
+postSlug: math
+featured: false
+draft: false
+tags:
+  - npm
+  - math
+description:
+  "添加数学公式，使用rehype-katex和remark-math"
+---
+
+
+## 添加插件
+
+```bash
+pnpm --filter @notes/docs i remark-math rehype-katex -r
+```
+
+```js
+import remarkToc from "remark-toc";
+import remarkMath from "remark-math";
+import { defineConfig } from "astro/config";
+//***
+export default defineConfig({
+
+    // ***
+    markdown: {
+        remarkPlugins: [
+            remarkMath,
+        ],
+        rehypePlugins: [
+            rehypeKatex,
+             
+         ],
+})
+```
+
+### 使用
+
+```md
+$\|frac{abc}{|xyz}$|
+
+ $$
+ \frac{abc123}{xyz123}
+ $$
+
+
+```
+
+$\|frac{abc}{|xyz}$|
+
+ $$
+ \frac{abc123}{xyz123}
+ $$
+
+ $$
+\overline{X}=\frac{1}{n}\sum_{i=1}^{n}x_i
+ $$
+
+
+
+### 隐藏原始语法
+
+```css
+.katex-html{
+    display:none;
+}
+```
+
+
+### 语法
+
+- 输入希腊字母
+
+|常用特殊符号| 语法|
+|-------|-------|
+|B \BetaB	|$\Beta$|
+|Γ \GammaΓ	|$\Gamma$|
+|Θ \ThetaΘ	|$\Theta$|
+|Λ \LambdaΛ	|$\Lambda$|
+|Σ \SigmaΣ	|$\Sigma$|
+|Φ \PhiΦ	|$\Phi$|
+|Ψ \PsiΨ	|$\Psi$|
+|Ω \OmegaΩ	|$\Omega$|
+|Γ \varGammaΓ	|$\varGamma$|
+|Θ \varThetaΘ	|$\varTheta$|
+|Λ \varLambdaΛ	|$\varLambda$|
+|Φ \varPhiΦ	|$\varPhi$|
+|Ψ \varPsiΨ	|$\varPsi$|
+|Ω \varOmegaΩ	|$\varOmega$|
+|α \alphaα	|$\alpha$|
+|β \betaβ	|$\beta$|
+|ϵ \epsilonϵ	|$\epsilon$|
+|θ \thetaθ	|$\theta$|
+|ρ \rhoρ	|$\rho$|
+|σ \sigmaσ	|$\sigma$|
+
+
+- 特殊呈现
+
+|常用特殊符号| 语法|
+|-------|-------|
+| $$a^{prime}$$ | `$$a^{prime}$$`|
+|$a’$ | `$a’$`|
+
+
