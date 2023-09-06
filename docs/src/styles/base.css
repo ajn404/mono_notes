@@ -129,9 +129,7 @@
     @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline focus-visible:outline-dashed;
   }
 
-  .progress-bar{
-    @apply backdrop-blur-3xl bg-gradient-to-r from-purple-500 to-pink-500 ;
-  }
+  
 
 /* https://webgradients.com/ */
   .color-warm-frame{
@@ -189,3 +187,8 @@ blockquote footer cite::before {
 .math.math-display{
     padding-top:1em;
 }
+
+
+.progress-bar{
+    @apply top-0 backdrop-blur-3xl bg-gradient-to-r from-purple-500 to-pink-500 ;
+  }

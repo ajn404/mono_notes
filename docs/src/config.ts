@@ -23,7 +23,7 @@ export const SOCIALS: SocialObjects = [
   {
     name: "Github",
     href: "https://github.com/ajn404/mono_notes",
-    linkTitle: ` ${SITE.title} on Github`,
+    linkTitle: ` ${SITE.title}的代码仓库`,
     active: true,
   },
  

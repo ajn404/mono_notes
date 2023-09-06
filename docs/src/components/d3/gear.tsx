@@ -80,26 +80,23 @@ const Gear = () => {
                 if (start === 0) {
                     start = timestamp;
                 }
-                if (timestamp - start < 2000) {
-                    (d3.select(ref.current).node() as any).update({ angle, frameAngle });
-                    angle += speed;
-                    frameAngle += speed / 360;
-                    id = requestAnimationFrame(draw)
-                }
-                else {
-                    cancelAnimationFrame(id);
-                    // setTimeout(() => {
-                    //     animate();
-                    // }, 2000)
-                }
+                // if (timestamp - start < 2000) {
+                (d3.select(ref.current).node() as any).update({ angle, frameAngle });
+                angle += speed;
+                frameAngle += speed / 360;
+                id = requestAnimationFrame(draw)
+                // }
+                // else {
+                //     cancelAnimationFrame(id);
+                // }
             }
             id = requestAnimationFrame(draw)
         }
         animate();
 
-        d3.select(ref.current).node()?.addEventListener("click", () => {
-            animate();
-        })
+        // d3.select(ref.current).node()?.addEventListener("click", () => {
+        //     animate();
+        // })
 
         return () => {
             cancelAnimationFrame(id);

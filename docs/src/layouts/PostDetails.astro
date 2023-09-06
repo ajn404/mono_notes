@@ -1,6 +1,5 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Header from "@components/UI/Header.astro";
 import Footer from "@components/UI/Footer.astro";
 import Tag from "@components/UI/Tag.astro";
 import Datetime from "@components/UI/Datetime";
@@ -22,7 +21,6 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
 ---
 
 <Layout title={title} author={author} description={description} ogImage={ogUrl} canonicalURL={canonicalURL}>
-  <Header />
   <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
     <button
       class="focus-outline mb-2 mt-8 flex hover:opacity-75"
@@ -40,6 +38,14 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
   <main data-barba="container" data-barba-namespace="home" id="main-content">
     <h1 class="post-title">{title}</h1>
     <Datetime datetime={pubDatetime} size="lg" className="my-2" />
+     <div class="flex flex-wrap gap-4 text-sm justify-end">
+        <span>
+            预计阅读时长：{remarkPluginFrontmatter.minutesRead}
+        </span>
+        <span>
+            字数：{remarkPluginFrontmatter.wordsRead}
+        </span>
+    </div>
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <Content />
     </article>
@@ -48,14 +54,7 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
       {tags.map(tag => <Tag name={slugifyStr(tag)} />)}
     </ul>
     
-    <div class="flex flex-col">
-        <span>
-            阅读时长：{remarkPluginFrontmatter.minutesRead}
-        </span>
-        <span>
-            阅读字数：{remarkPluginFrontmatter.wordsRead}
-        </span>
-    </div>
+   
   </main>
   
   <Footer />

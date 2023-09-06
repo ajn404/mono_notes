@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
-import Header from "@components/UI/Header.astro";
 import Footer from "@components/UI/Footer.astro";
 import LinkButton from "@components/UI/LinkButton.astro";
 import Hr from "@components/UI/Hr.astro";
@@ -17,7 +16,6 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
 <Layout>
-  <Header />
   <main id="main-content">
     <section id="hero">
       <h1>前端探索</h1>

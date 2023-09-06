@@ -6,18 +6,17 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
-import mdx from '@astrojs/mdx';
-import { remarkReadingTime } from './plugin/remark-reading-time.mjs';
-
+import mdx from "@astrojs/mdx";
+import { remarkReadingTime } from "./plugin/remark-reading-time.mjs";
 // https://astro.build/config
 export default defineConfig({
     server: {
         port: 3333
     },
-    base: '/mono_notes',
+    base: "/mono_notes",
     build: {
-        assets: 'static',
-        inlineStylesheets: 'always'
+        assets: "static",
+        inlineStylesheets: "always"
     },
 
     site: "https://ajn404.github.io/mono_notes/", // replace this with your deployed domain
@@ -35,13 +34,13 @@ export default defineConfig({
     markdown: {
         remarkPlugins: [
             [remarkToc, {
-                heading: '目录'
+                heading: "目录"
             }],
             [
                 remarkCollapse,
                 {
                     test: "脚本",
-                    summary: str=> '展开 ' + str
+                    summary: str=> "展开 " + str
                 },
             ],
             remarkMath,
@@ -59,7 +58,8 @@ export default defineConfig({
     },
     vite: {
         optimizeDeps: {
-            exclude: ["@resvg/resvg-js"],
+            exclude: ["@resvg/resvg-js"]
         },
+       
     },
 });

@@ -2,7 +2,6 @@
 import { SITE } from "@config";
 import Breadcrumbs from "@components/UI/Breadcrumbs.astro";
 import Footer from "@components/UI/Footer.astro";
-import Header from "@components/UI/Header.astro";
 import Layout from "./Layout.astro";
 
 export interface Props {
@@ -15,8 +14,7 @@ export interface Props {
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={`${frontmatter.title} | ${SITE.title}`}>
-  <Header activeNav="about" />
+<Layout activeNav="about" title={`${frontmatter.title} | ${SITE.title}`}>
   <Breadcrumbs />
   <main id="main-content">
     <section id="about" class="prose mb-28 max-w-3xl prose-img:border-0">
