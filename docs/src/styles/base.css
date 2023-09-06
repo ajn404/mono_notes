@@ -192,3 +192,25 @@ blockquote footer cite::before {
 .progress-bar{
     @apply top-0 backdrop-blur-3xl bg-gradient-to-r from-purple-500 to-pink-500 ;
   }
+
+  details {
+    max-height: 2em;
+    overflow: auto;
+    transition: all 5s ease;
+    @apply flex flex-col;
+  }
+
+  details summary{
+    @apply sticky top-0;
+  }
+
+   
+
+details::-webkit-scrollbar {
+    @apply w-0 h-0;
+  }
+
+
+  details[open] {
+    max-height: 50em;
+  }
