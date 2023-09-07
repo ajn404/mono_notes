@@ -15,8 +15,12 @@ description:
 
 
 import Tree from '@components/d3/tree'
+import Common from '@components/doodle/common.tsx';
+
 
 <Tree client:load/>
+
+
 ## 目录
 
 
@@ -241,29 +245,118 @@ export default Gear;
 
 ### css-doodle
 
-import Common from '@components/doodle/common.tsx';
+
 
 <Common  client:load>
-@grid: 10/100vmin;
-background: #60569e;
-transform: scale(@rand(.2, .9));
+@grid: 1 / 100% 100vmin / #0a0c27;
+    background-size: 200px 200px;
+    background-image: @doodle(
+      @grid: 6 / 100%;
+      @size: 4px;
+      font-size: 4px;
+      color: hsl(@r240, 30%, 50%);
+      box-shadow: @m3x5(
+        calc(4em - @nx * 1em) calc(@ny * 1em)
+          @p(@m3(currentColor), @m2(transparent)),
+        calc(2em + @nx * 1em) calc(@ny * 1em)
+          @lp
+      );
+    );
 </Common>
 
 ```tsx
 import Common from '@components/doodle/common.tsx';
 
 <Common  client:load>
-@grid: 10/100vmin;
-background: #60569e;
-transform: scale(@rand(.2, .9));
+@grid: 1 / 100vmin 100vmin / #0a0c27;
+    background-size: 200px 200px;
+    background-image: @doodle(
+      @grid: 6 / 100%;
+      @size: 4px;
+      font-size: 4px;
+      color: hsl(@r240, 30%, 50%);
+      box-shadow: @m3x5(
+        calc(4em - @nx * 1em) calc(@ny * 1em)
+          @p(@m3(currentColor), @m2(transparent)),
+        calc(2em + @nx * 1em) calc(@ny * 1em)
+          @lp
+      );
+    );
 </Common>
 ```
+
+<Common client:load>
+@grid: 1x1 / 100% 600px;
+gap: 2px;
+background: conic-gradient(
+    at @r(30%, 70%) 0,
+    @stripe(
+      transparent 25%, 
+      @m32.@p(
+        #781217, #9A1320, #0A2667, #D8A088, #D6DDD1,
+        #E95A22, #CA4122, #C74523, #2CACC9, #008C3B,
+        #F5D700, #CA2821, #EADF93, #003A59, #00609A,
+        #6E746E, #E2E0B8, #1E272B, #468495, #E1E0CA,
+        #666F75, #84A16A, #413B4E, #98AEC7, #979DA4
+      ),
+      transparent 25%
+    )
+  );
+</Common>
+
 
 ### webgl
 
 - [webgl in regl](/mono_notes/posts/webgl)
 
 ### svg
+
+- [svg basic](/mono_notes/posts/svg)
+
+
+### d3基础
+
+#### d3.arc() 弧
+
+import PracticeArc from '@components/d3/practice-arc.tsx';
+
+<PracticeArc client:load  / >
+
+<details>
+  <summary>practice-arc</summary>
+```tsx
+import * as d3 from "d3";
+import { useEffect, useRef } from "react"
+
+export default () => {
+    const ref = useRef<SVGSVGElement | null>(null);
+    useEffect(() => {
+        const svgElement = d3.select(ref.current);
+        const g = svgElement
+            .attr("width", "100")
+            .attr("height", "100")
+            .append("path")
+
+        g.attr("d", d3.arc()({
+            innerRadius: 19,
+            outerRadius: 40,
+            startAngle: -Math.PI / 2,
+            endAngle: Math.PI / 2
+        }))
+            .attr("fill", "cornflowerblue")
+            .attr("style", "transform: translate(50%, 50%)"
+            )
+    })
+
+    return (
+        <svg ref={ref} >
+        </svg>
+    )
+}
+
+
+```
+</details>
 
 
 
