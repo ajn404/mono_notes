@@ -13,9 +13,7 @@ const Doodle: React.FunctionComponent<Props> = ({ children, download, grid }) =>
     let value = (children as ReactElement).props.value;
     let doodle = useRef<any>(null)
     let [show, setShow] = useState(false)
-    const click = () => {
-        setShow(show => !show);
-    }
+
     useEffect(() => {
         setShow(true)
     })
@@ -28,7 +26,7 @@ const Doodle: React.FunctionComponent<Props> = ({ children, download, grid }) =>
     }
     return (
         <div>
-            {show && <css-doodle ref={doodle} onClick={click} grid={grid?.toString()}>
+            {show && <css-doodle style={{ cursor: 'none' }} ref={doodle} grid={grid?.toString()} click-to-update>
                 {value}
             </css-doodle>}
             {download && <button className='w-[50vmin] pt-1 text-skin-base text-l hover:drop-shadow-md' onClick={downloadClick}>下载</button>}
