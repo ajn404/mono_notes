@@ -7,15 +7,25 @@ export default () => {
         const drawTriangle = regl({
             frag: `
   void main() {
+    // mainImage(gl_FragColor,vUv*u_resolution.xy);
     gl_FragColor = vec4(1, 0, 0, 1);
   }`,
             vert: `
-  attribute vec2 position;
+
+uniform float time;
+  attribute vec2 v_position;
+  varying vec2 vUv;
+  uniform vec2 u_resolution;
   void main() {
-    gl_Position = vec4(position, 0, 1);
+    gl_Position = vec4(v_position, 0, 1);
   }`,
+
+            uniforms: {
+                time: ({ time }) => time,
+                u_resolution: [0, 0]
+            },
             attributes: {
-                position: [[0, -1], [-1, 0], [1, 1]]
+                v_position: [[0, -1], [-1, 0], [1, 1]]
             },
 
             count: 3

@@ -4,7 +4,7 @@
     "baseUrl": "src",
     "jsx": "react-jsx",
     "allowImportingTsExtensions": true,
-
+    "allowJs": true,
     "paths": {
       "@assets/*": ["assets/*"],
       "@config": ["config.ts"],
