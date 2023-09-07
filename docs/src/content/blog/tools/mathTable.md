@@ -483,14 +483,14 @@ use `\ce` instead|
 |\hookleftarrow|$\hookleftarrow$||
 |\hookrightarrow|$\hookrightarrow$||
 |\hphantom|$a\hphantom{bc}d$|`a\hphantom{bc}d`|
-|\href|$\href{https://katex.org/}{\KaTeX}$|`\href{https://katex.org/}{\KaTeX}` Requires `trust` [option](options.md)|
+|\href|$\href{https://katex.org/}{\KaTeX}$|`\href{https://katex.org/}{\KaTeX}` Requires `trust` option|
 |\hskip|$w\hskip1em i\hskip2em d$|`w\hskip1em i\hskip2em d`|
 |\hslash|$\hslash$||
 |\hspace|$s\hspace7ex k$|`s\hspace7ex k`|
-|\htmlClass|$\htmlClass{foo}{x}$|`\htmlClass{foo}{x}` Must enable `trust` and disable `strict` [option](options.md)|
-|\htmlData|$\htmlData{foo=a, bar=b}{x}$|`\htmlData{foo=a, bar=b}{x}` Must enable `trust` and disable `strict` [option](options.md)|
-|\htmlId|$\htmlId{bar}{x}$|`\htmlId{bar}{x}` Must enable `trust` and disable `strict` [option](options.md)|
-|\htmlStyle|$\htmlStyle{color: red;}{x}$|`\htmlStyle{color: red;}{x}` Must enable `trust` and disable `strict` [option](options.md)|
+|\htmlClass|$\htmlClass{foo}{x}$|`\htmlClass{foo}{x}` Must enable `trust` and disable `strict` option|
+|\htmlData|$\htmlData{foo=a, bar=b}{x}$|`\htmlData{foo=a, bar=b}{x}` Must enable `trust` and disable `strict` option|
+|\htmlId|$\htmlId{bar}{x}$|`\htmlId{bar}{x}` Must enable `trust` and disable `strict` option|
+|\htmlStyle|$\htmlStyle{color: red;}{x}$|`\htmlStyle{color: red;}{x}` Must enable `trust` and disable `strict` option|
 |\huge|$\huge huge$|`\huge huge`|
 |\Huge|$\Huge Huge$|`\Huge Huge`|
 
@@ -515,7 +515,7 @@ use `\ce` instead|
 |\impliedby|$P\impliedby Q$|`P\impliedby Q`|
 |\implies|$P\implies Q$|`P\implies Q`|
 |\in|$\in$||
-|\includegraphics|$\includegraphics$|`\includegraphics` Requires `trust` [option](options.md)
+|\includegraphics|$\includegraphics$|`\includegraphics` Requires `trust` option
 |\inf|$\inf$||
 |\infin|$\infin$||
 |\infty|$\infty$||
@@ -1160,7 +1160,7 @@ use `\ce` instead|
 |\upsilon|$\upsilon$||
 |\upuparrows|$\upuparrows$||
 |\urcorner|$\urcorner$||
-|\url|$\footnotesize\url{https://katex.org/}$|`\url{https://katex.org/}` Requires `trust` [option](options.md)|
+|\url|$\footnotesize\url{https://katex.org/}$|`\url{https://katex.org/}` Requires `trust` option|
 |\utilde|$\utilde{AB}$|`\utilde{AB}`|
 
 ## V

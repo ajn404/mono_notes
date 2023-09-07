@@ -1,0 +1,76 @@
+---
+title:  webgl in regl
+author: ajn404
+pubDatetime: 2023-09-07T03:37:23Z
+postSlug: webgl
+featured: false
+draft: false
+tags:
+  - webgl
+  - mdn
+description:
+  "webgl"
+---
+
+
+## 引入regl
+
+```shell
+pnpm --filter @notes/docs i regl -r
+```
+
+
+## quick start
+
+
+import ReglDemo from "@components/regl/demo.tsx"
+
+<ReglDemo client:load/ >
+
+
+<details>
+<summary>regl demo</summary>
+
+```tsx
+import { useEffect } from "react";
+import wrapREGL from "regl";
+
+export default () => {
+    useEffect(() => {
+        const regl = wrapREGL("#demo");
+        const drawTriangle = regl({
+            frag: `
+  void main() {
+    gl_FragColor = vec4(1, 0, 0, 1);
+  }`,
+            vert: `
+  attribute vec2 position;
+  void main() {
+    gl_Position = vec4(position, 0, 1);
+  }`,
+            attributes: {
+                position: [[0, -1], [-1, 0], [1, 1]]
+            },
+
+            count: 3
+        })
+        regl.frame(() => {
+            regl.clear({
+                color: [0, 0, 0, 1],
+            })
+            drawTriangle()
+        })
+    })
+    return <canvas id="demo"></canvas>
+}
+```
+</details>
+
+
+
+
+
+
+## 链接
+
+- [quick start](https://github.com/regl-project/regl/blob/gh-pages/API.md#quick-start)

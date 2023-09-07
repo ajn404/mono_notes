@@ -51,6 +51,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       reading-time: ^1.5.0
+      regl: ^2.1.0
       rehype-katex: ^6.0.3
       remark-collapse: ^0.1.2
       remark-math: ^5.1.1
@@ -75,6 +76,7 @@ importers:
       mdast-util-to-string: 4.0.0
       p5: 1.7.0
       reading-time: 1.5.0
+      regl: 2.1.0
       rehype-katex: 6.0.3
       remark-collapse: 0.1.2
       remark-math: 5.1.1
@@ -5939,6 +5941,10 @@ packages:
 
   /reading-time/1.5.0:
     resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
+    dev: false
+
+  /regl/2.1.0:
+    resolution: {integrity: sha512-oWUce/aVoEvW5l2V0LK7O5KJMzUSKeiOwFuJehzpSFd43dO5spP9r+sSUfhKtsky4u6MCqWJaRL+abzExynfTg==}
     dev: false
 
   /rehype-katex/6.0.3:

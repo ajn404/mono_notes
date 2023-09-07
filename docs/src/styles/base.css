@@ -129,8 +129,6 @@
     @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline focus-visible:outline-dashed;
   }
 
-  
-
 /* https://webgradients.com/ */
   .color-warm-frame{
     background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
@@ -152,6 +150,7 @@
 
 
 
+/* 引用 */
 blockquote {
   margin: 0;
 }
@@ -179,7 +178,7 @@ blockquote footer cite::before {
   content: '----';
 }
 
-
+/* katex */
 .katex-html{
     display:none;
 }
@@ -188,29 +187,18 @@ blockquote footer cite::before {
     padding-top:1em;
 }
 
-
+/* 顶部framer */
 .progress-bar{
     @apply top-0 backdrop-blur-3xl bg-gradient-to-r from-purple-500 to-pink-500 ;
   }
 
-  details {
-    max-height: 2em;
-    overflow: auto;
-    transition: all 5s ease;
-    @apply flex flex-col;
+  /* 折叠 */
+details {
+    @apply flex flex-col w-full;
   }
 
-  details summary{
-    @apply sticky top-0;
-  }
-
-   
 
 details::-webkit-scrollbar {
     @apply w-0 h-0;
   }
 
-
-  details[open] {
-    max-height: 50em;
-  }

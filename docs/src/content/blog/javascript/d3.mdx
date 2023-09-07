@@ -225,7 +225,45 @@ export default Gear;
 </details>
 
 
+## 数据可视化
 
+### html + css
+
+<div class="relative w-full border-solid border-lightgrey bg-skin-fill border-[1px]">
+    <div class="w-[95%] bg-skin-accent h-3"/>
+</div>
+
+```html
+<div class="relative w-full border-solid border-lightgrey bg-skin-fill border-[1px]">
+    <div class="w-[95%] bg-skin-accent h-3"/>
+</div>
+```
+
+### css-doodle
+
+import Common from '@components/doodle/common.tsx';
+
+<Common  client:load>
+@grid: 10/100vmin;
+background: #60569e;
+transform: scale(@rand(.2, .9));
+</Common>
+
+```tsx
+import Common from '@components/doodle/common.tsx';
+
+<Common  client:load>
+@grid: 10/100vmin;
+background: #60569e;
+transform: scale(@rand(.2, .9));
+</Common>
+```
+
+### webgl
+
+- [webgl in regl](/mono_notes/posts/webgl)
+
+### svg
 
 
 
@@ -235,3 +273,5 @@ export default Gear;
 - [d3.js官网](https://d3js.org/what-is-d3)
 - [d3 in react](https://2019.wattenberger.com/blog/react-and-d3)
 - [探索d3](https://observablehq.com/explore)
+- [d3 api index](https://d3js.org/api)
+- [webgl](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
