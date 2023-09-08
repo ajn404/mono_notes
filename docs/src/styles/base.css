@@ -48,6 +48,7 @@
   .prose svg{
     @apply w-auto h-auto block ;
   }
+
   svg.icon-tabler {
     @apply inline-block h-6 w-6 scale-125 fill-transparent 
     stroke-current stroke-2 opacity-90 group-hover:fill-transparent 
@@ -66,7 +67,7 @@
     prose-code:before:!content-[''] prose-code:after:!content-['']
     prose-pre:!text-skin-base prose-ol:!text-skin-base 
     prose-ul:overflow-x-clip prose-ul:!text-skin-base prose-li:marker:!text-skin-accent
-    prose-table:text-skin-base prose-th:border
+    prose-table:text-skin-base max-w-full overflow-auto prose-th:border
     prose-th:border-skin-line prose-td:border 
     prose-td:border-skin-line prose-img:mx-auto break-all
     prose-img:!mt-2 prose-img:border-2 

@@ -10,7 +10,7 @@ tags:
   - algorithm
   - math
 description:
-  "动态规划基础"
+  "动态规划基础,dp,算法,数学"
 ---
 
 ## 目录
@@ -184,4 +184,40 @@ BOTTOM-UP-CUT-ROD(p,n)
         r[j] = q
     return r[n]
 ```
+
+- 分析自顶向上
+
+> 第一行创建一个新数组保存子问题的解,第二行将数组第一个值初始化为0
+```js
+let r[0..n] be a new Array;
+r[0] = 0
+```
+> 3-6行升序求解从1到n的规模为j的子问题
+```js
+for j=1 to n
+        q = -∞
+        for i=1 to j
+```
+
+> 7行解决子问题，不必调用递归，直接访问r[j-i],即以保存的子问题的解
+```js
+q = max{q, p[i]+r[j-i]}
+```
+
+> 8行将子问题的解存入数组，9行返回最优解
+
+#### 两种方法具有相同的渐进运行时间，$O(n^2)$
+
+> 自底向上 嵌套的两层for循环
+
+> 自顶向下 递归调用,  使用聚合分析,其中
+```js
+ for j=1 to n
+            q = max{q, p[j]+MEMOIZED-CUT-ROD-AUX(p,n-j,r)}
+```
+> 对每个子问题只求解一次，求解规模为$\sum_0^n{i}$ =  O($n^2$)
+
+import Graph from '@components/echarts/graph.tsx'
+
+<Graph client:load/>
 
