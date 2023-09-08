@@ -1,0 +1,23 @@
+
+
+## echarts graph关系图报错：
+
+<div class="red">
+Cannot set properties of undefined (setting ‘dataIndex‘)
+</div>
+
+```js
+  links: [{
+      source: 4,
+      target: 3,
+  },]
+```
+
+改为
+
+```js
+  links: [{
+      source: '4',
+      target: '3',
+  },]
+```

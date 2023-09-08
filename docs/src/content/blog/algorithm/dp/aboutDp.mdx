@@ -218,10 +218,37 @@ q = max{q, p[i]+r[j-i]}
 > 对每个子问题只求解一次，求解规模为$\sum_0^n{i}$ =  O($n^2$)
 
 
-#### 子问题图
+#### 自顶向下递归树的简化版/自顶向下的子问题图
 
 import Graph from '@components/echarts/graph.tsx'
 
 <Graph client:load/>
 
+> n=4
+> 这是一个有向图,每个顶点唯一地对应一个子问题,标号代表子问题的规模
 
+#### 重构解
+
+上述算法能返回最终的最优收益值，但并没有返回解本身。下面我们拓展动态规划算法，使其返回最优收益值的同时，返回一个最优解。
+
+```js
+EXTENDED-BOTTOM-UP-CUT-ROD(p,n)
+    let r[0..n] and s[0..n] be a new Array;
+    r[0]=0
+    for j=1 to n
+        q = -∞
+        for i=1 to j
+            if q < p[i]+r[j-i]
+                q = p[i]+r[j-i]
+                s[j] = i
+        r[j] = q
+    return r and s
+```
+### 2.矩阵链乘法
+
+> 矩阵乘法满足结合律，但乘法顺序不固定，所以需要求解最优乘法顺序，使得乘法次数最少
+
+
+## 链接
+
+- [bellman-fords-shortest-path](https://algorithm-visualizer.org/dynamic-programming/bellman-fords-shortest-path)

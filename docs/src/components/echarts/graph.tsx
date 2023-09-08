@@ -9,19 +9,25 @@ export default () => {
     useEffect(() => {
 
         const option: Option = {
+            title: {
+                text: '问题规模为4时的钢条问题子问题图',
+                textStyle: {
+                    color: '#777',
+                }
+            },
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
             series: [
                 {
                     type: 'graph',
                     layout: 'none',
-                    symbolSize: 50,
+                    symbolSize: 30,
                     roam: true,
                     label: {
                         show: true
                     },
                     edgeSymbol: ['circle', 'arrow'],
-                    edgeSymbolSize: [4, 10],
+                    edgeSymbolSize: [8, 10],
                     edgeLabel: {
                         fontSize: 20
                     },
@@ -33,27 +39,27 @@ export default () => {
                     data: [
                         {
                             name: '0',
-                            x: 50,
+                            x: 80,
                             y: 100
                         },
                         {
                             name: '1',
-                            x: 100,
+                            x: 80,
                             y: 200
                         },
                         {
                             name: '2',
-                            x: 150,
+                            x: 80,
                             y: 300
                         },
                         {
                             name: '3',
-                            x: 200,
+                            x: 80,
                             y: 400
                         },
                         {
                             name: '4',
-                            x: 250,
+                            x: 80,
                             y: 500
                         }
                     ],
