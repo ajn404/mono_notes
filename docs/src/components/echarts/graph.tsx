@@ -9,15 +9,8 @@ export default () => {
     useEffect(() => {
 
         const option: Option = {
-            title: {
-                text: 'Basic Graph'
-            },
-            tooltip: {
-
-            },
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
-
             series: [
                 {
                     type: 'graph',
@@ -32,73 +25,99 @@ export default () => {
                     edgeLabel: {
                         fontSize: 20
                     },
+                    scaleLimit: {
+                        min: 1,
+                        max: 1
+                    },
                     draggable: true,
                     data: [
                         {
                             name: '0',
-                            x: 300,
-                            y: 300
-                        },
-                        {
-                            name: '1',
-                            x: 800,
-                            y: 300
-                        },
-                        {
-                            name: '2',
-                            x: 550,
+                            x: 50,
                             y: 100
                         },
                         {
-                            name: '3',
-                            x: 550,
-                            y: 500
+                            name: '1',
+                            x: 100,
+                            y: 200
+                        },
+                        {
+                            name: '2',
+                            x: 150,
+                            y: 300
                         },
                         {
                             name: '3',
-                            x: 550,
+                            x: 200,
+                            y: 400
+                        },
+                        {
+                            name: '4',
+                            x: 250,
                             y: 500
                         }
                     ],
-                    // links: [],
                     links: [
+
                         {
-                            source: 0,
+                            source: 4,
+                            target: 3,
+                        },
+                        {
+                            source: 3,
+                            target: 2,
+                        },
+                        {
+                            source: 2,
                             target: 1,
-                            symbolSize: [5, 20],
-                            label: {
-                                show: true
-                            },
+                        },
+                        {
+                            source: 1,
+                            target: 0,
+                        },
+                        {
+                            source: 4,
+                            target: 0,
                             lineStyle: {
                                 width: 5,
-                                curveness: 0.2
+                                curveness: -1
                             }
                         },
                         {
-                            source: 'Node 2',
-                            target: 'Node 1',
-                            label: {
-                                show: true
-                            },
+                            source: 4,
+                            target: 1,
                             lineStyle: {
-                                curveness: 0.2
+                                curveness: -1
                             }
                         },
                         {
-                            source: 'Node 1',
-                            target: 'Node 3'
+                            source: 4,
+                            target: 2,
+                            lineStyle: {
+                                curveness: - 1
+                            }
+                        },
+
+                        {
+                            source: 3,
+                            target: 0,
+                            lineStyle: {
+                                curveness: 1
+                            }
                         },
                         {
-                            source: 'Node 2',
-                            target: 'Node 3'
+                            source: 3,
+                            target: 1,
+                            lineStyle: {
+                                curveness: 1
+                            }
                         },
                         {
-                            source: 'Node 2',
-                            target: 'Node 4'
-                        },
-                        {
-                            source: 'Node 1',
-                            target: 'Node 4'
+                            source: 2,
+                            target: 0,
+                            lineStyle: {
+                                curveness: 1
+                            }
                         }
                     ],
                     lineStyle: {
