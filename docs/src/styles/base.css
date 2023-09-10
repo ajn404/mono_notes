@@ -73,6 +73,11 @@
     prose-img:!mt-2 prose-img:border-2 
     prose-img:border-skin-line prose-hr:!border-skin-line;
   }
+
+  .prose *{
+    @apply text-skin-base
+
+  }
   .prose a {
     @apply hover:!text-skin-accent;
   }

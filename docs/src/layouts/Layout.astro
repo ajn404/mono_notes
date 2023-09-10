@@ -80,11 +80,22 @@ const socialImageURL = new URL(
     }
 
     <script is:inline src=`${import.meta.env.BASE_URL}toggle-theme.js`></script>
+    
   </head>
   <body class="top-[100px]" >
         <Header activeNav={activeNav} />
         <slot  />
   </body>
+  <script>
+    //添加平滑滚动
+    import Lenis from '@studio-freight/lenis'
+    const lenis = new Lenis()
+    function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+    }
+    requestAnimationFrame(raf)
+  </script>
 </html>
 
 <!-- <script is:inline>

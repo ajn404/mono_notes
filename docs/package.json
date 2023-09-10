@@ -16,6 +16,7 @@
     "@astrojs/rss": "^2.4.1",
     "@barba/core": "^2.9.7",
     "@resvg/resvg-js": "^2.4.1",
+    "@studio-freight/lenis": "^1.0.22",
     "@types/d3": "^7.4.0",
     "@types/p5": "^1.7.0",
     "astro": "^2.4.5",
