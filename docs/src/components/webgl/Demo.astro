@@ -16,9 +16,8 @@ class="hidden w-[200px]" src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEi
 
 <script>
     let aId =0;
-
+    console.log('loaded');
     const init = ()=>{
-        console.log('loaded');
         const canvas = document.getElementById("canvas1") as HTMLCanvasElement;
         const wrapButton= document.getElementById('wrapButton') as HTMLButtonElement;
         const ctx = canvas.getContext("2d") as CanvasRenderingContext2D; 
