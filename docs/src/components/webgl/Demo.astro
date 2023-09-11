@@ -129,7 +129,7 @@ class="hidden w-[200px]" src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEi
         const effect = new Effect(width, height);
         effect.init(ctx);
         const animate = ()=>{
-            ctx.clearRect(0,0,width,height)
+            ctx.clearRect(0,0,width,height);
             effect.draw(ctx);
             effect.update() ;
             aId = requestAnimationFrame(animate);
