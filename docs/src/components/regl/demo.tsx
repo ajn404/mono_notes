@@ -40,8 +40,6 @@ uniform float time;
             regl.destroy()
         }
         return () => {
-            console.log('hh');
-
             destroy()
         }
 

@@ -176,6 +176,24 @@ border-left: 1px solid #5d81bc
 </Common>
 ```
 
+### [惯性滚动](https://www.npmjs.com/package/@studio-freight/lenis)
+
+```shell
+pnpm i @studio-freight/lenis
+```
+
+```ts
+const lenis = new Lenis()
+lenis.on('scroll', (e) => {
+  console.log(e)
+})
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+requestAnimationFrame(raf)
+```
+
 ### 相关链接
 
 - [css-doodle](https://css-doodle.com/)

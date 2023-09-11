@@ -1,0 +1,14 @@
+
+
+
+### 前端effect 有哪些概念
+
+前端Effect概念有许多解释，但通常它们可以分为以下几个主要类别：
+
+- 状态管理（State Management）：使用Effect来管理组件的状态。这包括处理数据、操作DOM、处理用户交互等。Effect通常使用React.useEffect来实现。
+- 依赖注入（Dependency Injection）：使用Effect来管理组件的依赖关系。这包括获取数据、操作数据库等。Effect通常使用React.useEffect来实现。
+- 生命周期（Lifecycle）：使用Effect来处理组件的挂载、更新、卸载等生命周期事件。这包括设置初始状态、处理数据变化等。Effect通常使用React.useEffect来实现。
+- 副作用（Side Effects）：使用Effect来处理组件的副作用，例如副作用函数、条件渲染等。这包括处理网络请求、设置定时器等。Effect通常使用React.useEffect来实现。
+- 取消订阅（Cancellation）：使用Effect来处理组件的取消订阅，例如在组件卸载时取消定时器、订阅等。这包括使用React.useEffect来处理取消订阅等。
+其他：除了以上类别，Effect还可以用于处理其他类型的副作用，例如使用React.useCallback来处理函数缓存等。
+总之，Effect是React中用于处理组件状态、依赖关系、生命周期、副作用和取消订阅等的事件处理函数。它在组件中运行，可以提高组件的逻辑可读性和可维护性。

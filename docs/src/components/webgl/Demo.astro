@@ -1,87 +1,20 @@
 ---
-title:  webgl
-author: ajn404
-pubDatetime: 2023-09-07T03:37:23Z
-upDateTime: 2023-09-11 09:44:33
-postSlug: webgl
-featured: false
-draft: false
-tags:
-  - webgl
-  - mdn
-  - regl
-description:
-  "webgl"
+
 ---
 
 
-## regl
+<div class="demo ">
+    <canvas id="canvas1" class="fixed hidden sm:block left-0 top-0  bg-[rgb(250,250,250)]"></canvas>
+    <img 
+class=" w-[200px] " src="/mono_notes/assets/logo.png" id="image1">
+    <div class="controls text-center">
+        <button id="wrapButton" class="p-[20px] m-[20px] text-lg font-mono">Wrap</button>
+    </div>
+</div>
 
-```shell
-pnpm --filter @notes/docs i regl -r
-```
-## regl quick start
-
-import ReglDemo from "@components/regl/demo.tsx"
-
-<ReglDemo client:load/ >
-
-<details>
-<summary>regl demo</summary>
-
-```tsx
-import { useEffect } from "react";
-import wrapREGL from "regl";
-
-export default () => {
-    useEffect(() => {
-        const regl = wrapREGL("#demo");
-        const drawTriangle = regl({
-            frag: `
-  void main() {
-    gl_FragColor = vec4(1, 0, 0, 1);
-  }`,
-            vert: `
-  attribute vec2 position;
-  void main() {
-    gl_Position = vec4(position, 0, 1);
-  }`,
-            attributes: {
-                position: [[0, -1], [-1, 0], [1, 1]]
-            },
-
-            count: 3
-        })
-        regl.frame(() => {
-            regl.clear({
-                color: [0, 0, 0, 1],
-            })
-            drawTriangle()
-        })
-    })
-    return <canvas id="demo"></canvas>
-}
-```
-</details>
-
-
-### 图片粒子化(左一)
-import Demo from '@components/webgl/Demo.astro'
-
-<Demo/>
-
-```tsx
-import Demo from '@components/webgl/Demo.astro'
-
-<Demo/>
-```
-
-<details>
-<summary> canvas详情</summary>
-
-```js
- let aId =0;
-    addEventListener('load', ()=>{
+<script>
+    let aId =0;
+    window.addEventListener('load', ()=>{
         const canvas = document.getElementById("canvas1") as HTMLCanvasElement;
         const wrapButton= document.getElementById('wrapButton') as HTMLButtonElement;
         const ctx = canvas.getContext("2d") as CanvasRenderingContext2D; 
@@ -155,7 +88,6 @@ import Demo from '@components/webgl/Demo.astro'
                 this.centerY = this.height * 0.5;
                 this.x = this.centerX- this.imgae.height*0.5;
                 this.y= this.centerY-this.imgae.height*0.5;
-
                 this.gap =1;
             }
 
@@ -209,11 +141,6 @@ import Demo from '@components/webgl/Demo.astro'
         })
 
     })
-```
-</details>
 
 
-## 链接
-
-- [regl quick start](https://github.com/regl-project/regl/blob/gh-pages/API.md#quick-start)
-- [regl toturial](https://observablehq.com/collection/@rreusser/regl-examples)
+</script>
