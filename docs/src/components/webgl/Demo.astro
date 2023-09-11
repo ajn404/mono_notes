@@ -10,12 +10,15 @@ class="hidden w-[200px]" src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEi
 
     <div class="controls text-center">
         <button id="wrapButton" class="p-[20px] m-[20px] text-lg font-mono">Wrap</button>
+        <button id="start" class="p-[20px] m-[20px] text-lg font-mono">init</button>
     </div>
 </div>
 
 <script>
     let aId =0;
-    window.addEventListener('load', ()=>{
+
+    const init = ()=>{
+        console.log('loaded');
         const canvas = document.getElementById("canvas1") as HTMLCanvasElement;
         const wrapButton= document.getElementById('wrapButton') as HTMLButtonElement;
         const ctx = canvas.getContext("2d") as CanvasRenderingContext2D; 
@@ -111,7 +114,6 @@ class="hidden w-[200px]" src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEi
                     
                 }
             }
-
             draw(context:CanvasRenderingContext2D){
                 this.particles.forEach(item=>item.draw(context))
             }
@@ -124,23 +126,25 @@ class="hidden w-[200px]" src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEi
             }
         }
 
-       
-
         const effect = new Effect(width, height);
         effect.init(ctx);
         const animate = ()=>{
             ctx.clearRect(0,0,width,height)
             effect.draw(ctx);
-            effect.update() 
+            effect.update() ;
             aId = requestAnimationFrame(animate);
         }
-
         animate();
-
         wrapButton.addEventListener('click',()=>{
             effect.wrap();
         })
-
+    }
+    window.addEventListener('load',()=>{ 
+        init()
+        document.getElementById('start')?.addEventListener('click',()=>{
+            init()
+        })
+    
     })
 
 
