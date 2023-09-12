@@ -20,7 +20,7 @@ const {
   description = SITE.desc,
   ogImage = SITE.ogImage,
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
-  activeNav = "posts",
+  activeNav = "",
 } = Astro.props;
 
 const socialImageURL = new URL(
@@ -83,7 +83,7 @@ const socialImageURL = new URL(
     
   </head>
   <body class="top-[100px]" >
-        <Header activeNav={activeNav} />
+        {activeNav&&<Header activeNav={activeNav} />}
         <slot  />
   </body>
   <script>
