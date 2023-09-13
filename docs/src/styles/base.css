@@ -46,7 +46,7 @@
     @apply inline-block h-6 w-6 fill-skin-base group-hover:fill-skin-accent;
   }
   .prose svg{
-    @apply w-auto h-auto block ;
+    @apply w-auto h-auto block m-auto;
   }
 
   svg.icon-tabler {
