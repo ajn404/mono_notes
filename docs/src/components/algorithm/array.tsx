@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { dp } from "./dp"
 
 interface Props {
     array: Array<number>,
@@ -6,7 +7,7 @@ interface Props {
 }
 
 function shuffleArray(arr: Array<number>) {
-    const shuffled = [...arr]; // 使用数组的 spread 属性创建一个新数组，将原始数组的值复制到新数组中
+    const shuffled = [...arr];
     for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1)); // 随机选择一个索引
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // 交换两个元素
@@ -21,32 +22,44 @@ export default ({ array, type = false }: Props) => {
     const [arr, setArr] = useState(structuredClone(array));
     if (!type) {
         setArr(shuffleArray(arr));
-    }
-    useEffect(() => {
-        let aId = 0;
-        let startTime: number;
-        let tag = false;
-        const animate = () => {
-            // let time = new Date().getTime();
-            let time = performance.now();
-            if (!startTime) {
-                startTime = time
-            }
-            if (!tag && time - startTime > 1500) {
-                startTime = time;
-                tag = true;
-                setArr(shuffleArray(arr));
-            }
-            tag = false;
-            aId = requestAnimationFrame(animate);
+        useEffect(() => {
+            let aId = 0;
+            let startTime: number;
+            let tag = false;
+            const animate = () => {
+                // let time = new Date().getTime();
+                let time = performance.now();
+                if (!startTime) {
+                    startTime = time
+                }
+                if (!tag && time - startTime > 1500) {
+                    startTime = time;
+                    tag = true;
+                    setArr(shuffleArray(arr));
+                }
+                tag = false;
+                aId = requestAnimationFrame(animate);
 
-        }
-        aId = requestAnimationFrame(animate);
-        return () => {
-            cancelAnimationFrame(aId)
-        }
-    })
+            }
+            aId = requestAnimationFrame(animate);
+            return () => {
+                cancelAnimationFrame(aId)
+            }
+        })
+    }
+
+    let input = {
+        p: [1, 5, 8, 9, 10, 17, 17, 20, 24, 30],
+        n: 5
+
+    }
+    const { p, n } = input;
+    let output = dp(p, n);
+    console.log(output);
+
+
+
     return <div className="array flex w-full" >
-        {arr.map((item, index) => <div className="flex-item flex-1 text-center p-10 border-4 border-indigo-600" key={index}>{item}</div>)}
+        {arr.map((item, index) => <div className="flex-item flex-1 text-center  border-2 border-indigo-600" key={index}>{item}</div>)}
     </div>
 }

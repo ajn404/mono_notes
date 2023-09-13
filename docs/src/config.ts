@@ -7,7 +7,7 @@ export const SITE: Site = {
   title: "笔记",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
-  postPerPage: 5,
+  postPerPage: 20,
 };
 
 export const LOCALE = ["en-EN"]; // set to [] to use the environment default
