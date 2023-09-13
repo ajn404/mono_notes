@@ -20,7 +20,7 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
   .href;
 ---
 
-<Layout title={title} author={author} description={description} ogImage={ogUrl} canonicalURL={canonicalURL}>
+<Layout activeNav="posts" title={title} author={author} description={description} ogImage={ogUrl} canonicalURL={canonicalURL}>
   <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
     <button
       class="focus-outline mb-2 mt-8 flex hover:opacity-75"
