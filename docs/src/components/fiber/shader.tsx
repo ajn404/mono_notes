@@ -9,7 +9,6 @@ function ShaderPlane() {
     const { viewport, size } = useThree()
     useFrame((state, delta) => {
         ref.current.time += delta
-
         easing.damp3(ref.current.pointer, state.pointer, 0.2, delta)
     })
     return (
@@ -25,7 +24,7 @@ function ShaderPlane() {
 
 export default function App() {
     return (
-        <Canvas>
+        <Canvas style={{ height: '300px', margin: 'auto' }}>
             <ShaderPlane />
         </Canvas>
     )

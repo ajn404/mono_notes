@@ -46,11 +46,14 @@ function FadingImage() {
     const [texture1, texture2, dispTexture] = useTexture(["/mono_notes/assets/xiaoGong.jpg", "/mono_notes/assets/xiaoGong.jpg", "/mono_notes/assets/xiaoGong.jpg"])
     const [hovered, setHover] = useState(false)
     useFrame(() => {
+
         ref.current.dispFactor = THREE.MathUtils.lerp(ref.current.dispFactor, hovered ? 1 : 0, 0.075)
     })
-    const { viewport, size } = useThree()
+    const { viewport } = useThree()
     return (
-        <mesh scale={[viewport.width, viewport.height, 1]} onPointerOver={(e) => setHover(true)} onPointerOut={(e) => setHover(false)}>
+        <mesh scale={[viewport.width, viewport.height, 1]} onPointerOver={() => setHover(true)} onClick={() => {
+            setHover(!hovered)
+        }} onPointerOut={() => setHover(false)}>
             <planeGeometry />
             <imageFadeMaterial ref={ref} tex={texture1} tex2={texture2} disp={dispTexture} toneMapped={false} />
         </mesh>
