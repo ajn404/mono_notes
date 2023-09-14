@@ -1,0 +1,15 @@
+
+
+- ping – send ICMP ECHO_REQUEST packets to network hosts
+>  The ping utility uses the ICMP protocol's mandatory ECHO_REQUEST datagram to elicit an ICMP ECHO_RESPONSE from a host or gateway.  ECHO_REQUEST datagrams
+     (“pings”) have an IP and ICMP header, followed by a “struct timeval” and then an arbitrary number of “pad” bytes used to fill out the packet. 
+
+> ICMP
+ICMP（Internet Control Message Protocol）是一种网络协议，用于在IP层发送控制消息。这些消息用于检查网络连接的可靠性、维护网络配置等。ICMP协议的主要用途是检测网络设备的状态和运行情况。
+
+以下是一些常见的ICMP协议消息类型：
+
+PING（回显请求）：用于检查目标主机是否正常运行。
+TCP Port Unreachable：表示目标主机上的特定TCP端口无法访问。
+TTL Expired：表示数据包在传输过程中超过了指定的生存时间（TTL）。
+ICMPv6：用于IPv6网络中的ICMP消息。
