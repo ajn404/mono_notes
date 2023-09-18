@@ -1,0 +1,46 @@
+---
+title: 第一步：使用某个编辑器
+author: ajn404
+pubDatetime: 2023-09-18T09:35:28Z
+postSlug: editor
+featured: true
+draft: false
+tags:
+  - affine
+  - editor
+  - lit
+description:
+  "关于实施博客系统内构建博客编辑器的计划的开始"
+---
+
+
+
+## start demo
+
+import Editor from '@components/editor/index.tsx'
+
+<Editor client:only="react"/>
+
+
+```tsx
+import '@blocksuite/editor/themes/affine.css';
+import { useEffect, useRef } from 'react';
+
+export default () => {
+    const ref = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        import('@blocksuite/editor').then((res) => {
+            const editor = new res.SimpleAffineEditor();
+            ref.current?.appendChild(editor)
+        })
+    })
+    return <>
+        <div className="editor" ref={ref}></div>
+    </>
+}
+```
+
+
+### 链接
+
+- [lit](https://lit.dev/)

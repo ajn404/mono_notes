@@ -1,7 +1,7 @@
 ---
 title: vue3设计与实现
 author: ajn404
-pubDatetime: 2023-09-18 08:01:33
+pubDatetime: 2023-09-18T08:01:33Z
 postSlug: vue3
 featured: true
 draft: false
@@ -116,6 +116,10 @@ effect(() => {
     console.log(p.bar)
 })
 ```
+
+import Editor from '@components/editor/index.tsx'
+
+<Editor client:only="react"/>
 
 
 
