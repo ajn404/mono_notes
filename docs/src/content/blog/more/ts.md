@@ -3,7 +3,7 @@ title: typescript
 author: ajn404
 pubDatetime: 2023-09-18 03:36:30
 postSlug: ts
-featured: false
+featured: true
 draft: false
 tags:
   - ts
@@ -115,7 +115,41 @@ function useGivesBoth(instance: GivesBothAndEither) {
 }
 ```
 
-## 链接
+### member naming conflicts
+
+
+```ts
+interface MergedProperties {
+  same: (input: boolean) => string;
+  different: (input: string) => string;
+}
+
+interface MergedProperties {
+  same: (input: boolean) => string; // Ok
+  different: (input: number) => string;
+  //Subsequent property declarations must have the same type.  Property 'different' must be of type '(input: string) => string', but here has type '(input: number) => string'.
+}
+```
+
+```ts
+interface MergedMethods {
+  different(input: string): string;
+}
+
+interface MergedMethods {
+  different(input: number): string; // Ok
+}
+
+const a :MergedMethods ={
+  different:(a)=>{
+    return a.toString()
+    //(parameter) a: string | number
+  }
+}
+```
+
+# 链接
 
 - [TypeScript 之 More on Functions](https://zhuanlan.zhihu.com/p/434016060?utm_id=0)
 - [TypeScript 中的 Index Signatures](http://www.icodebang.com/article/255272)
+- [ts playground](https://www.typescriptlang.org/play)

@@ -46,7 +46,9 @@
     "satori": "^0.8.1",
     "tailwindcss": "^3.3.2",
     "three": "^0.156.1",
-    "waveform-data": "^4.3.0"
+    "uuid-by-string": "^4.0.0",
+    "waveform-data": "^4.3.0",
+    "wouter": "^2.11.0"
   },
   "devDependencies": {
     "@astrojs/react": "^2.1.3",

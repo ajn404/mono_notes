@@ -83,7 +83,7 @@ export const useParticle = (
                     this.centerY = this.height * 0.5;
                     this.x = this.centerX - this.imgae.width * 0.5;
                     this.y = this.centerY - this.imgae.height * 0.5;
-                    this.gap = 4;
+                    this.gap = 1;
                 }
 
                 init(context: CanvasRenderingContext2D) {

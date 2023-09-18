@@ -3,7 +3,7 @@
 import * as THREE from "three"
 import { useRef, useState } from "react"
 import { Canvas, extend, useFrame, useThree } from "@react-three/fiber"
-import { useTexture, shaderMaterial } from "@react-three/drei"
+import { useTexture, shaderMaterial, OrbitControls } from "@react-three/drei"
 
 export const ImageFadeMaterial = shaderMaterial(
     {
@@ -47,7 +47,7 @@ function FadingImage() {
     const [hovered, setHover] = useState(false)
     useFrame(() => {
 
-        ref.current.dispFactor = THREE.MathUtils.lerp(ref.current.dispFactor, hovered ? 1 : 0, 0.075)
+        ref.current.dispFactor = THREE.MathUtils.lerp(ref.current.dispFactor, hovered ? 1 : 0, 0.05)
     })
     const { viewport } = useThree()
     return (
@@ -56,6 +56,7 @@ function FadingImage() {
         }} onPointerOut={() => setHover(false)}>
             <planeGeometry />
             <imageFadeMaterial ref={ref} tex={texture1} tex2={texture2} disp={dispTexture} toneMapped={false} />
+            <OrbitControls enablePan={true} zoomSpeed={0.5} />
         </mesh>
     )
 }
@@ -64,6 +65,7 @@ export default function App() {
     return (
         <Canvas className="max-w-full" style={{ width: "250px", height: '208px', margin: 'auto' }} camera={{ position: [0, 0, 2], fov: 50 }}>
             <FadingImage />
+
         </Canvas>
     )
 }

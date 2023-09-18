@@ -11,6 +11,7 @@ tags:
   - three
   - shader
   - react-fiber
+  - webgl
 description:
   "glsl"
 ---
@@ -97,9 +98,6 @@ import DemoImageFadeShader from '@components/fiber/demoImageFadeShader.tsx'
 
 <DemoImageFadeShader client:load/>
 
-
-## 脚本
-
 ```tsx
 export const ImageFadeMaterial = shaderMaterial(
     {
@@ -134,9 +132,11 @@ export const ImageFadeMaterial = shaderMaterial(
       #include <colorspace_fragment>
     }`
 )
-
 extend({ ImageFadeMaterial })
 ```
+
+
+## [gallery](/mono_notes/posts/gallery)
 
 
 ## 链接
