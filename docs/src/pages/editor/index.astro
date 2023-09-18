@@ -1,0 +1,19 @@
+---
+import '@blocksuite/editor/themes/affine.css';
+---
+
+
+<div class="editor">
+
+</div>
+
+<script>
+
+    const container = document.querySelector('.editor')
+    import('@blocksuite/editor').then((res) => {
+        console.log(res);
+            const editor = new res.SimpleAffineEditor();
+            container?.appendChild(editor)
+        })
+</script>
+
