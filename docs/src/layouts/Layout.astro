@@ -86,16 +86,7 @@ const socialImageURL = new URL(
         {activeNav&&<Header activeNav={activeNav} />}
         <slot  />
   </body>
-  <script>
-    //添加平滑滚动
-    import Lenis from '@studio-freight/lenis'
-    const lenis = new Lenis()
-    function raf(time:any) {
-        lenis.raf(time)
-        requestAnimationFrame(raf)
-    }
-    requestAnimationFrame(raf)
-  </script>
+ 
 </html>
 
 <!-- <script is:inline>

@@ -60,6 +60,17 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
   <Footer />
 </Layout>
 
+ <script>
+    //添加平滑滚动
+    import Lenis from '@studio-freight/lenis'
+    const lenis = new Lenis()
+    function raf(time:any) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+    }
+    requestAnimationFrame(raf)
+  </script>
+
 <style>
   main {
     @apply mx-auto w-full max-w-3xl px-4 pb-12;
