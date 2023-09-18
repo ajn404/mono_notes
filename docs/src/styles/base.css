@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Xingcao';
+    src:url('/mono_notes/assets/Xingcao.ttf') format('truetype');
+}
+
 @layer base {
   :root,
   html[data-theme="light"] {
@@ -224,3 +229,8 @@ details::-webkit-scrollbar {
   }
 }
 
+
+
+.xing-cao{
+    font-family: "Xingcao","DM Sans", sans-serif;
+}

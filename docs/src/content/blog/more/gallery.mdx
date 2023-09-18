@@ -21,3 +21,30 @@ import Gallery from '@components/fiber/gallery.tsx'
 # 3
 # 4
 # 5
+
+#### 浏览器打开文件
+
+```js
+const pickerOpts = {
+  types: [
+    {
+      description: "Images",
+      accept: {
+        "image/*": [".png", ".gif", ".jpeg", ".jpg"],
+      },
+    },
+  ],
+  excludeAcceptAllOption: true,
+  multiple: false,
+};
+// create a reference for our file handle
+let fileHandle;
+
+async function getFile() {
+  // open file picker, destructure the one element returned array
+  [fileHandle] = await window.showOpenFilePicker(pickerOpts);
+
+  // run code with our fileHandle
+}
+getFile();
+```
