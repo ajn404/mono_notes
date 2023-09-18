@@ -8,6 +8,8 @@ import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import { remarkReadingTime } from "./plugin/remark-reading-time.mjs";
+
+import commonjs from '@rollup/plugin-commonjs';
 // https://astro.build/config
 export default defineConfig({
     server: {
@@ -40,7 +42,7 @@ export default defineConfig({
                 remarkCollapse,
                 {
                     test: "脚本",
-                    summary: str=> "展开 " + str
+                    summary: str => "展开 " + str
                 },
             ],
             remarkMath,
@@ -48,8 +50,8 @@ export default defineConfig({
         ],
         rehypePlugins: [
             rehypeKatex,
-             
-         ],
+
+        ],
         shikiConfig: {
             theme: "one-dark-pro",
             wrap: true,
@@ -60,6 +62,15 @@ export default defineConfig({
         optimizeDeps: {
             exclude: ["@resvg/resvg-js"]
         },
-       
+        build: {
+            rollupOptions: {
+                plugins: [
+                    commonjs({
+                        dynamicRequireTargets: ['@blocksuite/editor']
+                    })
+                ]
+            }
+        }
+
     },
 });

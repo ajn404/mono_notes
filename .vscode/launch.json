@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "pnpm run docs",
+      "command": "pnpm  -F @notes/docs dev",
       "name": "run docs",
       "request": "launch",
       "type": "node-terminal"
