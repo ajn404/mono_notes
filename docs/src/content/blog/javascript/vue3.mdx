@@ -11,7 +11,7 @@ description:
   "阅读vue3设计与实现"
 ---
 
-# 目录
+## 目录
 
 ## 非原始值的响应式方案
 
@@ -80,8 +80,6 @@ a // ["zero","zero"]
 
 #### 第四节实现的响应式数据代码
 
-
-
 ```js
 const obj = {foo:1}
 
@@ -117,9 +115,38 @@ effect(() => {
 })
 ```
 
-import Editor from '@components/editor/index.tsx'
+尝试修改p.foo的值，p.bar的值也会跟着变化,但副作用函数并不会执行。
+```js
+p.foo=2
+//p.bar===3
+```
 
-<Editor client:only="react"/>
+因为代理过程的get中的target实际上指向的是obj
 
+```js
+const p = new Proxy(obj, {
+    get(target, key) {
+        //target===obj
+        track(target, key)
+        return target[key]
+        }
+    ...
+})
+```
 
+解决办法
 
+```js
+const p = new Proxy(obj, {
+    get(target, key,receiver) {
+        //target===obj
+        track(target, key)
+        return Reflect.get(target,key,receiver)
+        }
+    ...
+})
+```
+
+p访问bar时，这里的receiver指向p，返回 `Reflect.get(target,key,receiver)`时触发get中的this也就指向p
+
+#### js中的对象与proxy工作原理

@@ -9,6 +9,42 @@ export interface Props {
 }
 
 const { noMarginTop = false } = Astro.props;
+
+const otherBlogList = [
+    {
+        name:"mdbook",
+        url:"https://ajn404.github.io/vue3_tauri_fun/book/draft/doc.html"
+    },
+    {
+        name:"mdbook--gitee",
+        url:"https://ajn404.gitee.io/vue3_tauri_fun/book/draft/doc.html"
+    },
+    {
+        name:"2023上半年的技术探索之旅(tauri app)",
+        url:"https://ajn404.github.io/vue3_tauri_fun/#/index"
+    },
+    {
+        name:"2023上半年的技术探索之旅--gitee",
+        url:"https://ajn404.gitee.io/vue3_tauri_fun/#/index"
+    },
+    {
+        name:"2023上半年的技术探索之旅--netlify",
+        url:"https://taurifun.netlify.app/#/index"
+    },
+    {
+        name:"贯穿2022-2023的笔记整理",
+        url:"https://ajn404.github.io/note/"
+    },
+    {
+        name:"贯穿2022-2023的笔记整理--gitee",
+        url:"https://ajn404.gitee.io/note/"
+    },
+    {
+        name:"君子慎独",
+        url:"http://ajn404.gitee.io/ngm.github.io/"
+    }
+
+]
 ---
 
 <footer class={`${noMarginTop ? "" : "mt-auto"}`}>
@@ -20,6 +56,14 @@ const { noMarginTop = false } = Astro.props;
       <span class="separator">&nbsp;|&nbsp;</span>
       <span>All rights reserved.</span>
     </div>
+  </div>
+
+  <div class="flex gap-2 flex-wrap">
+    {
+        otherBlogList.map(item=>{
+            return(<a href={item.url} title={item.name} class="truncate max-w-[14em]">{item.name}</a>)
+        })
+    }
   </div>
 </footer>
 
