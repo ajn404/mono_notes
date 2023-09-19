@@ -1,3 +1,17 @@
+---
+title: vim
+author: ajn404
+pubDatetime: 2023-09-19T08:52:10Z
+postSlug: ts
+featured: false
+draft: false
+tags:
+  - ts
+
+description:
+  "vim & restart everything"
+---
+
 # 第一步
 
 去[这里](https://qwerty.kaiyi.cool/)进行英语的肌肉记忆练习
