@@ -64,7 +64,7 @@ const otherBlogList = [
   <div class="flex-none flex-wrap flex gap-4 space-y-2 sm:space-y-1 ">
     {
         otherBlogList.map(item=>{
-            return(<a href={item.url} title={item.name} class="truncate w-1/4">{item.name}</a>)
+            return(<a href={item.url} target="_blank" title={item.name} class="truncate w-1/4">{item.name}</a>)
         })
     }
   </div>
