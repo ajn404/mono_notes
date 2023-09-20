@@ -1,17 +1,18 @@
-import '@blocksuite/editor/themes/affine.css';
-import { useEffect, useRef } from 'react';
-const isDev = import.meta.env.DEV;
-
+import "@blocksuite/editor/themes/affine.css";
+import { useEffect, useRef } from "react";
 export default () => {
-    const ref = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        if (isDev)
-            import('@blocksuite/editor').then((res) => {
-                const editor = new res.SimpleAffineEditor();
-                ref.current?.appendChild(editor)
-            })
-    })
-    return <>
-        <div className="editor" ref={ref}></div>
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    import("@blocksuite/editor").then(res => {
+      const editor = new res.SimpleAffineEditor();
+      console.log(res);
+
+      ref.current?.appendChild(editor);
+    });
+  });
+  return (
+    <>
+      <div className="editor" ref={ref}></div>
     </>
-}
+  );
+};
