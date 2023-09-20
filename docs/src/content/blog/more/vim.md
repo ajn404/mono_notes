@@ -1166,3 +1166,11 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 ```bash
 npm install -g pnpm
 ```
+
+> 这些最近又重装了一次mac进行的工作
+
+- mac 查看系统变量`printenv`
+
+
+
+
