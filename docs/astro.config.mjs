@@ -15,6 +15,7 @@ export default defineConfig({
     },
     base: "/mono_notes",
     build: {
+        assets: "static",
         inlineStylesheets: "always",
     },
 
