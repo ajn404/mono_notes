@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "rootDir": "./src/",
+        "outDir": "./dist/",
+        "noEmit": false
+    },
+    "include": [
+        "./src"
+    ],
+    "references": [
+        {
+            "path": "../global"
+        }
+    ]
+}

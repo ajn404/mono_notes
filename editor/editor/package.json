@@ -1,0 +1,50 @@
+{
+    "name": "@notes/editor",
+    "version": "0.8.0",
+    "description": "Default BlockSuite-based editor built for AFFiNE.",
+    "type": "module",
+    "repository": "toeverything/blocksuite",
+    "scripts": {
+        "build": "tsc -b --verbose",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "toeverything",
+    "license": "MPL-2.0",
+    "peerDependencies": {
+        "@notes/blocks": "workspace:*",
+        "@notes/lit": "workspace:*",
+        "@notes/store": "workspace:*",
+        "@toeverything/theme": "^0.7.16"
+    },
+    "dependencies": {
+        "@notes/global": "workspace:*",
+        "lit": "^2.8.0"
+    },
+    "devDependencies": {
+        "@notes/blocks": "workspace:*",
+        "@notes/lit": "workspace:*",
+        "@notes/store": "workspace:*",
+        "@toeverything/theme": "^0.7.16"
+    },
+    "exports": {
+        ".": "./src/index.ts",
+        "./themes/*": "./themes/*"
+    },
+    "publishConfig": {
+        "access": "public",
+        "main": "dist/index.js",
+        "types": "dist/index.d.ts",
+        "exports": {
+            ".": {
+                "module": "./dist/index.js",
+                "import": "./dist/index.js"
+            },
+            "./themes/*": "./themes/*"
+        }
+    },
+    "files": [
+        "dist",
+        "themes"
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "rootDir": "./src/",
+        "outDir": "./dist/",
+        "noEmit": false
+    },
+    "include": [
+        "./src",
+        "index.d.ts"
+    ],
+    // This package MUST NOT use any other package.
+    "references": []
+}
