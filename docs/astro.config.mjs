@@ -15,7 +15,6 @@ export default defineConfig({
     },
     base: "/mono_notes",
     build: {
-        assets: "static",
         inlineStylesheets: "always",
     },
 
@@ -59,13 +58,5 @@ export default defineConfig({
         optimizeDeps: {
             exclude: ["@resvg/resvg-js"],
         },
-        build: {
-            rollupOptions: {
-                output: {
-                    chunkFileNames: 'static/chunk.[hash].mjs',
-                    assetFileNames: 'assets/asset.[hash][extname]',
-                }
-            }
-        }
     },
 });
