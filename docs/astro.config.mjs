@@ -64,9 +64,9 @@ export default defineConfig({
         output:{
           chunkFileNames:({name})=>{
             if(name.indexOf('_')!==-1){
-              return "rename.[hash].js"
+              return "static/rename.[hash].js"
             }
-            return "[name].[hash].js"
+            return "static/[name].[hash].js"
           }
         }
       }
