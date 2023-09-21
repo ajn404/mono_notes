@@ -62,7 +62,7 @@ export default defineConfig({
     build:{
       rollupOptions:{
         output:{
-          chunksFileNames:({name})=>{
+          chunkFileNames:({name})=>{
             if(name.indexOf('_')!==-1){
               return "rename.[hash].js"
             }
