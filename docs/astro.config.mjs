@@ -59,5 +59,17 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
+    build:{
+      rollupOptions:{
+        output:{
+          chunksFileNames:({name})=>{
+            if(name.indexOf('_')!==-1){
+              return "rename.[hash].js"
+            }
+            return "[name].[hash].js"
+          }
+        }
+      }
+    }
   },
 });
