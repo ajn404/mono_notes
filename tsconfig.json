@@ -1,0 +1,60 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "ES2020",
+    "useDefineForClassFields": false,
+    "experimentalDecorators": true,
+    "module": "NodeNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "noEmitOnError": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "skipLibCheck": true,
+    "incremental": true,
+    "composite": true,
+    "plugins": []
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./editor/block-std"
+    },
+    {
+      "path": "./editor/blocks"
+    },
+    {
+      "path": "./editor/editor"
+    },
+    {
+      "path": "./editor/playground"
+    },
+    {
+      "path": "./editor/store"
+    },
+    {
+      "path": "./editor/global"
+    },
+    {
+      "path": "./editor/virgo"
+    }
+  ],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "compilerOptions": {
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
+      "noImplicitReturns": false
+    }
+  }
+}
