@@ -144,4 +144,4 @@ async function main() {
     document.body.prepend(exampleList);
 }
 
-main();
+main()

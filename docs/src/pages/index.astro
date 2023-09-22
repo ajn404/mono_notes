@@ -15,6 +15,24 @@ const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
+<script>
+
+import { registerMicroApps, start } from 'qiankun';
+
+registerMicroApps([
+  {
+    name: 'reactApp',
+    entry: {
+        scripts:["http://localhost:5173/apps/default/main.ts"]
+    },
+    container: '#editor-container',
+    activeRule: '/mono_notes',
+  }
+]);
+// 启动 qiankun
+// start();
+</script>
+
 <Layout>
   <main id="main-content">
     <section id="hero">
@@ -101,9 +119,11 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       </div>
     </section>
   </main>
-
+  <div id="editor-container"></div>
   <Footer />
 </Layout>
+
+
 
 <style>
   /* ===== Hero Section ===== */

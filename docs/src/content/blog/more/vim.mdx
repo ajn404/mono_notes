@@ -2,11 +2,11 @@
 title: vim
 author: ajn404
 pubDatetime: 2023-09-19T08:52:10Z
-postSlug: ts
+postSlug: vim
 featured: false
 draft: false
 tags:
-  - ts
+  - vim
 
 description:
   "vim & restart everything"
@@ -40,7 +40,7 @@ brew install nushell
 ## howbrew
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sH)"
 ```
 
 <details>
@@ -1255,5 +1255,28 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
 find . -name ‘*.DS_Store’ -type f -delete
 ```
 
+### vim ji技巧
+
+```shell
+#ctrl + u
+向上滚动半屏
+```
 
 
+### @rollup/plugin-node-resolve作用
+
+```js
+// 不配置 @rollup/plugin-node-resolve 插件引入方式
+export foo from './foo/index.js'
+import bar from './bar/index.js'
+```
+
+```js
+// 配置了 @rollup/plugin-node-resolve 插件引入方式
+export foo from './foo'
+import bar from './bar'
+```
+
+import Shoelace from '@components/shoelace/index.astro'
+
+<Shoelace/>

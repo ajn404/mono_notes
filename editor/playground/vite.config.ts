@@ -8,6 +8,12 @@ import wasm from 'vite-plugin-wasm';
 
 import { hmrPlugin } from './scripts/hmr-plugin';
 
+
+import qiankun from 'vite-plugin-qiankun';
+import reactRefresh from '@vitejs/plugin-react-refresh'
+
+
+const useDevMode = true;
 const enableIstanbul = !!process.env.CI || !!process.env.COVERAGE;
 
 // https://vitejs.dev/config/
@@ -15,6 +21,10 @@ export default defineConfig({
     plugins: [
         react(),
         hmrPlugin,
+        ...(useDevMode ? [] : [reactRefresh()]),
+        qiankun('reactApp', {
+            useDevMode: true
+        }),
         enableIstanbul &&
         istanbul({
             cwd: fileURLToPath(new URL('../..', import.meta.url)),
