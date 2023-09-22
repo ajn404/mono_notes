@@ -1255,11 +1255,13 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
 find . -name ‘*.DS_Store’ -type f -delete
 ```
 
-### vim ji技巧
+### vim 技巧
 
 ```shell
 #ctrl + u
 向上滚动半屏
+#ctrl + d
+向下滚动半屏
 ```
 
 
@@ -1277,6 +1279,13 @@ export foo from './foo'
 import bar from './bar'
 ```
 
+## Shoelace
+
 import Shoelace from '@components/shoelace/index.astro'
 
-<Shoelace/>
+<Shoelace />
+
+```mdx  
+import Shoelace from '@components/shoelace/index.astro'
+<Shoelace client:load/>
+```

@@ -18,7 +18,7 @@ import { fileURLToPath } from 'url'
 
 const __filenameNew = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filenameNew)
-
+console.log('dir name', __dirname);
 // https://astro.build/config
 export default defineConfig({
     server: {
@@ -77,24 +77,22 @@ export default defineConfig({
         },
         build: {
             rollupOptions: {
-                output: {
-                    plugins: [
-                        resolve(),
-                        commonjs(),
-                        copy({
-                            copyOnce: true,
-                            targets: [
-                                {
-                                    src: path.resolve(__dirname, 'node_modules/@shoelace-style/shoelace/dist/assets'),
-                                    dest: path.resolve(__dirname, 'dist/shoelace')
-                                }
-                            ]
-                        }),
-                        css({
-                            output: 'bundle.css'
-                        }),
-                    ]
-                }
+                plugins: [
+                    resolve(),
+                    commonjs(),
+                    copy({
+                        copyOnce: true,
+                        targets: [
+                            {
+                                src: path.resolve(__dirname, 'node_modules/@shoelace-style/shoelace/dist/assets'),
+                                dest: path.resolve(__dirname, 'dist/shoelace')
+                            }
+                        ]
+                    }),
+                    css({
+                        output: 'bundle.css'
+                    }),
+                ]
             }
         }
     },
