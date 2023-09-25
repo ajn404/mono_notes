@@ -47,7 +47,6 @@ jobs:
 
       - name: Build Astro site
         run: pnpm  -F @notes/docs build
-        run: touch docs/dist/.nojekyll
       
 
       - name: Deploy to GitHub Pages
