@@ -13,13 +13,10 @@ setBasePath('/path/to/shoelace/dist');
 
 export default () => {
     useEffect(() => {
-        console.log(1);
-
         // Set the base path to the folder you copied Shoelace's assets to
     })
 
     return <div>
-        hh
         <SlButton>Button</SlButton>
     </div>
 }
