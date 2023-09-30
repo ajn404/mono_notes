@@ -1,0 +1,77 @@
+---
+title: 初识java
+author: ajn404
+pubDatetime: 2023-09-28 17:11:00
+postSlug: java
+featured: false
+draft: false
+tags:
+  - java
+description:
+  "java!!!"
+---
+
+## hello java!!!!
+
+```java
+package org.example;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello world!");
+    }
+}
+```
+
+## spring Boot
+
+
+> 约定大于配置
+
+### 问？spring项目中controller,dao,service都是什么
+- 答！⬇️
+
+在Spring项目中, controller、dao和service分别表示控制器、数据访问对象(Data Access Object)和业务逻辑服务层(Service Layer)。
+
+控制器(Controller): 控制器是Spring MVC中的核心组件,它负责接收用户请求,调用服务层(Service Layer)和数据访问对象(Data Access Object)完成相应的业务操作,并将结果返回给客户端。控制器通常位于项目的src/main/java目录下,与Service和DAO层分开存放。控制器中通常包含一个处理请求的方法,如@RequestMapping、@GetMapping、@PostMapping等注解。
+
+数据访问对象(DAO, Data Access Object): DAO层是直接与数据库进行交互的层,它封装了对数据库的操作,如查询、插入、更新和删除等。DAO层通常位于项目的src/main/java目录下,与Service层分开存放。DAO层中通常包含一个接口,该接口定义了对数据库的基本操作,如查询、插入、更新和删除等。同时,DAO层中还需要一个实现该接口的具体类,该类实现具体的操作。
+
+业务逻辑服务层(Service Layer): 业务逻辑服务层是处理业务逻辑的层,它负责处理业务逻辑,并与DAO层进行交互,完成相应的业务操作。业务逻辑服务层通常位于项目的src/main/java目录下,与Controller层和DAO层分开存放。业务逻辑服务层中通常包含一个接口,该接口定义了需要实现的业务方法,如查询、插入、更新和删除等。同时,业务逻辑服务层中还需要一个实现该接口的具体类,该类实现具体的业务方法。
+
+以上是Spring项目中controller、dao和service的基本概念,它们分别负责不同的功能,共同协作完成项目的开发和维护。
+
+### 问? spring项目中的装饰器RequestMapping
+- 答！⬇️
+
+Spring项目中的装饰器RequestMapping是Spring MVC中用于映射HTTP请求到特定的处理方法或Controller的一个核心注解。它可以帮助开发者更灵活地定义Controller中的处理方法来响应不同的HTTP请求,如GET、POST、PUT、DELETE等。
+
+RequestMapping的语法如下:
+
+```java
+@RequestMapping(value = "/uri", method = RequestMethod.GET)
+public String handleRequest() {
+   // 处理请求逻辑
+}
+```
+
+其中,value属性指定请求的URI,method属性指定请求的方法,如GET、POST、PUT、DELETE等。RequestMapping还可以与@RequestParam、@PathVariable、@RequestBody等注解配合使用,以获取请求参数或请求体中的数据。
+
+RequestMapping的常用属性:
+
+- value: 指定请求的URI,可以指定多个URI,用逗号分隔。
+- method: 指定请求的方法,可以指定多个请求方法,用逗号分隔。
+- requestMapping: 与value和method属性等价,可以同时指定请求的URI和方法。
+- params: 指定请求参数的名称,用逗号分隔。当请求参数的名称与Controller中的方法参数名称不同时,可以使用该属性指定参数名称。
+- headers: 指定请求头中字段的名称,用逗号分隔。
+- consumes: 指定处理请求时所接受的请求内容类型,如application/json、application/xml等。
+- produces: 指定处理请求时所返回的响应内容类型,如application/json、application/xml等。
+
+总之,RequestMapping是Spring MVC中用于映射HTTP请求到处理方法的一个核心注解,可以帮助开发者更好地组织和管理Controller中的处理方法,提高代码的可读性和可维护性。
+
+
+
+## 链接
+
+- [Spring Boot 简介及快速搭建，一文让你搞懂springboot的前世今生](https://juejin.cn/post/7090786484172619807?searchId=2023092816522912FB8DB49DAA7AC6D936)
+
