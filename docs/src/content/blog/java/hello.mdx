@@ -11,6 +11,9 @@ description:
   "java!!!"
 ---
 
+
+## 目录
+
 ## hello java!!!!
 
 ```java
@@ -70,6 +73,137 @@ RequestMapping的常用属性:
 总之,RequestMapping是Spring MVC中用于映射HTTP请求到处理方法的一个核心注解,可以帮助开发者更好地组织和管理Controller中的处理方法,提高代码的可读性和可维护性。
 
 ## java版本和springboot版本
+
+...
+
+
+## first demo
+
+`src/main/java/com/example/demo`
+
+```java
+package com.example.demo;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+@RestController
+public class DemoApplication {
+    public static void main(String[] args) {
+      SpringApplication.run(DemoApplication.class, args);
+    }
+    @GetMapping("/hello")
+    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
+      return String.format("Hello %s!", name);
+    }
+}
+
+```
+这是一个使用Spring Boot框架编写的Java程序,它定义了一个名为DemoApplication的RESTful Web服务。以下是程序的各个部分解释:
+
+**包声明**
+包声明定义了程序所在的包路径,这里是com.example.demo。
+
+**导入**
+程序中使用了多个Java类库,包括Spring Boot、Spring、Java Web和String等。这些类库被导入到程序中,以便使用它们的类和方法。
+
+**类定义**
+这是一个使用Spring Boot注解@SpringBootApplication的类,它表示这是一个Spring Boot应用程序的入口点。
+
+**类级别注解**
+这是一个使用Spring Boot注解@RestController的类,它表示这是一个RESTful Web服务控制器。
+
+**main方法**
+main方法是程序的入口点,它使用SpringApplication.run()方法启动Spring Boot应用程序。
+
+**方法定义**
+这是一个使用@GetMapping注解的方法,它表示这是一个HTTP GET请求映射。
+
+**方法参数**
+hello方法接收两个参数:name和value。其中,name是一个请求参数,它是一个可选参数,默认为"World"。value是一个默认参数,它是一个请求参数,默认为"World"。
+
+**方法返回值**
+hello方法返回一个字符串,它是一个格式化后的字符串,其中包含请求参数name。
+
+总之,这是一个使用Spring Boot框架编写的Java程序,它定义了一个RESTful Web服务控制器,该控制器处理HTTP GET请求,并返回一个格式化的字符串。
+
+
+
+### java springboot项目如何添加依赖Spring Web
+
+
+在Java Spring Boot项目中添加依赖Spring Web，可以通过在pom.xml文件中添加以下依赖来实现：
+```xml
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+这将自动包含Spring Web的所有依赖项，包括**Tomcat、JSP、Spring MVC**等。
+
+### mvnw
+
+Maven Wrapper（简称mvnw）是一个Maven的命令行工具，它提供了一个简单的命令行界面，用于执行Maven构建任务。Maven是一个构建和项目管理工具，用于简化Java项目的构建、管理和发布过程。Maven Wrapper是Maven的官方推荐方式，用于简化Maven项目的构建过程。
+
+Maven Wrapper是一个包含Maven依赖的jar包，它提供了一个简单的命令行界面，用于执行Maven构建任务。Maven Wrapper可以自动下载所需的依赖，避免了手动下载依赖的繁琐过程。使用Maven Wrapper可以确保项目使用的Maven版本是一致的，避免了版本不一致导致的问题。
+
+Maven Wrapper的安装和使用非常简单。首先需要在项目的根目录下创建一个名为“mvnw”的文件，然后使用Java运行这个文件即可启动Maven Wrapper。Maven Wrapper会自动下载所需的依赖并执行构建任务。
+
+例如，在Linux或macOS系统上，可以在项目根目录下创建一个名为“mvnw”的文件，然后使用以下命令启动Maven Wrapper：
+
+```./mvnw clean install```
+
+Maven Wrapper提供了一系列Maven命令，如clean、compile、test、package等，可以方便地执行Maven构建任务。
+
+
+### 遇到的问题
+
+- Full component analysis cannot be performed until the Pom is valid.
+
+> 那就解决
+
+<div class="red">
+This error message typically indicates that there is an issue with the Pom (Project Object Model) file in your Java project. The Pom is a configuration file that contains information about the project, such as its dependencies, build tools, and other metadata.
+
+To resolve this error, you should first ensure that your Pom file is valid and contains all the necessary information. You can do this by running the following command in your project directory:
+</div>
+
+```
+mvn validate
+```
+
+```zsh
+└─(00:01:40)──> mvn validate                                                                                                                                                               ──(五,1006)─┘
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.ajn404:learn >--------------------------
+[INFO] Building learn 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.143 s
+[INFO] Finished at: 2023-10-06T00:01:44+08:00
+[INFO] ------------------------------------------------------------------------
+```
+
+If the validation fails, you will see error messages that indicate the issues in your Pom file. You should address these issues before attempting to perform a full component analysis.
+
+Once you have a valid Pom file, you can perform a full component analysis by running the following command:
+
+```
+mvn dependency:analyze
+```
+
+This command will analyze your project's dependencies and provide a report that shows which dependencies are being used and which are not. You can use this report to identify any unused dependencies that can be removed to reduce the size of your project.
+
+If you encounter any issues or errors during the analysis, you can consult the Maven documentation for more information on how to resolve them.
+
 
 
 
