@@ -2,18 +2,19 @@ import { useEffect } from "react"
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 
-interface Element {
-    title: string,
-    description: string,
-    element: string
-}
+// interface Element {
+//     title: string,
+//     description: string,
+//     element: string
+// }
 
 interface Pros {
     // elements?: Array<Element>
     elements?: string
 }
 export default ({ elements }: Pros) => {
-    useEffect(() => {
+
+    const click = () => {
         if (elements && elements?.length > 0) {
             // JSON.parse(elements).map((item: Element) => {
             //     const driverObj = driver({
@@ -35,10 +36,13 @@ export default ({ elements }: Pros) => {
             });
             driverObj.drive();
         }
+    }
+    useEffect(() => {
         return () => {
         }
     })
 
-    return
-    <></>
+    return <div onClick={click} className=" cursor-pointer p-3 rounded-md text-red hover:underline">
+        点击这里触发demo
+    </div>
 }
