@@ -31,3 +31,114 @@ import Demo from '@components/driver/demo.tsx'
 {"element":"header","popover":{"title":"header","description":"这里是页面的header","doneBtnText":"完成"}}
 ]' client:load/>
 
+
+## lombok
+
+> lombok是一个可以通过简单的注解的形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具，简单来说，比如我们新建了一个类，然后在其中写了几个字段，然后通常情况下我们需要手动去建立getter和setter方法啊，构造函数啊之类的，lombok的作用就是为了省去我们手动创建这些代码的麻烦，它能够在我们编译源码的时候自动帮我们生成这些方法。
+
+pom.xml
+
+```xml
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+</dependency>
+```
+
+例如
+
+- @AllArgsConstructor: 自动生成全参数构造函数
+- @Data: 自动为所有字段添加@ToString, @EqualsAndHashCode, @Getter方法，为非final字段添加@Setter,和@RequiredArgsConstructor!
+
+
+```java
+package com.example.fantasty.practice;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class User {
+    private String name;
+    private int age;
+}
+```
+
+```java
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class User {
+   private String name;
+   private int age;
+
+   // Constructor with all arguments
+   public User(String name, int age) {
+       this.name = name;
+       this.age = age;
+   }
+
+   public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return age == user.age && name.equals(user.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+```
+
+
+## restful api
+
+REST（Representational State Transfer，表示状态转换）风格是一种用于构建Web服务的架构风格。它基于HTTP协议的基本操作（如GET、POST、PUT、DELETE等）来表示数据的获取、创建、更新和删除操作。
+
+REST风格的Web服务通常具有以下特点：
+
+- 资源：REST将HTTP请求映射到资源的操作。资源可以是一个实体（如用户、文章、订单等），也可以是一组操作（如CRUD操作）。
+- 统一接口：REST使用HTTP请求方法来表示操作，如GET用于获取资源，POST用于创建资源，PUT用于更新资源，DELETE用于删除资源。
+- 轻量级状态：REST不推荐将整个对象作为响应，而是应该只返回资源的状态。这样可以避免传输大量数据，提高服务响应速度。
+- 层分离：REST将服务分为不同的层次，如客户端和服务器，客户端和服务器之间通过HTTP协议进行通信。这样可以提高系统的可扩展性和可维护性。
+
+REST风格的Web服务通常比SOAP风格的Web服务更易于使用和维护。
+
+```java
+
+```
+
+

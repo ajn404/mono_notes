@@ -160,50 +160,6 @@ Maven Wrapper的安装和使用非常简单。首先需要在项目的根目录�
 Maven Wrapper提供了一系列Maven命令，如clean、compile、test、package等，可以方便地执行Maven构建任务。
 
 
-### 遇到的问题
-
-- Full component analysis cannot be performed until the Pom is valid.
-
-> 那就解决
-
-<div class="red">
-This error message typically indicates that there is an issue with the Pom (Project Object Model) file in your Java project. The Pom is a configuration file that contains information about the project, such as its dependencies, build tools, and other metadata.
-
-To resolve this error, you should first ensure that your Pom file is valid and contains all the necessary information. You can do this by running the following command in your project directory:
-</div>
-
-```
-mvn validate
-```
-
-```zsh
-└─(00:01:40)──> mvn validate                                                                                                                                                               ──(五,1006)─┘
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --------------------------< com.ajn404:learn >--------------------------
-[INFO] Building learn 0.0.1-SNAPSHOT
-[INFO]   from pom.xml
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  0.143 s
-[INFO] Finished at: 2023-10-06T00:01:44+08:00
-[INFO] ------------------------------------------------------------------------
-```
-
-If the validation fails, you will see error messages that indicate the issues in your Pom file. You should address these issues before attempting to perform a full component analysis.
-
-Once you have a valid Pom file, you can perform a full component analysis by running the following command:
-
-```
-mvn dependency:analyze
-```
-
-This command will analyze your project's dependencies and provide a report that shows which dependencies are being used and which are not. You can use this report to identify any unused dependencies that can be removed to reduce the size of your project.
-
-If you encounter any issues or errors during the analysis, you can consult the Maven documentation for more information on how to resolve them.
-
 
 
 ### spring mvc与前端中的mvc有什么区别和联系
@@ -399,10 +355,121 @@ public class MyService {
 - @Component：用于标识类是一个组件，可以被 Spring 容器扫描到并实例化。
 
 ```java
+@Component
+public class MyComponent {
+   // ...
+}
 ```
+
+- @PostConstruct：用于标识一个方法是一个依赖注入之后的初始化操作。
+
+```java
+@PostConstruct
+public void init() {
+   // ...
+}
+```
+
+- @PreDestroy：用于标识一个方法是一个依赖注入对象销毁之前的操作。
+
+```java
+@PreDestroy
+public void cleanup() {
+   // ...
+}
+```
+
+这些只是 Java 注解的一部分，还有很多其他的注解可以用于不同的场景。要熟练掌握注解的使用，需要不断练习和实践
+
+
+### gradle springboot3项目添加knife4j 4.3.0的starter应该怎么做
+
+要在 Gradle Spring Boot 项目中添加 Knife4j 4.3.0 的 starter，请按照以下步骤操作：
+
+在项目的根目录下创建一个名为 build.gradle 的文件（如果已经存在则跳过此步骤）。
+在 build.gradle 文件中，添加以下依赖：
+
+```gradle
+dependencies {
+  implementation 'com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.3.0'
+}
+```
+
+这将添加 Knife4j 4.3.0 的starter依赖到项目的依赖列表中。
+
+保存 build.gradle 文件。
+运行 ./gradlew build 命令以构建项目。
+这将在项目中添加 Knife4j 4.3.0 的 starter 依赖，并构建项目。
+
+注意：请确保在添加依赖之前已经将项目的构建工具设置为 Gradle。如果尚未设置，请将项目的构建工具设置为 Gradle，方法如下：
+
+对于 IntelliJ IDEA：打开项目的 build.gradle 文件，然后在 build.gradle 文件顶部添加以下内容
+
+
+
+
+```gradle
+plugins {
+   id 'java'
+   id 'com.github.johnrengelman.shadow' version '7.1.0'
+}
+```
+
+完成上述步骤后，Knife4j 4.3.0 的 starter 依赖将被添加到项目中，并可以正常使用。
+
+### 遇到的问题
+
+- Full component analysis cannot be performed until the Pom is valid.
+
+> 那就解决
+
+<div class="red">
+This error message typically indicates that there is an issue with the Pom (Project Object Model) file in your Java project. The Pom is a configuration file that contains information about the project, such as its dependencies, build tools, and other metadata.
+
+To resolve this error, you should first ensure that your Pom file is valid and contains all the necessary information. You can do this by running the following command in your project directory:
+</div>
+
+```
+mvn validate
+```
+
+```zsh
+└─(00:01:40)──> mvn validate                                                                                                                                                               ──(五,1006)─┘
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.ajn404:learn >--------------------------
+[INFO] Building learn 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.143 s
+[INFO] Finished at: 2023-10-06T00:01:44+08:00
+[INFO] ------------------------------------------------------------------------
+```
+
+If the validation fails, you will see error messages that indicate the issues in your Pom file. You should address these issues before attempting to perform a full component analysis.
+
+Once you have a valid Pom file, you can perform a full component analysis by running the following command:
+
+```
+mvn dependency:analyze
+```
+
+This command will analyze your project's dependencies and provide a report that shows which dependencies are being used and which are not. You can use this report to identify any unused dependencies that can be removed to reduce the size of your project.
+
+If you encounter any issues or errors during the analysis, you can consult the Maven documentation for more information on how to resolve them.
+
+
+- You must accept the terms of legal notice of the beta Java specification to enable support for "21 - Record patterns, pattern matching for switch".  The implementation of an early-draft specification developed under the Java Community Process (JCP) is made available for testing and evaluation purposes only and is not compatible with any specification of the JCP.
+
+> 这段文字的意思是：在使用 "21 - Record patterns, pattern matching for switch" 功能之前，您必须接受 Java 规范的legal notice，以启用对这种功能的支持。根据 JCP（Java 社区进程）的开发，该功能是基于早期草稿的实现，仅用于测试和评估，与 JCP 任何规范都不兼容。
+> 这段文字是在说明在使用一种尚未正式发布的功能之前，必须遵守一些规则和条件。这种功能可能是基于某个早期版本的规范，可能不兼容现有的规范。为了避免潜在的问题，在使用这种功能之前，必须先接受相关的 legal notice。
 
 
 ## 链接
 
 - [Spring Boot 简介及快速搭建，一文让你搞懂springboot的前世今生](https://juejin.cn/post/7090786484172619807?searchId=2023092816522912FB8DB49DAA7AC6D936)
 - [Spring官网](https://spring.io/)
+- [knife4j文档](https://doc.xiaominfo.com/)
