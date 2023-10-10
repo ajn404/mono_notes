@@ -23,6 +23,7 @@ console.log('dir name', __dirname);
 export default defineConfig({
     server: {
         port: 3333,
+        open: true,
     },
     base: "/mono_notes",
     build: {

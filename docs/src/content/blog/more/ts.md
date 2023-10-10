@@ -148,6 +148,122 @@ const a :MergedMethods ={
 }
 ```
 
+
+# [npm monorepo with ts](https://www.yieldcode.blog/post/npm-workspaces/)
+
+## 目录
+
+假定你拥有三个npm项目:
+
+- infra which responsible for working with the database
+- api which is your API server
+- worker which is some kind of asynchronous processing worker
+
+目录结构如下
+```zsh
+.
+├── node_modules
+├── package-lock.json
+├── package.json
+├── packages
+│   ├── api
+│   ├── worker
+│   └── infra
+├── tsconfig.build.json
+└── tsconfig.json
+```
+
+根目录的node_modules里放的是所有项目的依赖
+
+根目录下的node_modules包含子项目的依赖的**符号链接**
+```zsh
+.node_modules/
+├── ...
+├── api -> ../packages/api
+├── worker -> ../packages/worker
+└── infra -> ../packages/infra
+```
+
+> 至于什么是符号链接
+
+> 符号链接（Symbolic Links）是一种特殊的文件类型，它允许用户在不删除原始文件的情况下，将一个文件链接到另一个文件。在Linux和Unix系统中，符号链接通常使用“软链接”（Soft Links）或“硬链接”（Hard Links）来表示。
+
+> 符号链接的特点是，当您访问符号链接时，实际上是在访问其所指向的文件。因此，如果您修改符号链接所指向的文件，符号链接本身不会发生变化。但是，如果您修改符号链接本身，例如更改其目标文件路径，符号链接将不再指向原始文件。
+
+> 符号链接主要用于在不同目录之间共享文件、目录以及避免重复文件名等场景。在某些情况下，符号链接也被用于实现文件系统的动态链接，例如动态库、共享库等。
+
+## 配置npm workspace
+
+package.json
+```json
+{
+  "name": "my-app",
+  "private": true,
+  "scripts": {},
+  "workspaces": ["packages/*"],
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.2",
+    "@types/node": "^20.6.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
+```
+
+整个项目的配置
+
+tsconfig.json
+```json
+{
+  "extends": "@tsconfig/recommended",
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es2019",
+    "module": "commonjs",
+    "declaration": true,
+    "sourceMap": true,
+    "composite": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
+```
+
+打包配置
+
+tsconfig.build.json
+```json
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/infra"
+    },
+    {
+      "path": "packages/api"
+    },
+    {
+      "path": "packages/worker"
+    }
+  ]
+}
+```
+
+package.json中添加打包命令
+`...
+"scripts": {
+    "build": "tsc --build --verbose tsconfig.build.json",
+}
+...`
+
+更多细节参考[npm docs - workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces)
+
+
+
+
 # 链接
 
 - [TypeScript 之 More on Functions](https://zhuanlan.zhihu.com/p/434016060?utm_id=0)
