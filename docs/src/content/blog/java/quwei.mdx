@@ -20,16 +20,11 @@ description:
 
 
 
-
-## driverjs
-
+## driverjs,一个实现引导功能的sdk
 
 import Demo from '@components/driver/demo.tsx'
 
-<Demo elements='[
-{"element":"#driverjs","popover":{"title":"driverjs","description":"driverjs很强哟,实现了向导的功能"}},
-{"element":"header","popover":{"title":"header","description":"这里是页面的header","doneBtnText":"完成"}}
-]' client:load/>
+<Demo client:load elements='[{"element":"#driverjs","popover":{"title":"driverjs","description":"driverjs很强哟,实现了向导的功能","side":"top","align":"start"}},{"element":"header","popover":{"title":"header","description":"这里是页面的header","doneBtnText":"完成"}}]' client:load/>
 
 
 ## lombok
@@ -136,9 +131,5 @@ REST风格的Web服务通常具有以下特点：
 - 层分离：REST将服务分为不同的层次，如客户端和服务器，客户端和服务器之间通过HTTP协议进行通信。这样可以提高系统的可扩展性和可维护性。
 
 REST风格的Web服务通常比SOAP风格的Web服务更易于使用和维护。
-
-```java
-
-```
 
 

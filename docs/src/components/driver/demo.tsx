@@ -32,6 +32,7 @@ export default ({ elements }: Pros) => {
 
             const driverObj = driver({
                 showProgress: true,
+                animate: true,
                 steps: JSON.parse(elements)
             });
             driverObj.drive();
