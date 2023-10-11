@@ -2,34 +2,12 @@ import { useEffect } from "react"
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 
-// interface Element {
-//     title: string,
-//     description: string,
-//     element: string
-// }
-
 interface Pros {
-    // elements?: Array<Element>
     elements?: string
 }
 export default ({ elements }: Pros) => {
-
     const click = () => {
         if (elements && elements?.length > 0) {
-            // JSON.parse(elements).map((item: Element) => {
-            //     const driverObj = driver({
-            //         showProgress: true,
-            //         steps: JSON.parse(elements)
-            //     });
-            //     driverObj.highlight({
-            //         element: item.element,
-            //         popover: {
-            //             title: item.title,
-            //             description: item.description
-            //         }
-            //     });
-            // })
-
             const driverObj = driver({
                 showProgress: true,
                 animate: true,
@@ -38,12 +16,34 @@ export default ({ elements }: Pros) => {
             driverObj.drive();
         }
     }
+
     useEffect(() => {
+        let tag = 0;
+        const keydown = (event: KeyboardEvent) => {
+            const key = event.key;
+            // 判断按下的键是否为Shift键和字母C
+            if (tag === 1 && key === 'h') {
+                tag = 0;
+                const driverObj = driver({
+                    showProgress: false,
+                    animate: true,
+                    steps: [{ popover: { title: 'hh', description: '你真是个小天才' } }]
+                });
+                driverObj.drive();
+                return;
+            }
+            if (key === 'h') {
+                tag += 1
+            }
+        }
+        window.addEventListener('keydown', keydown);
+
         return () => {
+            window.removeEventListener('keydown', keydown);
         }
     })
 
     return <div onClick={click} className=" cursor-pointer p-3 rounded-md text-red hover:underline">
-        点击这里触发demo
+        点击这里触发小demo
     </div>
 }
