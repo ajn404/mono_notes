@@ -5,6 +5,9 @@ import { useEffect, useRef, useState } from "react"
 export default () => {
     const ref = useRef<SVGSVGElement | null>(null);
     let [svg, setSvg] = useState();
+    const [width, setWidth] = useState(900);
+    const [height, setHeight] = useState(150);
+
     function* poissonDiscSampler(width, height, radius) {
         const k = 30; // maximum number of samples before rejection
         const radius2 = radius * radius;
@@ -73,15 +76,16 @@ export default () => {
         }
     }
 
-    const play = function* () {
+    const randomColor = (): string => {
+        const hue = Math.floor(Math.random() * 360);
+        const saturation = Math.floor(Math.random() * 30) + 70;
+        const lightness = Math.floor(Math.random() * 70) ;
+        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    };
 
-        const width = 954;
-        const height = 150;
+    const play = function* () {       
         const duration = 150;
-
         let svg = d3.select(ref.current);
-        console.log(svg);
-
         setSvg(d3.select(ref.current));
         console.log(svg);
 
@@ -96,12 +100,15 @@ export default () => {
                     .attr("y1", sample.parent[1])
                     .attr("x2", sample.parent[0])
                     .attr("y2", sample.parent[1])
+                    .attr("stroke", randomColor())
                     .transition()
                     .ease(d3.easeLinear)
                     .delay(sample.depth * duration)
                     .duration(duration)
                     .attr("x2", sample[0])
-                    .attr("y2", sample[1]);
+                    .attr("y2", sample[1])
+                    .attr("stroke", randomColor())
+                    ;
                 if (++i % 50 === 0) {
                     yield svg.node();
                 }
@@ -130,11 +137,54 @@ export default () => {
     })
 
     return (
+        
         <>
-            <svg className="min-h-[120px] max-w-full" ref={ref} ></svg>
+            <svg className=" absolute inset-x-0 opacity-50 inset-y-0 w-full h-min-full pointer-events-none" ref={ref} ></svg>
             <button type="button" onClick={click} className="inline-block rounded bg-blue-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">start</button>
             <button type="button" onClick={restart} className="inline-block rounded bg-blue-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">restart</button>
+            <div>
+                <label
+                    htmlFor="customRange1"
+                    className="mb-2 inline-block text-neutral-700 dark:text-neutral-200"
+                >
+                   Width
+                </label>
+                <input
+                    type="range"
+                    value={width.toString()}
+                    onChange={(e) => {
+                        setWidth(Number(e.target.value));
+                        if(started) restart();
+                        else click()
+                    }}
+                    min="0"
+                    max="2000"
+                    className="bg-[#95f595] h-1.5 w-full cursor-pointer appearance-none rounded-lg border-transparent"
+                    id="customRange1"
+                />
+            </div>
 
+            <div>
+                <label
+                    htmlFor="customRange1"
+                    className="mb-2 inline-block text-neutral-700 dark:text-neutral-200"
+                >
+                    Height
+                </label>
+                <input
+                    type="range"
+                    value={height.toString()}
+                    onChange={(e) => {
+                        setHeight(Number(e.target.value));
+                        if (started) restart();
+                        else click()
+                    }}
+                    min="0"
+                    max="2000"
+                    className="bg-[#95f595] h-1.5 w-full cursor-pointer appearance-none rounded-lg border-transparent"
+                    id="customRange1"
+                />
+            </div>
         </>
 
     )
