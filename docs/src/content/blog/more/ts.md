@@ -9,11 +9,14 @@ tags:
   - ts
 
 description:
-  "typescript more more more"
+  "typescript more more more ts"
 ---
 # 目录
 
+
 # interfaces
+
+
 
 ## interfaces call signatures
 
@@ -151,7 +154,6 @@ const a :MergedMethods ={
 
 # [npm monorepo with ts](https://www.yieldcode.blog/post/npm-workspaces/)
 
-## 目录
 
 假定你拥有三个npm项目:
 
@@ -260,6 +262,37 @@ package.json中添加打包命令
 ...`
 
 更多细节参考[npm docs - workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces)
+
+# ts工具类
+
+## Partial
+
+Partial是TypeScript中的一个实用类型，用于创建一个新的类型，表示一个部分对象类型，即仅包括显式定义的属性。
+
+以下是使用Partial实用类型的示例：
+
+
+```ts
+interface Person {
+ name: string;
+ age: number;
+ city: string;
+}
+
+type PartialPerson = Partial<Person>;
+
+const person: PartialPerson = {
+ name: "John Doe",
+ age: 30,
+};
+
+// 这将不会编译，因为我們沒有定義城市屬性
+// person.city = "New York";
+```
+
+在這個例子中，我們有一個接口Person，其中包含三個屬性：name、age和city。我們 then 創建了一個新的類型PartialPerson，通過使用Partial實用類型來從Person中創建。
+
+我們 then 創建了一個對象person，其類型為PartialPerson，僅包括name和age屬性。如果我們嘗試將city屬性設置在該對象上，TypeScript將不允許這件事，因為它沒有在PartialPerson類型中明確定義。
 
 
 

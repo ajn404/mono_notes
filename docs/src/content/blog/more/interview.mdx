@@ -35,6 +35,8 @@ ICMPv6：用于IPv6网络中的ICMP消息。
 
 ### vue
 
+
+
 ### react
 
 #### Refactoring to input with State
@@ -232,6 +234,95 @@ function submitForm(answer) {
 
 
 <canvas id="myCanvas" class="h-[100px] w-[100px] bg-[#000]"/>
+
+
+## 基础
+
+### 防抖
+
+ n 秒内函数只会执行一次
+```js
+function debounce(fn, timing) {
+  let timer;
+  return function() {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn();
+    }, timing);
+  }
+}
+```
+
+```
+const debounce = (fn, delay) => {
+    let timer;
+    return ()=>{
+        clearTimeout(timer);
+        timer = setTimeout(()=>{
+            fn();
+        }, delay);
+    }
+}
+```
+
+常用于避免事件处理程序或函数被频繁触发，从而提高性能。例如，在搜索输入框中，当用户输入时，可能会触发一个搜索函数，但这个函数可能会被频繁触发，导致性能下降。使用 debounce 函数可以解决这个问题，确保搜索函数只在用户停止输入后的 delay 毫秒后执行。
+
+### 节流
+
+```js
+function throttle(fn, timing) {
+  let trigger;
+  return function() {
+    if (trigger) return;
+    trigger = true;
+    fn();
+    setTimeout(() => {
+      trigger = false;
+    }, timing);
+  }
+}
+```
+
+常用于限制函数的执行频率，从而提高性能。例如，在滚动事件处理程序中，可能会触发一个函数来重新获取页面内容，但这个函数可能会被频繁触发，导致性能下降。使用 throttle 函数可以解决这个问题，确保在滚动事件触发后的 timing 时间间隔内只执行一次函数。
+
+
+## 实现(5).add(3).minus(2)功能
+
+```js
+Number.prototype.add = function(num) {
+    return this+num
+}
+
+Number.prototype.minus = function(num) {
+    return this-num
+}
+
+Number.prototype.multiply = function(num) {
+    return this*num
+}
+
+Number.prototype.divide = function(num) {
+    return this/num
+}
+```
+
+## Async/Await 如何通过同步的方式实现异步
+
+generate 
+
+```js
+var fetch = require("node-fetch");
+
+function *gen() { // 这里的 * 可以看成 async
+  var url = "https://api.github.com/users/github";
+  var result = yield fetch(url); // 这里的 yield 可以看成 await
+  console.log(result.bio);
+}
+
+var g = gen();
+var result = g.next();
+result.value.then(data => data.json()).then(data  => g.next(data));
+```
 
 ## 链接
 
