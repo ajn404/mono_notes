@@ -1,6 +1,5 @@
 import { useEffect } from "react"
 import { driver } from "driver.js";
-import "driver.js/dist/driver.css";
 
 interface Pros {
     elements?: string

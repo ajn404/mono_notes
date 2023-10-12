@@ -11,6 +11,8 @@ description:
   "八股文"
 ---
 
+## 目录
+
 ## 命令
 
 ### 网络
@@ -32,6 +34,208 @@ ICMPv6：用于IPv6网络中的ICMP消息。
 ## 框架
 
 ### vue
+
+### react
+
+#### Refactoring to input with State
+
+- 1.Identify your component’s different visual states
+
+通过props控制虚拟dom
+
+<details>
+<summary>from.tsx</summary>
+```tsx
+export default function Form({
+  status = 'empty'
+}) {
+  if (status === 'success') {
+    return <h1>That's right!</h1>
+  }
+  return (
+    <>
+      <h2>City quiz</h2>
+      <p>
+        In which city is there a billboard that turns air into drinkable water?
+      </p>
+      <form>
+        <textarea disabled={
+          status === 'submitting'
+        } />
+        <br />
+        <button disabled={
+          status === 'empty' ||
+          status === 'submitting'
+        }>
+          Submit
+        </button>
+        {status === 'error' &&
+          <p className="Error">
+            Good guess but a wrong answer. Try again!
+          </p>
+        }
+      </form>
+      </>
+  );
+}
+```
+</details>
+
+<details>
+<summary>App.ts</summary>
+```ts
+import Form from './Form.js';
+
+let statuses = [
+  'empty',
+  'typing',
+  'submitting',
+  'success',
+  'error',
+];
+
+export default function App() {
+  return (
+    <>
+      {statuses.map(status => (
+        <section key={status}>
+          <h4>Form ({status}):</h4>
+          <Form status={status} />
+        </section>
+      ))}
+    </>
+  );
+}
+```
+</details>
+
+
+- 2.Determine what triggers those state changes
+- 3.Represent the state in memory with useState
+
+```js
+const [answer, setAnswer] = useState('');
+const [error, setError] = useState(null);
+```
+
+- 4.Remove any non-essential state variables 
+- 5 .Connect the event handlers to set state
+
+<details>
+<summary>App.ts</summary>
+
+```ts
+import { useState } from 'react';
+
+export default function Form() {
+  const [answer, setAnswer] = useState('');
+  const [error, setError] = useState(null);
+  const [status, setStatus] = useState('typing');
+
+  if (status === 'success') {
+    return <h1>That's right!</h1>
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus('submitting');
+    try {
+      await submitForm(answer);
+      setStatus('success');
+    } catch (err) {
+      setStatus('typing');
+      setError(err);
+    }
+  }
+
+  function handleTextareaChange(e) {
+    setAnswer(e.target.value);
+  }
+
+  return (
+    <>
+      <h2>City quiz</h2>
+      <p>
+        In which city is there a billboard that turns air into drinkable water?
+      </p>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={answer}
+          onChange={handleTextareaChange}
+          disabled={status === 'submitting'}
+        />
+        <br />
+        <button disabled={
+          answer.length === 0 ||
+          status === 'submitting'
+        }>
+          Submit
+        </button>
+        {error !== null &&
+          <p className="Error">
+            {error.message}
+          </p>
+        }
+      </form>
+    </>
+  );
+}
+
+function submitForm(answer) {
+  // Pretend it's hitting the network.
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let shouldError = answer.toLowerCase() !== 'lima'
+      if (shouldError) {
+        reject(new Error('Good guess but a wrong answer. Try again!'));
+      } else {
+        resolve();
+      }
+    }, 1500);
+  });
+}
+```
+</details>
+
+
+## canvas
+
+### 绘制三角形或多边形
+
+
+<details>
+<summary>index.js</summary>
+```js
+   const canvas = document.getElementById('myCanvas');
+   const ctx = canvas.getContext('2d');
+   // 绘制三角形
+   ctx.beginPath();
+   ctx.moveTo(10, 10);
+   ctx.lineTo(50, 100);
+   ctx.lineTo(10, 150);
+   ctx.closePath();
+   ctx.fillStyle = 'blue';
+   ctx.fill();
+
+   // 绘制多边形
+   ctx.beginPath();
+   ctx.moveTo(150, 10);
+   ctx.lineTo(200, 50);
+   ctx.lineTo(150, 100);
+   ctx.lineTo(100, 50);
+   ctx.closePath();
+   ctx.fillStyle = 'red';
+   ctx.fill();
+```
+
+</details>
+
+
+<canvas id="myCanvas" class="h-[100px] w-[100px] bg-[#000]"/>
+
+## 链接
+
+- [react docs](https://react.dev/)
 
 
 

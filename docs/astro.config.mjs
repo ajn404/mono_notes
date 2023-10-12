@@ -8,10 +8,11 @@ import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import { remarkReadingTime } from "./plugin/remark-reading-time.mjs";
-import commonjs from '@rollup/plugin-commonjs';
+// import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import css from 'rollup-plugin-css-only'
-import resolve from '@rollup/plugin-node-resolve';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+// import resolve from '@rollup/plugin-node-resolve';
 import path from 'path';
 
 import { fileURLToPath } from 'url'
@@ -60,7 +61,7 @@ export default defineConfig({
             remarkMath,
             remarkReadingTime,
         ],
-        rehypePlugins: [rehypeKatex],
+        rehypePlugins: [rehypeKatex, rehypeAutolinkHeadings],
         shikiConfig: {
             theme: "one-dark-pro",
             wrap: true,
@@ -79,8 +80,8 @@ export default defineConfig({
         build: {
             rollupOptions: {
                 plugins: [
-                    resolve(),
-                    commonjs(),
+                    // resolve(),
+                    // commonjs(),
                     copy({
                         copyOnce: true,
                         targets: [
