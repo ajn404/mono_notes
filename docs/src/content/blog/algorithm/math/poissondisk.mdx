@@ -1,0 +1,25 @@
+---
+title: 泊松盘采样
+author: ajn404
+pubDatetime: 2023-10-19 10:34:00
+postSlug: poisson-disk-sampling
+featured: false
+draft: false
+tags:
+  - algorithm
+description:
+  "d3 泊松盘采样(Poisson Disk Sampling)生成均匀随机点 "
+---
+
+import PoissonDisk from "@components/d3/poisson-disk.tsx"
+
+<PoissonDisk  client:load/>
+
+
+> 泊松盘采样（Poisson Disk Sampling）是一种从离散点集中随机选择一系列点的算法，这些点之间存在一定的距离，通常用于创建图像的随机表面。泊松盘采样基于一种称为“抽盘”的方法，其中每个点都有可能成为抽盘的中心点。
+
+> 在泊松盘采样中，首先选择一个中心点，然后从这个中心点开始，以一定的概率在周围选择一个新的点。然后，将这个新的点作为中心点，并重复这个过程。这个过程将持续到达到所需数量的点或者无法在给定范围内选择新的点为止。
+
+> 泊松盘采样的好处是，它产生了一个均匀分布的点集，每个点之间的距离大致相等。这种均匀性使得它适用于许多应用，例如图像处理、计算机图形学、物理模拟等。
+
+> 泊松盘采样也有一些缺点，例如在高密度区域选择中心点时可能会导致过度采样，以及在某些情况下可能会产生不连续的表面。然而，在许多情况下，泊松盘采样仍然是一个有效的解决方案。
