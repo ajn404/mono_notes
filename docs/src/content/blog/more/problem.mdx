@@ -35,9 +35,7 @@ Cannot set properties of undefined (setting ‘dataIndex‘)
 ```
 
 
-## 
-
-在 React 中,useState 中的 setState 可能会出现延迟生效的情况,这通常是因为 React 的渲染周期和事件循环的运行周期不同步。
+## 在 React 中,useState 中的 setState 可能会出现延迟生效的情况,这通常是因为 React 的渲染周期和事件循环的运行周期不同步。
 
 当组件渲染时,React 会先执行 useState 中的 setState 操作,但是这个操作不会立即生效,而是会被延迟到下一个事件循环中执行。这是因为 React 的渲染周期是同步的,而事件循环是异步的,因此在事件循环中执行的 setState 操作可能会在下一个事件循环开始时生效。
 
