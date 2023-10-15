@@ -1,0 +1,1623 @@
+---
+title: 部分八股文记录
+author: ajn404
+pubDatetime: 2023-10-11 14:05:00
+postSlug: 8ass
+featured: false
+draft: false
+tags:
+  - 八股
+description:
+  "前端八股文"
+---
+
+## 目录
+
+## 命令
+
+### 网络
+
+- ping – send ICMP ECHO_REQUEST packets to network hosts
+>  The ping utility uses the ICMP protocol's mandatory ECHO_REQUEST datagram to elicit an ICMP ECHO_RESPONSE from a host or gateway.  ECHO_REQUEST datagrams
+     (“pings”) have an IP and ICMP header, followed by a “struct timeval” and then an arbitrary number of “pad” bytes used to fill out the packet. 
+
+> ICMP
+ICMP（Internet Control Message Protocol）是一种网络协议，用于在IP层发送控制消息。这些消息用于检查网络连接的可靠性、维护网络配置等。ICMP协议的主要用途是检测网络设备的状态和运行情况。
+
+以下是一些常见的ICMP协议消息类型：
+
+PING（回显请求）：用于检查目标主机是否正常运行。
+TCP Port Unreachable：表示目标主机上的特定TCP端口无法访问。
+TTL Expired：表示数据包在传输过程中超过了指定的生存时间（TTL）。
+ICMPv6：用于IPv6网络中的ICMP消息。
+
+## 框架
+
+### vue
+
+
+
+### react
+
+#### Refactoring to input with State
+
+- 1.Identify your component’s different visual states
+
+通过props控制虚拟dom
+
+<details>
+<summary>from.tsx</summary>
+```tsx
+export default function Form({
+  status = 'empty'
+}) {
+  if (status === 'success') {
+    return <h1>That's right!</h1>
+  }
+  return (
+    <>
+      <h2>City quiz</h2>
+      <p>
+        In which city is there a billboard that turns air into drinkable water?
+      </p>
+      <form>
+        <textarea disabled={
+          status === 'submitting'
+        } />
+        <br />
+        <button disabled={
+          status === 'empty' ||
+          status === 'submitting'
+        }>
+          Submit
+        </button>
+        {status === 'error' &&
+          <p className="Error">
+            Good guess but a wrong answer. Try again!
+          </p>
+        }
+      </form>
+      </>
+  );
+}
+```
+</details>
+
+<details>
+<summary>App.ts</summary>
+```ts
+import Form from './Form.js';
+
+let statuses = [
+  'empty',
+  'typing',
+  'submitting',
+  'success',
+  'error',
+];
+
+export default function App() {
+  return (
+    <>
+      {statuses.map(status => (
+        <section key={status}>
+          <h4>Form ({status}):</h4>
+          <Form status={status} />
+        </section>
+      ))}
+    </>
+  );
+}
+```
+</details>
+
+
+- 2.Determine what triggers those state changes
+- 3.Represent the state in memory with useState
+
+```js
+const [answer, setAnswer] = useState('');
+const [error, setError] = useState(null);
+```
+
+- 4.Remove any non-essential state variables 
+- 5 .Connect the event handlers to set state
+
+<details>
+<summary>App.ts</summary>
+
+```ts
+import { useState } from 'react';
+
+export default function Form() {
+  const [answer, setAnswer] = useState('');
+  const [error, setError] = useState(null);
+  const [status, setStatus] = useState('typing');
+
+  if (status === 'success') {
+    return <h1>That's right!</h1>
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus('submitting');
+    try {
+      await submitForm(answer);
+      setStatus('success');
+    } catch (err) {
+      setStatus('typing');
+      setError(err);
+    }
+  }
+
+  function handleTextareaChange(e) {
+    setAnswer(e.target.value);
+  }
+
+  return (
+    <>
+      <h2>City quiz</h2>
+      <p>
+        In which city is there a billboard that turns air into drinkable water?
+      </p>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={answer}
+          onChange={handleTextareaChange}
+          disabled={status === 'submitting'}
+        />
+        <br />
+        <button disabled={
+          answer.length === 0 ||
+          status === 'submitting'
+        }>
+          Submit
+        </button>
+        {error !== null &&
+          <p className="Error">
+            {error.message}
+          </p>
+        }
+      </form>
+    </>
+  );
+}
+
+function submitForm(answer) {
+  // Pretend it's hitting the network.
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let shouldError = answer.toLowerCase() !== 'lima'
+      if (shouldError) {
+        reject(new Error('Good guess but a wrong answer. Try again!'));
+      } else {
+        resolve();
+      }
+    }, 1500);
+  });
+}
+```
+</details>
+
+
+## canvas
+
+### 绘制三角形或多边形
+
+
+<details>
+<summary>index.js</summary>
+```js
+   const canvas = document.getElementById('myCanvas');
+   const ctx = canvas.getContext('2d');
+   // 绘制三角形
+   ctx.beginPath();
+   ctx.moveTo(10, 10);
+   ctx.lineTo(50, 100);
+   ctx.lineTo(10, 150);
+   ctx.closePath();
+   ctx.fillStyle = 'blue';
+   ctx.fill();
+
+   // 绘制多边形
+   ctx.beginPath();
+   ctx.moveTo(150, 10);
+   ctx.lineTo(200, 50);
+   ctx.lineTo(150, 100);
+   ctx.lineTo(100, 50);
+   ctx.closePath();
+   ctx.fillStyle = 'red';
+   ctx.fill();
+```
+
+</details>
+
+
+<canvas id="myCanvas" class="h-[100px] w-[100px] bg-[#000]"/>
+
+
+## 基础
+
+### 防抖
+
+ n 秒内函数只会执行一次
+```js
+function debounce(fn, timing) {
+  let timer;
+  return function() {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn();
+    }, timing);
+  }
+}
+```
+
+```
+const debounce = (fn, delay) => {
+    let timer;
+    return ()=>{
+        clearTimeout(timer);
+        timer = setTimeout(()=>{
+            fn();
+        }, delay);
+    }
+}
+```
+
+常用于避免事件处理程序或函数被频繁触发，从而提高性能。例如，在搜索输入框中，当用户输入时，可能会触发一个搜索函数，但这个函数可能会被频繁触发，导致性能下降。使用 debounce 函数可以解决这个问题，确保搜索函数只在用户停止输入后的 delay 毫秒后执行。
+
+### 节流
+
+```js
+function throttle(fn, timing) {
+  let trigger;
+  return function() {
+    if (trigger) return;
+    trigger = true;
+    fn();
+    setTimeout(() => {
+      trigger = false;
+    }, timing);
+  }
+}
+```
+
+常用于限制函数的执行频率，从而提高性能。例如，在滚动事件处理程序中，可能会触发一个函数来重新获取页面内容，但这个函数可能会被频繁触发，导致性能下降。使用 throttle 函数可以解决这个问题，确保在滚动事件触发后的 timing 时间间隔内只执行一次函数。
+
+
+## 实现(5).add(3).minus(2)功能
+
+```js
+Number.prototype.add = function(num) {
+    return this+num
+}
+
+Number.prototype.minus = function(num) {
+    return this-num
+}
+
+Number.prototype.multiply = function(num) {
+    return this*num
+}
+
+Number.prototype.divide = function(num) {
+    return this/num
+}
+```
+
+## Async/Await 如何通过同步的方式实现异步
+
+generate 
+
+```js
+var fetch = require("node-fetch");
+
+function *gen() { // 这里的 * 可以看成 async
+  var url = "https://api.github.com/users/github";
+  var result = yield fetch(url); // 这里的 yield 可以看成 await
+  console.log(result.bio);
+}
+
+var g = gen();
+var result = g.next();
+result.value.then(data => data.json()).then(data  => g.next(data));
+```
+
+## 浏览器渲染原理
+
+
+浏览器的渲染原理可以简单地描述为以下几个步骤:
+
+### 解析 HTML:
+
+浏览器将 HTML 文档解析成 DOM(文档对象模型)树,以便浏览器可以理解和操作 HTML 元素。
+
+浏览器解析 HTML 时使用的方案主要有两种：SAX 和 DOM。
+
+SAX（Simple API for XML）解析器：SAX 解析器是一种基于事件驱动的解析方式，它会将 HTML 文件分割成一系列的事件，然后逐个处理这些事件。SAX 解析器不会将整个 HTML 文档加载到内存中，因此非常适合处理大型的 HTML 文档。SAX 解析器的主要缺点是，它不支持在解析过程中修改 DOM（Document Object Model，文档对象模型）。
+DOM（Document Object Model）解析器：DOM 解析器会将 HTML 文件解析成 DOM 树，然后通过 DOM API 进行操作。DOM 解析器会将整个 HTML 文档加载到内存中，因此适用于需要对 HTML 文件进行复杂操作的场景。DOM 解析器的主要优点是支持在解析过程中修改 DOM，但可能会导致解析速度变慢。
+在实际应用中，浏览器通常会根据 HTML 文档的大小和复杂程度选择合适的解析方式。对于较小的 HTML 文档，SAX 解析器更为高效；而对于较大的 HTML 文档，DOM 解析器更为高效。此外，浏览器可能会在解析过程中自动切换解析方式，以提高性能。
+
+需要注意的是，尽管 DOM 解析器支持在解析过程中修改 DOM，但在解析完成后，浏览器可能会对 DOM 进行优化，例如清除不再需要的节点、压缩 DOM 等，以减小内存占用和提高性能。因此，在实际应用中，尽量使用 DOM 解析器，并在解析完成后进行优化。
+
+
+### 解析 CSS:
+浏览器将 CSS 样式表解析成 CSSOM(样式对象模型)树,以便浏览器可以理解和应用 CSS 规则。
+
+### 构建渲染树:
+
+浏览器将 DOM 和 CSSOM 合并成一个渲染树,以便浏览器可以绘制屏幕上的内容。
+
+### 布局:
+
+浏览器使用布局引擎计算渲染树中每个节点的宽度和高度,以便将它们放置在屏幕上的适当位置。
+### 绘制:
+
+浏览器使用 GPU(图形处理单元)绘制渲染树中的每个节点,以便将它们显示在屏幕上。
+
+### 重排和重绘:
+
+如果渲染树中的某个节点发生了变化,例如,元素的属性或内容发生了变化,那么浏览器将重新计算渲染树,并重新绘制屏幕上的内容。这个过程被称为重排。如果只是修改了某个节点的属性,例如,修改了它的样式或大小,那么浏览器将只重新计算需要重新绘制的部分,这个过程被称为重绘。
+浏览器渲染过程的复杂性在于,它需要同时处理 HTML、CSS 和布局。此外,浏览器需要处理多种设备类型和屏幕尺寸,以确保网页在不同设备和屏幕上都能正常显示。因此,浏览器的渲染原理可以被视为一种复杂的高级算法。
+
+
+### 网络内容拦截
+
+从网络的角度来看，拦截内容通常是通过路由器、代理服务器等网络设备实现的。这些设备可以对网络通信进行拦截和处理，从而实现内容的过滤、篡改、拦截等操作。
+
+以路由器为例，路由器可以作为网络通信的入口和出口，可以将网络通信中的数据包进行拦截和处理。当数据包从一台计算机发出，经过路由器，到达目标计算机时，路由器可以对数据包进行查看、修改或丢弃等操作。如果路由器对数据包进行了拦截和处理，数据包将不会到达目标计算机，从而实现内容的过滤、篡改、拦截等操作。
+
+除了路由器之外，代理服务器也可以实现内容的拦截和处理。代理服务器可以作为网络通信的转发器，可以将网络通信中的数据包进行拦截和处理，然后转发到目标计算机。代理服务器可以实现对内容的过滤、篡改、拦截等操作，从而实现对网络通信的掌控。
+
+总之，拦截内容的实现可以通过路由器、代理服务器等网络设备来实现，这些设备可以对网络通信中的数据包进行查看、修改或丢弃等操作，从而实现内容的过滤、篡改、拦截等操作。
+
+## 算法
+
+### js写算法需要提前掌握
+
+以下是一些在编写JavaScript代码时需要提前掌握的方法、函数和技巧：
+
+#### 变量声明和方法
+在JavaScript中，变量声明非常重要。可以使用var、let和const关键字声明变量。其中，let关键字声明的变量具有块级作用域，而const关键字声明的变量不可更改。
+
+此外，方法（函数）在JavaScript中是非常重要的。可以使用function关键字定义方法，并使用参数传递数据。方法可以返回值，也可以不返回值。
+
+#### 对象和数组
+JavaScript中可以使用对象（Object）和数组（Array）来存储和操作数据。对象可以使用点（.）或方括号（[]）访问属性，数组可以使用索引访问元素。
+
+#### 条件语句和循环
+条件语句（如if、else if、else）用于根据条件执行不同的代码块。循环语句（如for、while、do-while）用于重复执行一段代码。
+
+#### 函数和模块
+JavaScript中可以使用函数来封装一段代码，使其更易于维护和 reuse。模块（module）是一种组织代码的方法，可以将相关功能分组在一起。
+
+#### 箭头函数和箭头操作符
+箭头函数是一种简洁的函数定义方式，可以简化代码。箭头操作符（=>）用于将函数的返回值与参数绑定在一起。
+
+#### Promise和async/await
+Promise是一种处理异步操作的方法，可以确保异步操作按预期进行。async/await是ES2017中引入的新语法，用于简化异步编程。
+
+#### 数组方法
+JavaScript提供了许多数组方法，如push、pop、shift、unshift、splice、sort、reverse等，这些方法可以方便地对数组进行操作。
+
+#### 字符串方法
+JavaScript提供了许多字符串方法，如toUpperCase、toLowerCase、substring、slice、indexOf、lastIndexOf、trim等，这些方法可以方便地对字符串进行操作。
+
+#### 正则表达式
+JavaScript提供了正则表达式来处理字符串。可以使用RegExp构造函数创建正则表达式对象，并使用正则表达式的方法来匹配和替换字符串。
+
+#### 全局对象和内置函数
+JavaScript中有许多全局对象和内置函数，如window、document、console、Math、Date等。这些对象和函数可以方便地进行浏览器操作和数据处理。
+
+
+
+
+### exam
+
+
+#### 1.二分查找(简单)
+> 输入不重复有序整数数组，使用空格隔开。查找特定整数，返回数组下标。不存在则返回-1。
+
+```js
+function findIndex(arr, target) {
+ let left = 0;
+ let right = arr.length - 1;
+
+ while (left <= right) {
+   const mid = Math.floor((left + right) / 2);
+
+   if (arr[mid] === target) {
+     return mid;
+   } else if (arr[mid] < target) {
+     left = mid + 1;
+   } else {
+     right = mid - 1;
+   }
+ }
+ return -1;
+}
+const arr = [1, 3, 5, 7, 9];
+const target = 5;
+
+console.log(findIndex(arr, target)); // 输出：2
+```
+
+#### 2.HJ12字符串反转/HJ11数字颠倒/HJ106 字符逆序
+
+```js
+const readline = require("readline");
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+rl.on("line", function (line) {
+    console.log(line.split('').reverse().join(''));
+});
+```
+
+*`line.split('').reverse().join('')`*
+
+
+#### 3.HJ54 表达式求值
+
+如果能使用eval的话会很简单
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    // Write your code here
+    while(line = await readline()){
+        let res = eval(line);
+    }
+}()
+
+```
+
+#### 4.HJ76 尼科彻斯定理
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    // Write your code here
+    while(line = await readline()){
+        let num =Number(line);
+        let res = []
+        let mid = Math.pow(num,3)/num;
+        for(let i= 0;i<num;i++){
+            res.push(mid+1-(num/2-i)*2);
+        }
+        console.log(res.join('+'));
+
+    }
+}()
+
+```
+
+#### 5.HJ75 公共子串计算
+
+给定两个只包含小写字母的字符串，计算两个字符串的最大公共子串的长度。
+注：子串的定义指一个字符串删掉其部分前缀和后缀（也可以不删）后形成的字符串。
+
+输入:asdfas
+werasdfaswer
+
+输出:6
+
+```js
+    const rl = require("readline").createInterface({ input: process.stdin });
+    var iter = rl[Symbol.asyncIterator]();
+    const readline = async () => (await iter.next()).value;
+    void async function () {
+        // Write your code here
+        let str = []
+        while(line = await readline()){
+            str.push(line);
+        }
+        let str_1=str[0];
+        let str_2=str[1];
+        let short = str_1.length>str_2.length?str_2:str_1;
+        let long = str_1.length>str_2.length?str_1:str_2;
+        let max = 0;
+        let dp = new Array(short.length);
+        for(let i=0;i<short.length;i++){
+            dp[i] = new Array(long.length).fill(0);
+            for(let j=0;j<long.length;j++){
+                if(short[i]===long[j]){
+                    if(i>0&&j>0){
+                        dp[i][j] = dp[i-1][j-1]+1;
+                    }
+                    else{
+                    dp[i][j]=1;
+                    }
+                }else{
+                    dp[i][j]=0;
+                }
+                if(max<dp[i][j]){
+                    max=dp[i][j];
+                }
+            }
+        }
+        console.log(max);       
+    }()
+```
+
+
+#### 6.求最大连续bit数(位运算)
+
+求一个int类型数字对应的二进制数字中1的最大连续数，例如3的二进制为00000011，最大连续2个1
+
+输入：
+200
+输出：
+2
+说明：
+200的二进制表示是11001000，最多有2个连续的1。 
+
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    // Write your code here
+    while(line = await readline()){
+        let num = Number(line);
+        let max =0;
+        let temp =0;
+        while(num){
+            console.log(num,num%2);
+            if(num%2===1){
+                temp++;
+            }
+            else{
+                temp =0;
+            }
+            if(temp>=max){
+                max = temp;
+            }
+            num = num >>1;
+        }
+        console.log(max);
+    }
+}()
+
+
+```
+
+
+#### 7.HJ85 最长回文子串(字符串,穷举)
+
+
+给定一个仅包含小写字母的字符串，求它的最长回文子串的长度。
+所谓回文串，指左右对称的字符串。
+所谓子串，指一个字符串删掉其部分前缀和后缀（也可以不删）的字符串
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+
+    function isHui(s){
+        return s.split('').reverse().join('')===s;
+    }
+
+    // Write your code here
+    while(line = await readline()){
+        let tokens = line.split(' ');
+        if(line.length<3){
+            console.log(line.length)
+        }
+        let max =2;
+        for (let i=2;i<line.length;i++){
+            
+            let left =i-1;
+            let right =i+1;
+
+            while(line[left]===line[i]&&left>=0){
+                left--;
+            }
+            while(line[right]===line[i]&&right<line.length){
+                right++;
+            }
+            let sum = right-left-1;
+            while(line[left]===line[right]&&left>=0&&right<line.length){
+                left--;
+                right++;
+                sum+=2;
+            }
+            if(sum>max){
+                max=sum
+            }
+        }
+        console.log(max)
+    }
+}()
+
+```
+
+
+
+#### [8.HJ100 等差数列](https://www.nowcoder.com/practice/52d382c2a7164767bca2064c1c9d5361?tpId=37&rp=1&ru=%2Fta%2Fhuawei&qru=%2Fta%2Fhuawei%2Fquestion-ranking&tab=answerKey&difficulty=&judgeStatus=&tags=&title=&sourceUrl=&gioEnter=menu)
+等差数列 2，5，8，11，14。。。。
+（从 2 开始的 3 为公差的等差数列）
+输出求等差数列前n项和
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    // Write your code here
+    while(line = await readline()){
+        let n =Number(line);
+        let res = Math.pow(n,2)*3/2+n/2;
+        console.log(res);
+    }
+}()
+
+```
+
+#### 9.HJ87 密码强度等级
+
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    // Write your code here
+    while(line = await readline()){
+        
+        let count =0;
+        let len = line.length;
+        if(len<1){
+            console.log("VERY_WEAK");
+            return;
+        }
+
+        {
+            if(len<=4){
+                count+=5;
+            }
+            else if(len<=7){
+                count+=10;
+            }
+            else{
+                count+=25;
+            }
+        }
+
+        let hasLetter =false;
+        let hasAllLetter = false;
+
+        if(new RegExp("[a-z,A-Z]","g").test(line))
+        {
+            hasLetter =true;
+            if(line.toUpperCase()===line||line.toLowerCase()===line){
+                count+=10;
+            }
+            else{
+                hasAllLetter=true;
+                count+=20;
+            }
+        }
+
+        let hasNum =false;
+
+        if(new RegExp("[0-9]","g").test(line))
+        {
+            hasNum = true;
+            let match_num = line.matchAll(/[0-9]/g);
+            let flag = 0;
+            while(!match_num.next().done){
+                flag++
+            }
+
+            if(flag>1){
+                count+=20;
+            }
+            else{
+                count+=10;
+            }
+        }
+
+        let hasSig = false;
+        //符号
+        if(new RegExp(/[\x21-\x2F,\x3A-\x40,\x5B-\x60,\x7B-\x7E]/,"g").test(line))
+        {
+            hasSig =true;
+            let match_num = line.matchAll(/[\x21-\x2F,\x3A-\x40,\x5B-\x60,\x7B-\x7E]/g);
+            let flag = 0;
+            while(!match_num.next().done){
+                flag++
+            }
+
+            if(flag>1){
+                count+=25;
+            }
+            else{
+                count+=10;
+        }
+        }
+        if(hasLetter&&hasNum){
+            if(hasAllLetter&&hasSig){
+                count+=5;
+            }else if(hasSig){
+                count+=3
+            }else
+            count+=2
+        }
+
+        console.log(count>=90?"VERY_SECURE":count>=80?"SECURE":count>=70?"VERY_STRONG":count>=60?"STRONG":count>=50?"AVERAGE":count>=25?"WEAK":"VERY_WEAK");
+    }
+}()
+
+
+```
+
+
+
+#### 10. HJ10 字符个数统计(开始中等题，虽然这是一道简单题)
+
+> 编写一个函数，计算字符串中含有的不同字符的个数。字符在 ASCII 码范围内( 0~127 ，包括 0 和 127 )，换行表示结束符，不算在字符里。不在范围内的不作统计。多个相同的字符只计算一次
+例如，对于字符串 abaca 而言，有 a、b、c 三种不同的字符，因此输出 3 。
+
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    // Write your code here
+    while(line = await readline()){
+        let tokens = line.split('');
+        let list  = [...new Set(tokens)];
+        console.log(list.length);
+        
+    }
+}()
+```
+
+#### 11.HJ46 截取字符串
+
+
+
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    let res =[]
+    // Write your code here
+    while(line = await readline()){
+        res.push(line)
+        
+    }
+
+    console.log(res[0].slice(0,parseInt(res[1])))
+}()
+
+```
+
+
+#### 12.HJ60 查找组成一个偶数最接近的两个素数
+
+任意一个偶数（大于2）都可以由2个素数组成，组成偶数的2个素数有很多种情况，本题目要求输出组成指定偶数的两个素数差值最小的素数对。
+
+要判断一个数是否为素数，可以使用以下方法：
+
+遍历从 2 到该数本身的所有整数，判断它们是否能被该数整除。
+如果该数能被其中任意一个整数整除，则该数不是素数。
+如果该数不能被任何整数整除，则该数是素数。
+
+
+
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void (async function () {
+    // Write your code here
+
+    function isSu(n) {
+        if (n >= 2) {
+            for (let i = 2; i < Math.ceil(n / 2); i++) {
+                if (n % i == 0) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    while ((line = await readline())) {
+        let mid = Number(line) / 2;
+        let l = 0,
+            g = 0;
+        for (let i = 0; i < mid; i++) {
+            // console.log(isSu(mid-i),isSu(mid+i),mid,i)
+            if (isSu(mid - i) && isSu(mid + i)) {
+                l = mid - i;
+                g = mid + i;
+                console.log(l);
+                console.log(g);
+                return;
+            }
+        }
+    }
+})();
+```
+
+#### 13.HJ40 统计字符
+
+输入一行字符，分别统计出包含英文字母、空格、数字和其它字符的个数
+
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    // Write your code here
+    while(line = await readline()){
+        let sl = 0;
+        let sk = 0;
+        let sn = 0;
+
+        let match_l = line.toLowerCase().matchAll(/[a-z]/g);
+        while(!match_l.next().done){
+            sl++
+        };
+        
+        let match_k = line.matchAll(" ");
+        while(!match_k.next().done){
+            sk++
+        };
+
+         let match_n = line.matchAll(/[0-9]/g);
+        while(!match_n.next().done){
+            sn++
+        };
+        console.log("%d\n%d\n%d\n%d",sl,sk,sn,line.length-sl-sk-sn)
+    }
+}()
+
+```
+
+
+#### 14.Hj14 字符串排序
+
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    let lsit = [];
+    // Write your code here
+    while(line = await readline()){
+        lsit.push(line);
+    }
+    let n = lsit.shift();
+    lsit = lsit.sort()
+    for(let i =0;i<Number(n);i++){
+        console.log(lsit[i]);
+    }
+
+}()
+
+```
+
+#### 15.HJ5 进制转换
+
+写出一个程序，接受一个十六进制的数，输出该数值的十进制表示。
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    // Write your code here
+    while(line = await readline()){
+        console.log(parseInt(line,16))
+    }
+}()
+
+```
+
+
+#### 16. HJ59 找出字符串中第一个只出现一次的字符
+
+找出字符串中第一个只出现一次的字符
+
+输入：
+asdfasdfo
+
+输出：
+o
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    // Write your code here
+    while(line = await readline()){
+        let lines = line.split('');
+        let newStr = [...new Set(lines)];
+        for(let i = 0 ;i<newStr.length;i++){
+            let tag = 0;
+            while(lines.indexOf(newStr[i])!==-1){
+                lines.splice(lines.indexOf(newStr[i]),1);
+                tag++;
+            }
+            if(tag===1){
+                console.log(newStr[i])
+                return;
+            }
+        }
+    }
+    console.log(-1)
+}()
+
+```
+
+
+使用match会更妙一点
+
+```js
+  while ((line = await readline())) {
+        try {
+            let unfind = true;
+            for (const i of line) {
+                if (line.match(new RegExp(i, "g")).length === 1) {
+                    unfind = false;
+                    console.log(i);
+                    break;
+                }
+            }
+            if (unfind) {
+                console.log(-1);
+            }
+        } catch (e) {}
+    }
+```
+
+在 JavaScript 中，可以使用 break 语句来跳出 for...of 循环。当 for...of 循环执行到 break 语句时，循环会立即停止，不再执行循环内剩余的代码。
+
+注意，break 语句只会跳出当前循环，不会跳出外层循环。如果需要在循环内跳出所有循环（包括外层循环），可以使用 return 语句。
+
+
+#### 17.HJ81 字符串字符匹配
+
+判断短字符串S中的所有字符是否在长字符串T中全部出现。
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+    let lines = [];
+    // Write your code here
+    while(line = await readline()){
+        lines.push(line);
+    }
+    // console.log(lines[1].indexOf(lines[0])!==-1)
+    let res= true
+    lines[0].split('').forEach(item=>{
+        if(lines[1].indexOf(item)===-1){
+            res = false
+        }
+    })
+
+    console.log(res)
+
+}()
+
+```
+
+
+#### 18 力扣简单 破冰游戏
+
+```js
+var iceBreakingGame = function(num, target) {
+    if(num===1){
+        return 0
+    }
+    let x = iceBreakingGame(num-1,target);
+    return (target+x)%num;
+};  
+```
+
+#### 19 力扣中等 无重复字符的最长子串
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+
+const isC = (s)=>{
+    return [...new Set(s.split(''))].join('')===s;
+}
+var lengthOfLongestSubstring = function(s) {
+    if(s.length<1){
+        return 0;
+    }
+    if(isC(s)){
+        return s.length;
+    }
+    let max =1;
+    for(let i=0;i<s.length-1;i++){
+        for(j=i;j<s.length;j++){
+            let str = s.slice(i,j+1);
+            if(!isC(str)){
+                if(max<j-i){
+                    max=j-i;
+                }
+                break;
+            }
+            if(j===s.length-1&&isC(str)){
+                if(max<j-i+1){
+                    max=j-i+1;
+                }
+            }
+        }
+    }
+    return max;
+};
+```
+
+emmm 做复杂了
+
+
+#### 20.[最长公共前缀](https://leetcode.cn/problems/longest-common-prefix/)
+
+编写一个函数来查找字符串数组中的最长公共前缀。
+
+如果不存在公共前缀，返回空字符串 ""。
+
+```js
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+
+const compareTowStr = (short,long)=>{
+    let str=""
+    for(let i=0;i<short.length;i++){
+        if(short[i]===long[i]){
+            str+=short[i];
+        }else{
+            break
+        }
+    }
+
+    return str;
+    
+
+}
+
+var longestCommonPrefix = function(strs) {
+    if(strs.length===1){
+        return strs[0]
+    }
+
+    let min = strs[0].length;
+    let minStr=strs[0];
+    strs.map(str=>{
+        if(str.length<min){
+            minStr = str;
+        }
+    })
+    let minIndex = minStr.length;
+    for(let i=0;i<strs.length;i++){
+        let str = compareTowStr(minStr,strs[i]);
+        console.log(str);
+        if(minIndex>=str.length){
+            minIndex = str.length;
+            // res = str;
+        }
+    }
+    let res = minStr.slice(0,minIndex);
+    return res
+
+};
+```
+
+
+#### 21 [反转字符串中的单词](https://leetcode.cn/problems/reverse-words-in-a-string/)
+
+给你一个字符串 s ，请你反转字符串中 单词 的顺序。
+
+单词 是由非空格字符组成的字符串。s 中使用至少一个空格将字符串中的 单词 分隔开。
+
+返回 单词 顺序颠倒且 单词 之间用单个空格连接的结果字符串。
+
+注意：输入字符串 s中可能会存在前导空格、尾随空格或者单词间的多个空格。返回的结果字符串中，单词间应当仅用单个空格分隔，且不包含任何额外的空格。
+
+```js
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reverseWords = function(s) {
+    let l = s.match(/[a-z,A-Z,0-9]+/g)
+    let res = l.reverse().join(' ').trim()
+    return res
+};
+```
+
+[`String.prototype.match()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
+
+
+
+#### 22. [字符串中的单词数](https://leetcode.cn/problems/number-of-segments-in-a-string/description/)
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var countSegments = function(s) {
+    return (s.match(/\S+/g)||[]).length;
+};
+```
+
+
+#### 23.[581. 最短无序连续子数组](https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/description/)
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findUnsortedSubarray = function(nums) {
+    let numss = nums.join(',').split(',');
+    let l = numss.sort((a,b)=>a-b);
+    console.log(l,nums)
+    let i_1 = 0;
+    let i_2 = 0;
+    for(let i =0;i<nums.length;i++){
+        if(l[i]!=nums[i]){
+            i_1 = i;
+            break;
+        }
+    }
+    for(let i =nums.length-1;i>0;i--){
+        if(l[i]!=nums[i]){
+            i_2 = i;
+            break;
+        }
+    }
+    if(i_1===i_2) return 0;
+
+    return i_2-i_1+1;
+};
+```
+
+
+#### 24.[1071. 字符串的最大公因子](https://leetcode.cn/problems/greatest-common-divisor-of-strings/description/)
+
+```js
+/**
+ * @param {string} str1
+ * @param {string} str2
+ * @return {string}
+ */
+var gcdOfStrings = function(str1, str2) {
+        let short = str1.length<=str2.length?str1:str2;
+        let long = str1.length>str2.length?str1:str2;
+        if(short.length<2){
+            return short;
+        }
+     
+
+        let res =""
+        for(let i=short.length-1;i>=0;i--){
+            res=short.slice(0,i+1);
+            if(
+                short.split(res).join("").trim().length===0&&
+                long.split(res).join("").trim().length===0){
+                break;
+            }
+        }
+        if(short.split(res).join("").trim().length>0||long.split(res).join("").trim().length>0){
+            return ""
+        }
+        return res
+};
+```
+
+
+#### 25[有效括号的嵌套深度](https://leetcode.cn/problems/maximum-nesting-depth-of-two-valid-parentheses-strings/description/)
+
+这题目描述的。。。
+
+```js
+var maxDepthAfterSplit = function(seq) {
+    let max = [];
+    let stack = 0;
+
+for (let i = 0; i < seq.length; i++) {
+   if (seq[i] === '(') {
+     stack++;
+     max.push(stack%2)
+
+   } else{
+     let ans = stack % 2;
+     stack--;
+     max.push(ans)
+   }
+ }
+ return max
+
+}
+
+```
+
+### 真题
+
+#### 1.宜居星球改造计划
+
+2XXX 年，人类通过对火星的大气进行宜居改造分析，使得火星已在理论上具备人类宜居的条件；
+
+由于技术原因，无法一次性将火星大气全部改造，只能通过局部处理形式；
+
+假设将火星待改造的区域为 r o w ∗ c o l u m n row * columnrow∗column 的网格，每个网格有 3 个值，宜居区、可改造区、死亡区，使用 YES、NO、NA 代替：
+
+YES 表示该网格已经完成大气改造；
+NO 表示该网格未进行改造，后期可进行改造；
+NA 表示死亡区，不作为判断是否改造完成的宜居，无法穿过；
+初始化下，该区域可能存在多个宜居区，并且每个宜居区能同时在每个太阳日单位向上下左右四个方向的相邻格子进行扩散，自动将 4 个方向相邻的真空区改造成宜居区；
+
+请计算这个待改造区域的网格中，可改造区是否能全部变成宜居区，如果可以，则返回改造的太阳日天数，不可以则返回-1。
+
+```js
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let rows, cols, gridCopy, coordinates;
+
+rl.on("line", (line) => {
+  if (!rows) {
+    rows = parseInt(line);
+    coordinates = [];
+  } else if (!cols) {
+    cols = line.split(" ").length;
+    gridCopy = new Array(rows).fill().map(() => new Array(cols));
+    for (let i = 0; i < rows; i++) {
+      const row = line.split(" ");
+      for (let j = 0; j < cols; j++) {
+        gridCopy[i][j] = row[j];
+      }
+      if (i < rows - 1) {
+        rl.prompt();
+      }
+    }
+    const noNums = countNoOccurrences();
+    let flag = true;
+    let day = 0;
+    while (noNums !== 0 && flag) {
+      for (const coordinate of findYesCoords()) {
+        updateAdjElems(coordinate[0], coordinate[1]);
+      }
+      if (coordinates.length !== 0) {
+        updateGridCopy();
+        noNums -= coordinates.length;
+        coordinates = [];
+        day++;
+      } else {
+        flag = false;
+      }
+    }
+    printDayOrMinusOne(noNums, day);
+    rl.close();
+  }
+});
+
+function countNoOccurrences() {
+  let count = 0;
+  for (const row of gridCopy) {
+    count += row.filter((s) => s === "NO").length;
+  }
+  return count;
+}
+
+function updateAdjElems(i, j) {
+  const directions = [
+    [-1, 0],
+    [1, 0],
+    [0, -1],
+    [0, 1],
+  ];
+  for (const dir of directions) {
+    const newRow = i + dir[0];
+    const newCol = j + dir[1];
+    if (
+      newRow >= 0 &&
+      newRow < rows &&
+      newCol >= 0 &&
+      newCol < cols &&
+      gridCopy[newRow][newCol] === "NO"
+    ) {
+      gridCopy[newRow][newCol] = "YES";
+      coordinates.push([newRow, newCol]);
+    }
+  }
+}
+
+function findYesCoords() {
+  const yesCoords = [];
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (gridCopy[i][j] === "YES") {
+        yesCoords.push([i, j]);
+      }
+    }
+  }
+  return yesCoords;
+}
+
+function updateGridCopy() {
+  for (const coordinate of coordinates) {
+    gridCopy[coordinate[0]][coordinate[1]] = "YES";
+  }
+}
+
+function printDayOrMinusOne(noNums, day) {
+  console.log(noNums === 0 ? day : -1);
+}
+
+```
+
+
+
+### 必会知识点
+
+#### 贪心算法
+
+计算一个数组中两个数的最大差值
+```js
+function greedyMaxDifference(arr) {
+ let max = arr[0];
+ let min = arr[0];
+ let difference = 0;
+
+ for (let i = 1; i < arr.length; i++) {
+   if (arr[i] > max) {
+     max = arr[i];
+     difference = max - min;
+   } else if (arr[i] < min) {
+     min = arr[i];
+     difference = max - min;
+   }
+ }
+
+ return difference;
+}
+
+const arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+console.log(greedyMaxDifference(arr)); // 输出：8
+```
+
+#### 滑动窗口
+滑动窗口算法是一种在处理字符串、数组等数据时，能够高效地获取连续的子集或片段的方法。它通过维护一个窗口，窗口在每次迭代中向右滑动，同时更新窗口中的数据。滑动窗口算法的应用范围非常广泛，例如在字符串匹配、文本处理、数据分析和过滤等场景中。
+
+下面是一个简单的滑动窗口算法实现：
+
+```js
+function slidingWindow(arr, windowSize) {
+ let result = [];
+ let left = 0;
+ let right = 0;
+
+ while (right < arr.length) {
+   // 扩大窗口
+   while (right - left < windowSize) {
+     right++;
+   }
+
+   // 更新窗口中的数据
+   // ...
+
+   // 缩小窗口
+   while (right - left >= windowSize) {
+     result.push(arr.slice(left, right));
+     left++;
+   }
+ }
+
+ return result;
+}
+
+
+```
+
+
+#### 进制转换
+
+
+在JavaScript中，我们可以使用toString()方法将数字转换为指定进制的字符串表示形式。以下是进制转换的示例：
+
+
+```js
+
+function convertToBase(num, base) {
+ const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ if (num === 0) return '0';
+ let result = '';
+ while (num > 0) {
+   result = digits[num % base] + result;
+   num = Math.floor(num / base);
+ }
+ return result;
+}
+
+console.log(convertToBase(10, 2)); // 输出：1010
+console.log(convertToBase(10, 8)); // 输出：12
+console.log(convertToBase(10, 16)); // 输出：A
+
+```
+
+
+#### 位元算
+
+位运算是一种在计算机科学中用于操作二进制数的数学运算，它可以用于实现各种算法，例如位操作符、位移操作符、按位与、按位或等。
+
+在JavaScript中，我们可以使用位运算符对二进制数进行操作。以下是位运算的一些示例：
+
+1.按位与（&）：按位与操作符&用于将两个二进制数的对应位进行逻辑与操作。只有当两个位都为1时，结果的对应位才为1，否则为0。
+
+```js
+console.log(5 & 3); // 输出：3
+console.log(6 & 3); // 输出：3
+console.log(7 & 3); // 输出：1
+```
+
+在这个示例中，5的二进制表示为101，3的二进制表示为011。按位与操作后，只有第五位（从右到左）的两个位都为1时，结果的第五位才为1，否则为0。
+
+2.按位或（|）：按位或操作符|用于将两个二进制数的对应位进行逻辑或操作。只要有一个位为1，结果的对应位就为1，否则为0。
+
+```js
+console.log(5 | 3); // 输出：7
+console.log(6 | 3); // 输出：7
+console.log(7 | 3); // 输出：7
+```
+
+在这个示例中，5的二进制表示为101，3的二进制表示为011。按位或操作后，只有第五位（从右到左）的两个位都为0时，结果的第五位才为0，否则为1。
+
+3. 按位异或（^）：按位异或操作符^用于将两个二进制数的对应位进行逻辑异或操作。当两个位相同时，结果的对应位为0，否则为1。
+
+```js
+console.log(5 ^ 3); // 输出：6
+console.log(6 ^ 3); // 输出：6
+console.log(7 ^ 3); // 输出：7
+```
+
+在这个示例中，5的二进制表示为101，3的二进制表示为011。按位异或操作后，只有第五位（从右到左）的两个位相同，结果的第五位才为0，否则为1。
+
+4.按位非（）：按位非操作符``用于将一个二进制数的对应位进行逻辑非操作。只有当对应位为1时，结果的对应位才为0，否则为1。
+
+```js
+console.log(~5); // 输出：-6
+console.log(~6); // 输出：-7
+console.log(~7); // 输出：-8
+```
+
+
+在这个示例中，5的二进制表示为101，按位非操作后，只有第五位（从右到左）的位为1，其他位都为0，所以结果为-6。
+
+5.左移（`<<`）：左移操作符`<<`用于将一个二进制数向左移动指定的位数。移动后的位数将被填充为0。
+
+```js
+console.log(5 << 1); // 输出：10
+console.log(6 << 1); // 输出：12
+console.log(7 << 1); // 输出：14
+```
+
+
+6.右移（>>）：右移操作符>>用于将一个二进制数向右移动指定的位数。移动后的位数将被填充为0。
+
+```js
+console.log(5 >> 1); // 输出：2
+console.log(6 >> 1); // 输出：3
+console.log(7 >> 1); // 输出：4
+```
+
+在这个示例中，5的二进制表示为101，向右移动1位后，第五位（从右到左）的位被填充为0，其他位保持不变，所以结果为2。
+
+
+#### 队列
+JavaScript中的队列是一种数据结构，用于存储一组元素，并允许在队首添加元素，在队尾删除元素。队列是一种先进先出（First In First Out, FIFO）的数据结构，与栈相反。
+
+在JavaScript中，我们可以使用数组来模拟队列的操作。以下是使用数组实现一个简单的队列数据结构的示例：
+
+```js
+class Queue {
+ constructor() {
+   this.items = [];
+ }
+
+ // 入队
+ enqueue(element) {
+   this.items.push(element);
+ }
+
+ // 出队
+ dequeue() {
+   if (this.isEmpty()) {
+     return '队列已空，无法出队';
+   }
+   return this.items.shift();
+ }
+
+ // 获取队列顶端元素
+ top() {
+   if (this.isEmpty()) {
+     return '队列已空，无法获取队列顶端元素';
+   }
+   return this.items[0];
+ }
+
+ // 判断队列是否为空
+ isEmpty() {
+   return this.items.length === 0;
+ }
+
+ // 获取队列大小
+ size() {
+   return this.items.length;
+ }
+}
+```
+
+使用这个队列数据结构，我们可以轻松地执行入队、出队、获取队首元素、判断队列是否为空以及获取队列大小等操作。例如：
+
+```js
+const queue = new Queue();
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+console.log(queue.top()); // 输出：1
+console.log(queue.dequeue()); // 输出：1
+console.log(queue.top()); // 输出：2
+console.log(queue.size()); // 输出：2
+console.log(queue.isEmpty()); // 输出：false
+```
+
+
+
+## 链接
+
+- [react docs](https://react.dev/)
+
+
+
+
