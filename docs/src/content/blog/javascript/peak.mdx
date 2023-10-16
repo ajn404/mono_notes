@@ -1,5 +1,5 @@
 ---
-title: 使用peak.js实现音乐可视化
+title: 音乐可视化
 author: ajn404
 pubDatetime: 2023-9-26 10:41:00
 postSlug: peakjs
@@ -8,9 +8,10 @@ draft: false
 tags:
   - music
 description:
-  "使用peakjs实现简单的音乐可视化"
+  "使用peakjs等实现简单的音乐可视化"
 ---
 
+## Peaks
 
 > peaks.js 音乐可视化[bbc demo](https://waveform.prototyping.bbc.co.uk/)
 
@@ -20,6 +21,12 @@ import Peaks from '@components/little/peaks.tsx'
 
 <Peaks client:load/>
 
+
+## audiomotion-analyzer
+
+import Motion from '@components/little/audioMotion.tsx'
+
+<Motion client:load/>
 
 
 - 自定义audio(todo)
@@ -252,6 +259,8 @@ export default Audio;
 ```
 
 </details>
+
+
 
 
 ## 链接

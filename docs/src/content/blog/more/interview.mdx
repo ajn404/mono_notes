@@ -2,7 +2,7 @@
 title: 10月记录
 author: ajn404
 pubDatetime: 2023-10-11 14:05:00
-postSlug: 8ass
+postSlug: interview
 featured: false
 draft: false
 tags:
@@ -997,8 +997,6 @@ void async function () {
 #### 11.HJ46 截取字符串
 
 
-
-
 ```js
 const rl = require("readline").createInterface({ input: process.stdin });
 var iter = rl[Symbol.asyncIterator]();
@@ -1484,7 +1482,7 @@ for (let i = 0; i < seq.length; i++) {
 
 ### 真题
 
-#### 1.宜居星球改造计划
+#### 1.宜居星球改造计划🌟
 
 2XXX 年，人类通过对火星的大气进行宜居改造分析，使得火星已在理论上具备人类宜居的条件；
 
@@ -1498,6 +1496,8 @@ NA 表示死亡区，不作为判断是否改造完成的宜居，无法穿过�
 初始化下，该区域可能存在多个宜居区，并且每个宜居区能同时在每个太阳日单位向上下左右四个方向的相邻格子进行扩散，自动将 4 个方向相邻的真空区改造成宜居区；
 
 请计算这个待改造区域的网格中，可改造区是否能全部变成宜居区，如果可以，则返回改造的太阳日天数，不可以则返回-1。
+
+
 
 ```js
 const readline = require("readline");
@@ -1601,6 +1601,272 @@ function printDayOrMinusOne(noNums, day) {
 
 ```
 
+自己跟写一遍
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+
+/**
+ * 
+YES NO NO NO
+NO NO NO NO
+NO NO NO NO
+NO NO NO NO
+
+6
+ * 
+ */
+void async function () {
+    let rows ,cols,coordinates=[];
+    let gridCopy = [];
+    // Write your code here
+    while(line = await readline()){
+        gridCopy.push(line.split(' '));
+    }
+    rows = gridCopy.length;
+    cols = gridCopy[0].length;
+    //找寻数组中“NO”的数量
+    let noNums = countNoOccurences();
+    let flag = true;
+    let day = 0;
+    while(noNums!==0&&flag){
+        for(const coordinate of FindeYesCoords()){
+            //遍历YES的坐标数组
+            //每轮循环更新YES的上下左右
+            updateAdjElems(coordinate[0],coordinate[1])
+        }
+        if(coordinates.length!==0){
+            for(const coordinate of coordinates){
+                gridCopy[coordinate[0]][coordinate[1]] = "YES"
+            }
+
+            noNums -= coordinates.length;
+            coordinates = [];
+            day++;
+        }else{
+            flag = false
+        }
+    }
+    console.log(noNums===0?day:-1);
+    //返回二维数组中YES的坐标即[i,j] 下标的数组
+    function FindeYesCoords(){
+        const list = [];
+        for(let i = 0;i<rows;i++){
+            for(let j = 0;j<cols;j++){
+                if(gridCopy[i][j]==="YES"){
+                    list.push([i,j])
+                }
+            }
+        }
+        return list;
+    }
+    //每轮循环更新YES的上下左右 ,gridCopy[i][j]
+    function updateAdjElems(i,j){
+        const direction = [
+            [-1,0],
+            [1,0],
+            [0,-1],
+            [0,1]
+        ]
+        for(const dir of direction){
+            let newI = i+dir[0];
+            let newJ = j + dir[1];
+            if(
+                newI>=0&&
+                newJ>=0&
+                newI<rows&&
+                newJ<cols&&
+                gridCopy[newI][newJ]==="NO"){
+
+                gridCopy[newI][newJ] = "YES";
+                coordinates.push([newI,newJ])
+            }
+        }
+    }
+    //找寻数组中“NO”的数量
+    function countNoOccurences(){
+        let count =0;
+        gridCopy.forEach(item=>{
+            count+= item.filter(s=>s==="NO").length;
+        })
+        return count
+    }
+}()
+```
+
+
+#### 2.跳格子（2）🌟
+
+小明和朋友玩跳格子游戏，有 n 个连续格子组成的圆圈，每个格子有不同的分数，小朋友可以选择从任意格子起跳，但是不能跳连续的格子，不能回头跳，也不能超过一圈;给定一个代表每个格子得分的非负整数数组，计算能够得到的最高分数。
+
+输入 2 3 2
+输出 4
+
+输入 1 2 3 1
+输出 4
+1+3
+
+> 动态规划
+
+**动态转移方程为 $dp[i] = max(dp[i-2)+scores[i],dp[i-1])$**
+
+```js
+function maxSumNonAdjacent(nums) {
+    const n = nums.length;
+    if (n === 0) {
+        return 0;
+    } else if (n === 1) {
+        return nums[0];
+    } else if (n === 2) {
+        return Math.max(nums[0], nums[1]);
+    }
+
+    let prevMax = nums[0];
+    let currMax = Math.max(nums[0], nums[1]);
+
+    for (let i = 2; i < n; i++) {
+        const temp = currMax;
+        currMax = Math.max(currMax, prevMax + nums[i]);
+        prevMax = temp;
+    }
+
+    return currMax;
+}
+
+const readline = require("readline");
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+rl.question("", (input) => {
+    const strings = input.split(" ");
+    const nums = strings.slice(0, strings.length - 1).map(Number);
+
+    const res = maxSumNonAdjacent(nums);
+
+    console.log(res);
+
+    rl.close();
+});
+```
+
+但感觉他的解法有问题，不能排除首尾相连的情况，这里把dp数组改成对象数组试试，给几个例子试试，感觉没错了
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+void async function () {
+     while(line = await readline()){
+        let scores = line.split(" ").map(item=>parseInt(item));
+        const n = scores.length;
+        if(n===1){
+            console.log(scores[0]);
+            return;
+        }
+        let dp = new Array(n).fill().map(()=>{return {}});
+        dp[0].value = scores[0];
+        dp[0].hasOne = true;
+        dp[1].value = Math.max(scores[0],scores[1]);
+        if(scores[0]>=scores[1]){
+            dp[1].hasOne = true;
+        }else{
+            dp[1].hasOne = false;
+        }
+        for(let i=2;i<n;i++){
+            dp[i].value = Math.max(dp[i-2].value+scores[i],dp[i-1].value);
+            // console.log(dp[i].value,dp[i-1])
+            if(dp[i-2].value+scores[i]>=dp[i-1].value&&dp[i-2].hasOne){
+                dp[i].hasOne = true;
+            }else{
+                dp[i].hasOne = false;
+            }
+        }
+        console.log(dp[n-1].hasOne?dp[n-2].value:dp[n-1].value);
+    }
+}()
+```
+
+#### 3.跳房子(2)✨
+
+跳房子，也叫跳飞机，是一种世界性的儿童游戏。
+
+游戏参与者需要分多个回合按顺序跳到第 1 格直到房子的最后一格，然后获得一次选房子的机会，直到所有房子被选完，房子最多的人获胜。
+
+跳房子的过程中，如果有踩线等违规行为会结束当前回合，甚至可能倒退几步。
+
+假设房子的总格数是 count，小红每回合可能连续跳的步数都放在数组 steps 中，请问数组中是否有一种步数的组合，可以让小红三个回合跳到最后一格？如果有，请输出索引和最小的步数组合(数据保证索引和最小的步数组合是唯一的)。
+
+注意：数组中的步数可以重复，但数组中的元素不能重复使用
+
+- 输入描述
+第一行输入为房子总格数 count，它是 int 整数类型。
+
+第二行输入为每回合可能连续跳的步数，它是 int 整数数组类型。
+
+- 输出描述
+返回索引和最小的满足要求的步数组合（顺序保持 steps 中原有顺序）
+
+
+```js
+let count = 9;
+let minIndexSum = Number.MAX_VALUE;
+let resList;
+
+function dfs(nums, remaining, combination, indices, index) {
+    if (remaining === 0) {
+        let total = 0;
+        let indexSumTemp = 0;
+        for (let i = 0; i < 3; i++) {
+            total += combination[i];        // 计算组合的元素总和
+            indexSumTemp += indices[i];      // 计算索引总和
+        }
+        if (total === count && indexSumTemp < minIndexSum) {   // 满足条件时更新结果
+            minIndexSum = indexSumTemp;
+            resList = combination.slice();
+        }
+    } else {
+        for (let i = index; i < nums.length; i++) {
+            combination[3 - remaining] = nums[i];    // 添加元素到组合
+            indices[3 - remaining] = i;              // 添加索引
+            dfs(nums, remaining - 1, combination, indices, i + 1);   // 递归调用
+        }
+    }
+}
+
+function printResult() {
+    let output = "[" + resList.join(",") + "]";
+    console.log(output);
+}
+
+let nums = [1, 5, 2, 0, 2, 4];
+let combination = Array(3);
+let indices = Array(3);
+dfs(nums, 3, combination, indices, 0);
+
+printResult();
+```
+
+
+### 牛客输入模版
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void async function () {
+
+     while(line = await readline()){
+
+        
+    }
+}()
+```
 
 
 ### 必会知识点
