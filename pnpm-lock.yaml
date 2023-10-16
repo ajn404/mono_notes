@@ -54,6 +54,7 @@ importers:
       '@toeverything/theme': ^0.7.15
       '@types/d3': ^7.4.0
       '@types/github-slugger': ^1.3.0
+      '@types/impress': ^0.5.31
       '@types/lodash.uniqueid': ^4.0.7
       '@types/node': ^20.6.3
       '@types/p5': ^1.7.0
@@ -70,6 +71,7 @@ importers:
       fuse.js: ^6.6.2
       github-slugger: ^2.0.0
       gsap: ^3.12.2
+      impress.js: ^1.1.0
       konva: ^9.2.0
       lodash.uniqueid: ^4.0.1
       maath: ^0.7.0
@@ -115,6 +117,7 @@ importers:
       '@studio-freight/lenis': 1.0.26
       '@toeverything/theme': 0.7.20
       '@types/d3': 7.4.1
+      '@types/impress': 0.5.31
       '@types/lodash.uniqueid': 4.0.7
       '@types/node': 20.8.4
       '@types/p5': 1.7.0
@@ -128,6 +131,7 @@ importers:
       fuse.js: 6.6.2
       github-slugger: 2.0.0
       gsap: 3.12.2
+      impress.js: 1.1.0
       konva: 9.2.2
       lodash.uniqueid: 4.0.1
       maath: 0.7.0_58efadaf260e61df10b9b838f9c3ff2e
@@ -2573,6 +2577,10 @@ packages:
     resolution: {integrity: sha512-hs/iBJx2aydugBQx5ETV3ZgeSS0oIreQrFJ4bjBl0XvM4wAmDjFEALY7p0rTSLt2eL+ibjRAAs9dTPiCLtmbqQ==}
     dependencies:
       '@types/unist': 3.0.0
+    dev: false
+
+  /@types/impress/0.5.31:
+    resolution: {integrity: sha512-GO3V23uVXxP38yDTbSwvV66Wpxp3H8P3mBZNhU8E1gA3XHuWXIeE5X7+mcbraO9ydeqNQ7e0D+hrljmesGEC0A==}
     dev: false
 
   /@types/json5/0.0.30:
@@ -5275,6 +5283,10 @@ packages:
 
   /import-meta-resolve/2.2.2:
     resolution: {integrity: sha512-f8KcQ1D80V7RnqVm+/lirO9zkOxjGxhaTC1IPrBGd3MEfNgmNG67tSUO9gTi2F3Blr2Az6g1vocaxzkVnWl9MA==}
+    dev: false
+
+  /impress.js/1.1.0:
+    resolution: {integrity: sha512-APQNnZx1M8RBe9vHdNAiAbIz4MaL0UDqIj0BDJOeFLqI/529/lGMmiz0m/c82xC08tBq8n9JzpMNoDykq0Zckg==}
     dev: false
 
   /imurmurhash/0.1.4:
