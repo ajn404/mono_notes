@@ -201,11 +201,6 @@ function submitForm(answer) {
 
 #### [useReducer](https://react.dev/learn/extracting-state-logic-into-a-reducer#comparing-usestate-and-usereducer)
 
-
-
-
-
-
 ## canvas
 
 ### 绘制三角形或多边形
@@ -237,10 +232,7 @@ function submitForm(answer) {
 ```
 
 </details>
-
-
 <canvas id="myCanvas" class="h-[100px] w-[100px] bg-[#000]"/>
-
 
 ## 基础
 
@@ -2301,7 +2293,6 @@ function preorderTraversalRecursive(root) {
  return result;
 }
 ```
-
 非递归
 ```js
 function preorderTraversal(root) {
@@ -2324,9 +2315,7 @@ function preorderTraversal(root) {
 ```
 
 判断某序列是否是二叉树的前序遍历,可以通过遍历该序列,比较其与二叉树前序遍历的规律是否一致来判断
-
 递归
-
 ```js
 function isValidPreorder(arr) {
   if (arr.length === 0) {
@@ -2394,6 +2383,38 @@ function isValidPreorder(arr) {
 ```
 
 
+##### 中序遍历
+
+栈的迭代
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function(root) {
+      let stack = [];
+      let res = []
+      while(root||stack.length>0){
+          while(root){
+              stack.push(root);
+              root = root.left;
+        }
+         root = stack.pop();
+         res.push(root.val);
+         root = root.right;
+      }
+      return res
+};
+```
 
 
 
