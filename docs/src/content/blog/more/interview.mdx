@@ -1478,6 +1478,47 @@ for (let i = 0; i < seq.length; i++) {
 
 ```
 
+#### 26. <span class="border-double border-4 border-indigo-600 p-1 m-1 ">二分查找</span> 
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) {
+    let left = 0;let right = nums.length - 1;
+    let middle = Math.floor((left+right)/2);
+    while(left<=right&&nums[middle]!==target){
+        middle = Math.floor((left+right)/2)
+        if(nums[middle]<target){
+            left = middle+1;
+        }
+        else if (nums[middle]>target){
+            right = middle-1;
+        }
+    }
+    return nums[middle]===target?middle:-1
+};
+```
+
+#### 27 移除元素
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+    while(nums.indexOf(val)!==-1){
+            nums.splice(nums.indexOf(val),1)
+    }
+    return nums.length
+};
+```
+
+
 ### 真题
 
 #### 1.宜居星球改造计划🌟
@@ -1825,6 +1866,7 @@ function dfs(nums, remaining, combination, indices, index) {
         }
         if (total === count && indexSumTemp < minIndexSum) {   // 满足条件时更新结果
             minIndexSum = indexSumTemp;
+            console.log(combination)
             resList = combination.slice();
         }
     } else {
@@ -1848,6 +1890,9 @@ dfs(nums, 3, combination, indices, 0);
 
 printResult();
 ```
+
+[Array.prototype.slice()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
+返回一个新的数组对象，占用一段新的内存地址
 
 
 三数之和
@@ -2042,8 +2087,238 @@ void (async function () {
 随着日积月累，地面会呈现伞坠的信息。
 输出如下三个值，以空格分隔: 是否二叉排序树，左侧地面呈现的伞坠数字值，右侧地面呈现的伞坠数字值.
 
+#### 6.[统计监控](https://blog.csdn.net/hihell/article/details/130818081)
+
+在一长方形停车场内，每个车位上方都有对应监控器，当且仅当在当前车位或者前后左右四个方向任意一个车位范围停车时，监控器才需要打开，给出某一时刻停车场的停车分布，请统计最少需要打开多少个监控器。
+
+输入
+
+```
+第一行输入 m mm，n nn 表示长宽，满足 1 < m , n < = 20 1<m,n<=201<m,n<=20；后面输入 m mm 行，每行有 n nn 个 0 00 或 1 11 的整数，整数间使用一个空格隔开，
+表示该行已停车情况，其中 0 00 表示空位，1 11 表示已停。
+```
+
+输出
+
+最少需要打开监控器的数量。
+
+例如
+
+输入
+
+3 3
+
+1 0 0
+
+0 1 0
+
+0 0 0
+
+输出
+
+6
+
+```js
+let rowCount = 3,
+  colCount = 3; // 行数和列数
+let grid = new Array(25);
+const DIRECTIONS = [
+  [0, -1],
+  [0, 1],
+  [-1, 0],
+  [1, 0],
+  [0, 0],
+]; // 方向数组，用于遍历相邻格子
+for (let i = 0; i < grid.length; i++) {
+  grid[i] = new Array(25).fill(0);
+}
+const inputGrid = [
+  [1, 0, 0],
+  [0, 1, 0],
+  [0, 0, 0],
+];
+for (let row = 1; row <= rowCount; row++) {
+  // 读入地图
+  for (let col = 1; col <= colCount; col++) {
+    grid[row][col] = inputGrid[row - 1][col - 1];
+  }
+}
+let result = 0;
+for (let row = 1; row <= rowCount; row++) {
+  // 遍历每个格子
+  for (let col = 1; col <= colCount; col++) {
+    if (grid[row][col] == 1) {
+      // 如果当前格子是车，直接计入结果
+      result++;
+      continue;
+    }
+    // 否则，遍历相邻的格子
+    if (
+      (row > 1 && grid[row - 1][col] == 1) || // 上方格子
+      (row < rowCount && grid[row + 1][col] == 1) || // 下方格子
+      (col > 1 && grid[row][col - 1] == 1) || // 左侧格子
+      (col < colCount && grid[row][col + 1] == 1) || // 右侧格子
+      grid[row][col] == 1
+    ) {
+      // 当前格子本身是车
+      result++;
+    }
+  }
+}
+console.log(result);
+
+```
 
 
+自己反向思考一下
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void (async function () {
+    let grid = []
+    while ((line = await readline())) {
+        grid.push(line.split(' ').map(item=>parseInt(item)));
+    }
+    let list = grid.shift()
+    let m = (list[0]);
+    let n = (list[1]);
+    let redirections = [
+                [0,-1],
+                [0,1],
+                [1,0],
+                [-1,0],
+            ]
+    for(let i = 0;i<m;i++){
+        for(let j = 0;j<n;j++){
+            if(!(grid[i][j]===true))
+            redirections.forEach(redirection=>{
+                if(i+redirection[0]<m&&i+redirection[0]>=0&&j+redirection[1]>=0&&j+redirection[1]<n){
+                let target = grid[i+redirection[0]][j+redirection[1]];
+                if(target===1){
+                    grid[i][j]="hh";
+                }
+                }
+                
+            })
+        }
+    }
+    let res =0
+        for(let i = 0;i<m;i++){
+        for(let j = 0;j<n;j++){
+            if(grid[i][j]!==0){
+                res+=1
+            }
+        }
+    }
+    console.log(res)
+    return res;
+
+
+})();
+
+```
+
+
+#### 7.[整数编码](https://blog.csdn.net/hihell/article/details/129163325)
+
+实现一个整数编码方法
+使得待编码的数字越小
+编码后所占用的字节数越小
+编码规则如下
+
+编码时7位一组，每个字节的低 7 位用于存储待编码数字的补码
+字节的最高位表示后续是否还有字节，置1表示后面还有更多的字节，置0表示当前字节为最后一个字节
+采用小端序编码，低位和低字节放在低地址上
+编码结果按16进制数的字符格式进行输出，小写字母需要转化为大写字母
+
+输入
+
+1000
+
+输出
+
+E807
+
+1000 的二进制表示为 0011 1110 1000 至少需要两个字节进行编码
+第一个字节最高位是 1 剩余 7 位存储数字 1000 的低 7 位(1101000)
+所以第一个字节的二进制位(1110 1000)即 E8
+第二个字节最高位置 0 剩余的 7 位存储数字 1000 的第二个低 7 位(0000111)
+所以第一个字节的二进制为(0000 0111)即 07
+采用小端序编码 所以低字节 E8 输出在前面
+高字节 07 输出在后面
+
+```js
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.on("line", (input) => {
+  solveMethod(parseInt(input));
+});
+
+function solveMethod(num) {
+  const binary = num.toString(2);
+
+  const len = binary.length;
+
+  let builder = "";
+
+  for (let i = len; i > 0; i -= 7) {
+    const start = Math.max(i - 7, 0);
+    let bin = binary.substring(start, i);
+    if (bin.length < 7) {
+      let head = "";
+      for (let j = 0; j < 7 - bin.length; j++) {
+        head += "0";
+      }
+      bin = head + bin;
+    }
+    bin = i - 7 <= 0 ? "0" + bin : "1" + bin;
+    const hex = parseInt(bin, 2).toString(16).toUpperCase().padStart(2, "0");
+    builder += hex;
+  }
+  console.log(builder);
+}
+
+```
+
+[parseInt](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseInt)
+> parseInt(string, radix) 解析一个字符串并返回指定基数的十进制整数，radix 是 2-36 之间的整数，表示被解析字符串的基数。
+
+[padStart](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
+
+> padStart() 方法用另一个字符串填充当前字符串（如果需要会重复填充），直到达到给定的长度。填充是从当前字符串的开头开始的。
+
+
+跟
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void (async function () {
+    while ((line = await readline())) {
+        let num = parseInt(line);
+        num = num.toString(2);
+        let len = num.length;
+        let res = ""
+        for(let i = len;i>0;i-=7){
+            let start = Math.max(i-7,0);
+            let sbs = num.substring(start,i);
+            sbs = sbs.padStart(7-sbs.length,"0");
+            sbs = i-7>0?'1'+sbs:'0'+sbs;
+            res+=parseInt(sbs,2).toString(16).toUpperCase().padStart(2,"0")
+        }
+        console.log(res)
+    }
+})();
+```
 
 ### 牛客输入模版
 
@@ -2416,7 +2691,16 @@ var inorderTraversal = function(root) {
 };
 ```
 
+以下是这个函数的详细解释：
 
+1.初始化一个空栈 stack 和一个空数组 res。
+2.进入一个 while 循环，当根节点 root 不为空或者栈 stack 不为空时，循环继续。
+3.在 while 循环中，将根节点的左子节点压入栈 stack 中，然后将根节点移动到它的左子节点。重复此步骤，直到根节点为空。
+4.当根节点为空时，从栈 stack 中弹出一个节点，将其值添加到结果数组 res 中。然后将根节点移动到它的右子节点。
+5.重复步骤 3 和 4，直到栈 stack 为空且根节点为空。
+6.最后返回结果数组 res。
+
+这个函数的优点是简单易懂，代码实现简单。但是，它的时间复杂度是 O(n)，其中 n 是二叉树的节点数，因为每个节点都需要入栈和出栈一次
 
 ## 链接
 
