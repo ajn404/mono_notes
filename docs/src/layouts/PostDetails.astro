@@ -82,9 +82,7 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
 
  <script>
     //添加平滑滚动
-    import Lenis from '@studio-freight/lenis'
-
-
+    import Lenis from '@studio-freight/lenis';
 
     const lenis = new Lenis()
     function raf(time:any) {
@@ -94,7 +92,8 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
     requestAnimationFrame(raf)
   </script>
 
-  <script>
+<script>
+// back to top
 import {
   Ripple,
   initTE,
@@ -122,11 +121,7 @@ const backToTop = () => {
 mybutton.addEventListener("click", backToTop);
 window.addEventListener("scroll", scrollFunction);
 }
-
-
-
   </script>
-
 <style>
   main {
     @apply mx-auto w-full max-w-3xl px-4 pb-12;
@@ -138,3 +133,5 @@ window.addEventListener("scroll", scrollFunction);
     @apply my-8;
   }
 </style>
+
+

@@ -2320,6 +2320,191 @@ void (async function () {
 })();
 ```
 
+#### 8.[五子棋迷](https://dream.blog.csdn.net/article/details/131961639)
+
+张兵和王武是五子棋迷，工作之余经常切磋棋艺。
+走了一会儿，轮到张兵了，他对着一条线思考起来了，这条线上的棋子分布如下：
+用数组表示： -1 0 1 1 1 0 1 0 1 -1
+
+棋子分布说明:
+
+-1 代表白子，0 代表空位，1 代表黑子；
+数组长度 L, 满足 1 < L < 40, 且 L 为奇数；
+请帮他写一个程序，算出最有利的出子位置。
+
+最有利定义：
+
+找到一个空位 (0)，用棋子 (1/-1) 填充该位置，可以使得当前子的最大连续长度变大；
+如果存在多个位置，**返回最靠近中间的较小的那个坐标；**
+如果不存在可行位置，直接返回 -1；
+连续长度不能超过 5 个(五子棋约束);
+
+
+输入描述
+
+第一行: 当前出子颜色
+第二行: 当前的棋局状态
+
+输出描述
+
+1 个整数，表示出子位置的数组下标
+
+1.输入
+
+```
+1
+-1 0 1 1 1 0 1 0 1 -1 1
+```
+
+输出
+
+```
+5
+```
+
+2.输入
+
+```
+-1
+-1 0 1 1 1 0 1 0 1 -1 1
+```
+
+输出
+
+```
+1
+```
+
+代码示例
+```js
+function countLeftMatch(nums, target, index, maxVal) {
+    let left = index - 1;
+    let leftCount = 0;
+    while (left >= 0 && nums[left] === target && leftCount < maxVal - 1) {
+        leftCount++;
+        left--;
+    }
+    return leftCount;
+}
+
+function countRightMatch(nums, target, index, maxVal) {
+    let right = index + 1;
+    let rightCount = 0;
+    while (
+        right < nums.length &&
+        nums[right] === target &&
+        rightCount < maxVal - 1
+    ) {
+        rightCount++;
+        right++;
+    }
+    return rightCount;
+}
+
+let target = 1;
+let nums = "-1 0 1 1 1 0 1 0 1 -1 1".split(" ").map((x) => parseInt(x));
+let maxVal = -Infinity;
+let midDist = 0;
+let result = -1;
+
+for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) {
+        continue;
+    }
+
+    let leftCount = countLeftMatch(nums, target, i, maxVal);
+    if (leftCount > 4) {
+        continue;
+    }
+
+    let rightCount = countRightMatch(nums, target, i, maxVal);
+    let totalCount = leftCount + rightCount;
+    let distToMid = Math.abs(i - Math.floor(nums.length / 2));
+
+    if (totalCount > maxVal || (totalCount === maxVal && distToMid < midDist)) {
+        maxVal = totalCount;
+        result = i;
+        midDist = distToMid;
+    }
+}
+
+console.log(result);
+
+
+```
+
+这个代码有点问题，更改输入为-1时，最后的输出不对
+
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void (async function () {
+    let list = [];
+    while ((line = await readline())) {
+        list.push(line);
+    }
+    let target = Number(list[0]);
+    let nums = list[1].split(" ").map((x) => parseInt(x));
+    function countLeftMatch(nums, target, index, maxVal) {
+        let left = index - 1;
+        let leftCount = 0;
+        while (left >= 0 && nums[left] === target ) {
+            leftCount++;
+            left--;
+        }
+        return leftCount;
+    }
+
+    function countRightMatch(nums, target, index, maxVal) {
+        let right = index + 1;
+        let rightCount = 0;
+        while (
+            right < nums.length &&
+            nums[right] === target 
+        ) {
+            rightCount++;
+            right++;
+        }
+        return rightCount;
+    }
+
+    let maxVal = -Infinity;
+    let midDist = 0;
+    let result = -1;
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== 0) {
+            continue;
+        }
+
+        let leftCount = countLeftMatch(nums, target, i, maxVal);
+        if (leftCount > 4) {
+            continue;
+        }
+
+        let rightCount = countRightMatch(nums, target, i, maxVal);
+        let totalCount = leftCount + rightCount;
+        let distToMid = Math.abs(i - Math.floor(nums.length / 2));
+
+        if (
+            totalCount > maxVal ||
+            (totalCount === maxVal && distToMid < midDist)
+        ) {
+            maxVal = totalCount;
+            result = i;
+            midDist = distToMid;
+        }
+    }
+
+    console.log(result);
+})();
+```
+
+改掉两个函数里面的约束条件后，看似正确了
+
+
 ### 牛客输入模版
 
 ```js
