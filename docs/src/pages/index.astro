@@ -81,7 +81,7 @@ registerMicroApps([
             <ul>
               {featuredPosts.map(({ data }) => (
                 <Card
-                  href={`${import.meta.env.BASE_URL}/posts/${slugify(data)}`}
+                  href={`${import.meta.env.BASE_URL}posts/${slugify(data)}`}
                   frontmatter={data}
                   secHeading={false}
                 />
