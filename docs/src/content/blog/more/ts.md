@@ -11,16 +11,14 @@ tags:
 description:
   "typescript more more more ts"
 ---
-# 目录
+## 目录
 
+## interfaces
 
-# interfaces
-
-
-
-## interfaces call signatures
+### interfaces call signatures
 
 接口调用签名
+
 ```ts
 type FunctionAlias = (input:string)=>number;
 interface CallSignature {
@@ -32,8 +30,7 @@ const typedCallSignature:CallSignature = (input) => input.length;
 
 我们想描述一个带有属性的函数，我们可以在一个对象类型中写一个调用签名（call signature）
 
-
-## index signatures
+### index signatures
 
 ```ts
 interface WordCount{
@@ -49,9 +46,10 @@ counts.banana =2;
 
 ```
 
-### Index signature vs Record<Keys, Type>
+#### Index signature vs Record<Keys, Type>
 
 - Record<Keys, Type>
+
 > Constructs an object type whose property keys are Keys and whose property values are Type. This utility can be used to map the properties of a type to another type.
 
 ```ts
@@ -73,7 +71,7 @@ const cats: Record<CatName, CatInfo> = {
 index signature仅接受string,number或symbol作为键类型。如果您想尝试使用字符串文字类型的联合作为索引签名中的键，则会出现错误
 *建议使用index signature来注解通用的对象，例如键是string类型。但是当您事先知道键时，应当使用Record<Keys, Type>注解特定对象*
 
-## interface extensions
+### interface extensions
 
 ```ts
 interface Writing{
@@ -95,8 +93,7 @@ const novella:Novella = {
 > Interface extensions are a nifty way to represent that one type of entity in your project is a superset (it includes all the members of) another entity.
 They allow you to avoid having to type out the same code repeatedly across multiple interfaces to represent that relationship.
 
-
-### extends multiple interfaces
+#### extends multiple interfaces
 
 ```ts
 interface GivesNumber {
@@ -118,8 +115,7 @@ function useGivesBoth(instance: GivesBothAndEither) {
 }
 ```
 
-### member naming conflicts
-
+#### member naming conflicts
 
 ```ts
 interface MergedProperties {
@@ -151,9 +147,7 @@ const a :MergedMethods ={
 }
 ```
 
-
-# [npm monorepo with ts](https://www.yieldcode.blog/post/npm-workspaces/)
-
+## [npm monorepo with ts](https://www.yieldcode.blog/post/npm-workspaces/)
 
 假定你拥有三个npm项目:
 
@@ -162,6 +156,7 @@ const a :MergedMethods ={
 - worker which is some kind of asynchronous processing worker
 
 目录结构如下
+
 ```zsh
 .
 ├── node_modules
@@ -178,6 +173,7 @@ const a :MergedMethods ={
 根目录的node_modules里放的是所有项目的依赖
 
 根目录下的node_modules包含子项目的依赖的**符号链接**
+
 ```zsh
 .node_modules/
 ├── ...
@@ -194,9 +190,10 @@ const a :MergedMethods ={
 
 > 符号链接主要用于在不同目录之间共享文件、目录以及避免重复文件名等场景。在某些情况下，符号链接也被用于实现文件系统的动态链接，例如动态库、共享库等。
 
-## 配置npm workspace
+### 配置npm workspace
 
 package.json
+
 ```json
 {
   "name": "my-app",
@@ -215,6 +212,7 @@ package.json
 整个项目的配置
 
 tsconfig.json
+
 ```json
 {
   "extends": "@tsconfig/recommended",
@@ -237,6 +235,7 @@ tsconfig.json
 打包配置
 
 tsconfig.build.json
+
 ```json
 {
   "files": [],
@@ -263,14 +262,13 @@ package.json中添加打包命令
 
 更多细节参考[npm docs - workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces)
 
-# ts工具类
+## ts工具类
 
-## Partial
+### Partial
 
 Partial是TypeScript中的一个实用类型，用于创建一个新的类型，表示一个部分对象类型，即仅包括显式定义的属性。
 
 以下是使用Partial实用类型的示例：
-
 
 ```ts
 interface Person {
@@ -294,10 +292,17 @@ const person: PartialPerson = {
 
 我們 then 創建了一個對象person，其類型為PartialPerson，僅包括name和age屬性。如果我們嘗試將city屬性設置在該對象上，TypeScript將不允許這件事，因為它沒有在PartialPerson類型中明確定義。
 
+## tsconfig
 
+### [exclude](https://www.typescriptlang.org/tsconfig#exclude)
 
+Specifies an array of filenames or patterns that should be skipped when resolving include.
 
-# 链接
+```json
+exclude: ["node_modules/**/*"]
+```
+
+## 链接
 
 - [TypeScript 之 More on Functions](https://zhuanlan.zhihu.com/p/434016060?utm_id=0)
 - [TypeScript 中的 Index Signatures](http://www.icodebang.com/article/255272)

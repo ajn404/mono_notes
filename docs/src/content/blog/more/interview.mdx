@@ -2503,8 +2503,161 @@ void (async function () {
     console.log(result);
 })();
 ```
-
 改掉两个函数里面的约束条件后，看似正确了
+
+(2023-10-18)todo:跟
+
+跟
+```js
+const rl = require("readline").createInterface({ input: process.stdin });
+var iter = rl[Symbol.asyncIterator]();
+const readline = async () => (await iter.next()).value;
+
+void (async function () {
+    let list = [];
+    while ((line = await readline())) {
+        list.push(line);
+    }
+    let target = Number(list[0]);
+    let nums = list[1].split(" ").map((x) => parseInt(x));
+    let inde=-1;
+    let maxVal =0;
+    let midDist =nums.length ;
+
+    const readLeft = (index)=>{
+        let i = index-1;
+        let res =0;
+        while(nums[i]===target&&i>=0){
+            res++;
+            i--
+        }
+        return res
+    }
+
+    const readRight = (index)=>{
+        let i = index+1;
+        let res =0;
+        while(nums[i]===target&&i<nums.length){
+            res++;
+            i++;
+        }
+        return res
+    }
+    for(let i = 0 ;i<nums.length;i++){
+            if(nums[i]!==0) continue;
+            let left = readLeft(i);
+            if(left>4) continue;
+            let right = readRight(i);
+            if(right>4) continue;
+            let sum = left+right;
+            if(sum>5) continue;
+            if(sum>maxVal&& Math.abs(i-nums.length/2)<midDist){
+                maxVal = sum;
+                inde=i;
+                midDist = Math.abs(i-nums.length/2);
+            }
+    }
+    console.log(inde)
+})();
+
+```
+
+#### 9.选修课
+
+题目描述
+
+现有两门选修课，每门选修课都有一部分学生选修，每个学生都有选修课的成绩，需要你找出同时选修了两门选修课的学生，
+先按照班级进行划分，班级编号小的先输出，每个班级按照两门选修课成绩和的降序排序，成绩相同时按照学生的学号升序排序。
+
+输入
+
+第一行为第一门选修课学生的成绩，第二行为第二门选修课学生的成绩，
+每行数据中学生之间以英文分号分隔，每个学生的学号和成绩以英文逗号分隔，学生学号的格式为 8 位数字(
+    2 位院系编号+入学年份后 2 位+院系内部 1 位专业编号+所在班级 3 位学号)，
+学生成绩的取值范围为 [0,100] 之间的整数，两门选修课选修学生数的取值范围为 [1-2000] 之间的整数。
+
+输出
+
+同时选修了两门选修课的学生的学号，如果没有同时选修两门选修课的学生输出 NULL，
+否则，先按照班级划分，班级编号小的先输出，每个班级先输出班级编号(学号前五位)，
+然后另起一行输出这个班级同时选修两门选修课的学生学号，学号按照要求排序(按照两门选修课成绩和的降序，成绩和相同时按照学号升序)，
+学生之间以英文分号分隔。
+
+
+举例
+
+输入
+
+```
+01202021,75;01201033,95;01202008,80;01203006,90;01203088,100
+01202008,70;01203088,85;01202111,80;01202021,75;01201100,88
+```
+
+输出
+
+```
+01202
+01202008;01202021
+01203
+01203088
+```
+
+
+```js
+class Student {
+    constructor(id, score) {
+        this.id = id;
+        this.score = score;
+    }
+}
+
+const one ="01202021,75;01201033,95;01202008,80;01203006,90;01203088,100".split(";");
+const two = "01202008,70;01203088,85;01202111,80;01202021,75;01201100,88".split(";");
+const tIds = new Map();
+for (const t of two) {
+    const tStu = t.split(",");
+    const tId = tStu[0];
+    const tScore = parseInt(tStu[1]);
+    tIds.set(tId, tScore);
+}
+const stuComparator = (a, b) => {
+    if (a.score !== b.score) {
+        return b.score - a.score;
+    } else {
+        return a.id.localeCompare(b.id);
+    }
+};
+const map = new Map();
+for (const s of one) {
+    const sStu = s.split(",");
+    const sId = sStu[0];
+    if (tIds.has(sId)) {
+        const sScore = parseInt(sStu[1]);
+        const tScore = tIds.get(sId);
+        const totalScore = sScore + tScore;
+        const cls = sId.substring(0, 5);
+        const student = new Student(sId, totalScore);
+        if (!map.has(cls)) {
+            map.set(cls, new Array());
+        }
+        map.get(cls).push(student);
+    }
+}
+if (map.size === 0) {
+    console.log("NULL");
+} else {
+    const sortedMap = new Map([...map.entries()].sort());
+    for (const [key, value] of sortedMap) {
+        console.log(key);
+        const sortedValue = value.sort(stuComparator);
+        const res = sortedValue.map((stu) => stu.id).join(";");
+        console.log(res);
+    }
+}
+```
+
+说实话，这种题我做不来，感觉就是数据结构的东西，什么类,Map之类的,确实比较薄弱，当然 我好像其他地方也很薄弱
+
 
 
 ### 牛客输入模版
