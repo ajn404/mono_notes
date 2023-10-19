@@ -47,8 +47,8 @@ ICMPv6：用于IPv6网络中的ICMP消息。
 
 通过props控制虚拟dom
 
-<details>
-<summary>from.tsx</summary>
+form.tsx
+
 ```tsx
 export default function Form({
   status = 'empty'
@@ -83,13 +83,9 @@ export default function Form({
   );
 }
 ```
-</details>
 
-<details>
-<summary>App.ts</summary>
 ```ts
 import Form from './Form.js';
-
 let statuses = [
   'empty',
   'typing',
@@ -111,7 +107,6 @@ export default function App() {
   );
 }
 ```
-</details>
 
 
 - 2.Determine what triggers those state changes
@@ -125,8 +120,7 @@ const [error, setError] = useState(null);
 - 4.Remove any non-essential state variables 
 - 5 .Connect the event handlers to set state
 
-<details>
-<summary>App.ts</summary>
+App.ts
 
 ```ts
 import { useState } from 'react';
@@ -199,7 +193,6 @@ function submitForm(answer) {
   });
 }
 ```
-</details>
 
 #### [useReducer](https://react.dev/learn/extracting-state-logic-into-a-reducer#comparing-usestate-and-usereducer)
 
@@ -207,9 +200,6 @@ function submitForm(answer) {
 
 ### 绘制三角形或多边形
 
-
-<details>
-<summary>index.js</summary>
 ```js
    const canvas = document.getElementById('myCanvas');
    const ctx = canvas.getContext('2d');
@@ -233,8 +223,6 @@ function submitForm(answer) {
    ctx.fill();
 ```
 
-</details>
-<canvas id="myCanvas" class="h-[100px] w-[100px] bg-[#000]"/>
 
 ## 基础
 
