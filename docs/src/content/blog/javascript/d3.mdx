@@ -15,8 +15,8 @@ description:
 ---
 
 
-import Tree from '@components/d3/tree'
-import Common from '@components/doodle/common.tsx';
+import Tree from '@components/react/d3/tree'
+import Common from '@components/react/doodle/common.tsx';
 
 
 <Tree client:load/>
@@ -98,14 +98,14 @@ container.append(svg.node());
 ### tree组件
 
 ```mdx
-import Tree from '@components/d3/tree'
+import Tree from '@components/react/d3/tree'
 
 <Tree client:load/>
 ```
 
 ### [齿轮组件](https://observablehq.com/d/f4715544ebbb94fd)
 
-import Gear from '@components/d3/gear'
+import Gear from '@components/react/d3/gear'
 
 <Gear client:load/>
 
@@ -256,7 +256,7 @@ export default Gear;
 </Common>
 
 ```tsx
-import Common from '@components/doodle/common.tsx';
+import Common from '@components/react/doodle/common.tsx';
 
 <Common  client:load>
 @grid: 1 / 100vmin 100vmin / #0a0c27;
@@ -309,7 +309,7 @@ background: conic-gradient(
 
 #### d3.arc() 弧
 
-import PracticeArc from '@components/d3/practice-arc.tsx';
+import PracticeArc from '@components/react/d3/practice-arc.tsx';
 
 <PracticeArc client:load  / >
 
@@ -352,7 +352,7 @@ export default () => {
 
 #### d3.axisBottom() 底部坐标轴
 
-import PracticeAxisBottom from '@components/d3/practice-axis-bottom.tsx';
+import PracticeAxisBottom from '@components/react/d3/practice-axis-bottom.tsx';
 
 <PracticeAxisBottom client:load/>
 

@@ -1,7 +1,7 @@
 {
   "name": "note-monorepo",
   "version": "1.0.0",
-  "description": "",
+  "description": "notes and some packages in one monorepo",
   "main": "index.js",
   "keywords": [
     "pnpm",

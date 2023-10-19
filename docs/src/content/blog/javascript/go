@@ -21,7 +21,7 @@ pnpm --filter @notes/docs i gojs -r
 
 ## getting started
 
-import GoDemo from '@components/gojs/common.tsx'
+import GoDemo from '@components/react/gojs/common.tsx'
 
 <GoDemo client:load/>
 

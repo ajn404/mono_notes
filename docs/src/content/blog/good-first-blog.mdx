@@ -31,13 +31,13 @@ yarn create astro --template satnaing/astro-paper
 
 ### p5js
 
-import Basic from '@components/p5/noise.tsx'
+import Basic from '@components/react/p5/noise.tsx'
 
 <Basic client:load></Basic>
 
 ### text
 
-import Text from '@components/UI/Text.tsx'
+import Text from '@components/react/UI/Text.tsx'
 
 <Text client:load>文字渐变色背景使用</Text>
 
@@ -66,7 +66,7 @@ export default function App() {
 
 ### basic 
 
-import Doodle from '@components/doodle/basic.tsx';
+import Doodle from '@components/react/doodle/basic.tsx';
 
 <Doodle client:only/>
 
@@ -74,7 +74,7 @@ import Doodle from '@components/doodle/basic.tsx';
 
 todo:这个组件会使滑动卡卡的,分析原因
 ```tsx
-import Noise from '@components/doodle/noise.tsx';
+import Noise from '@components/react/doodle/noise.tsx';
 <Noise  client:load/>
 ```
 
@@ -118,7 +118,7 @@ const Doodle: React.FunctionComponent<Props> = ({ children, download }) => {
 
 export default Doodle;
 ```
-import Common from '@components/doodle/common.tsx';
+import Common from '@components/react/doodle/common.tsx';
 
 <Common  client:load>
 @grid: 50x1 / 50vmin;
@@ -153,7 +153,7 @@ border-left: 1px solid #5d81bc
 
 在mdx中使用dooble组件，inner children 中的'\{'需要替换成'\{'
 ```mdx
-import Common from '@components/doodle/common.tsx';
+import Common from '@components/react/doodle/common.tsx';
 
 <Common  client:load>
 @grid: 14 / 50vmin;
