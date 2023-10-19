@@ -6,6 +6,6 @@
 
 ## 欢迎来到猎奇者的世界 👏👏👏👏👏👏
 
-## notes and some packages in one monorepo
+## notes and some packages (some not mine but fantastic) in one monorepo
 
-- **welcome to my fantatic world**
+- **welcome to my fantastic world**
