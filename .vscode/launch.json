@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "pnpm  -F @notes/docs dev",
+      "command": "pnpm run docs",
       "name": "run docs",
       "request": "launch",
       "type": "node-terminal"
@@ -20,6 +20,12 @@
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}/packages/ajn404-vscode-extension"
       ]
+    },
+    {
+        "command": "pnpm run all",
+        "name": "run all",
+        "request": "launch",
+        "type": "node-terminal"
     }
   ]
 }
