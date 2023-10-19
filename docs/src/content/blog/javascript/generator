@@ -1,7 +1,5 @@
 
-
-
-
+## generator  
 
 ```js
 function* fetchData(url) {

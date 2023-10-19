@@ -1,17 +1,21 @@
 ---
-title:  Array.prototype.reduce ( `callbackfn` [ , initialValue ] )
+title:  es6补漏
 author: ajn404
 pubDatetime: 2023-08-30T02:36:27Z
-postSlug: Array-prototype-reduce
+postSlug: es6-plus
 featured: false
 draft: false
 tags:
   - javascript
+  - es6
+  - mdn
 description:
-  "Array.prototype.reduce"
+  "more details about es"
 ---
 
+## 目录
 
+## Array.prototype.reduce ( `callbackfn` [ , initialValue ] )
 
 ### 基本语法
 
@@ -26,7 +30,6 @@ description:
 1 3 3 2 (4) [1, 2, 3, 4]
 1 6 4 3 (4) [1, 2, 3, 4]
 ```
-
 
 ```js
 let a = [1,2,3,4];
