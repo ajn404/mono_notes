@@ -3,8 +3,7 @@ import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import lit from '@astrojs/lit';
 import vue from '@astrojs/vue';
-
-
+// import vue  from "@vitejs/plugin-vue";
 import remarkToc from "remark-toc";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -12,14 +11,15 @@ import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import { remarkReadingTime } from "./plugin/remark-reading-time.mjs";
-// import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import css from 'rollup-plugin-css-only'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-// import resolve from '@rollup/plugin-node-resolve';
 import path from 'path';
-
 import { fileURLToPath } from 'url'
+
+// import commonjs from '@rollup/plugin-commonjs';
+// import resolve from '@rollup/plugin-node-resolve';
+
 
 const __filenameNew = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filenameNew)
@@ -37,6 +37,8 @@ export default defineConfig({
     },
 
     site: "https://ajn404.github.io/mono_notes/", // replace this with your deployed domain
+
+    // plugins: [vue()],
     integrations: [
         tailwind({
             config: {
@@ -44,14 +46,12 @@ export default defineConfig({
             },
         }),
         react({
-            include: ["src/components/vue/react/*"]
+            include: ["**/react/*"]
         }),
         lit({
-            include: ["src/components/vue/lit/*"]
+            include: ["**/lit/*"]
         }),
-        vue({
-            include:["src/components/vue/*"]
-        }),
+        vue({}),
         sitemap(),
         mdx(),
     ],
