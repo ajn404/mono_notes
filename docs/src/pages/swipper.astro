@@ -114,7 +114,7 @@
     import "impress.js/css/impress-demo.css"
 
         //@ts-ignore
-     import("impress.js").then((res)=>{
+     import("impress.js").then(()=>{
                 impress().init();
                 if ("ontouchstart" in document.documentElement) { 
                 (document.querySelector(".hint") as HTMLElement).innerHTML = "<p>Swipe left or right to navigate</p>";

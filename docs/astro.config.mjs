@@ -1,6 +1,10 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
+import lit from '@astrojs/lit';
+import vue from '@astrojs/vue';
+
+
 import remarkToc from "remark-toc";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -39,7 +43,15 @@ export default defineConfig({
                 applyBaseStyles: false,
             },
         }),
-        react({}),
+        react({
+            include: ["src/components/vue/react/*"]
+        }),
+        lit({
+            include: ["src/components/vue/lit/*"]
+        }),
+        vue({
+            include:["src/components/vue/*"],
+        }),
         sitemap(),
         mdx(),
     ],
