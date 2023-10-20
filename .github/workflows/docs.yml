@@ -47,7 +47,6 @@ jobs:
 
       - name: Build Astro site
         run: pnpm  -F @notes/docs build
-             touch docs/dist/.nojekyll
              
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2

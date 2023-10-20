@@ -50,7 +50,7 @@ export default defineConfig({
             include: ["src/components/vue/lit/*"]
         }),
         vue({
-            include:["src/components/vue/*"],
+            include:["src/components/vue/*"]
         }),
         sitemap(),
         mdx(),
