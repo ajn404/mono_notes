@@ -12,7 +12,7 @@ description:
 ---
 
 
-## echarts graph关系图报错：
+## echarts graph关系图报错
 
 <div class="red">
 Cannot set properties of undefined (setting ‘dataIndex‘)
@@ -34,8 +34,7 @@ Cannot set properties of undefined (setting ‘dataIndex‘)
   },]
 ```
 
-
-## 在 React 中,useState 中的 setState 可能会出现延迟生效的情况,这通常是因为 React 的渲染周期和事件循环的运行周期不同步。
+## 在 React 中,useState 中的 setState 可能会出现延迟生效的情况,这通常是因为 React 的渲染周期和事件循环的运行周期不同步
 
 当组件渲染时,React 会先执行 useState 中的 setState 操作,但是这个操作不会立即生效,而是会被延迟到下一个事件循环中执行。这是因为 React 的渲染周期是同步的,而事件循环是异步的,因此在事件循环中执行的 setState 操作可能会在下一个事件循环开始时生效。
 
@@ -70,13 +69,16 @@ export default Example;
 
 在这个例子中,我们使用 useEffect 来处理 setCount 的副作用,确保在每次 setCount 时都立即执行副作用函数 console.log。这样就可以避免 setCount 的延迟生效问题。
 
-
-
 ## react源码本地npm i 报错`...Command failed: autoreconf -ivf...`
-
 
 ```shell
 brew install autoconf automake libtool
 ```
 
 autoreconf 是一个用于自动配置 GNU 软件包的工具，通常在安装或更新源代码包时会自动调用。
+
+## gitaction 执行build 命令报错`javascript heap out of memory`
+
+一开始更改action中的build命令,添加[increase-memory-limit](https://www.npmjs.com/package/increase-memory-limit),命令中添加cross-env,例如`cross-env LIMIT=2048 increase-memory-limit`，这样只是添加运行内存大小，并没有实质解决问题
+
+后来分析提交的文件，才知道是mdx文件太大了，mdx需要做很多js处理，如果不引入组件，其实完全没必要使用mdx，改成md就好了
