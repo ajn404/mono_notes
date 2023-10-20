@@ -14,7 +14,6 @@ description:
 
 ### 目录
 
-
 ### 前端effect 有哪些概念
 
 前端Effect概念有许多解释，但通常它们可以分为以下几个主要类别：
@@ -41,9 +40,7 @@ Random seed，也就是随机数种子，是指在生成随机数时，用于初
 
 总之，随机数种子在编程和科学领域中是非常重要的，它可以帮助我们生成不可预测的随机数序列，从而提高程序的稳定性和可重复性。
 
-
 ### jsencrypt AES
-
 
 JSEncrypt 是一个 JavaScript 库，用于在客户端进行加密和解密数据。它支持多种加密算法，包括 AES（Advanced Encryption Standard，高级加密标准）。
 
@@ -78,14 +75,12 @@ console.log(decryptedData); // 输出：This is a message to be encrypted
 
 总之，JSEncrypt 库提供了丰富的加密算法，包括 AES，可以方便地在客户端进行加密和解密数据。
 
-
 ### token
 
 Token 是指在客户端与服务器之间进行身份验证和授权时使用的令牌。Token 可以分为两种类型：短 Token 和长 Token。
 
 - 短 Token：短 Token 是一种在客户端存储时间较短的令牌，例如用户登录时生成的 Token。短 Token 主要用于身份验证和授权，每次用户登录时都会刷新新的 Token。由于短 Token 的有效期较短，因此在客户端需要定期向服务器请求新的 Token，以确保身份验证的顺利进行。
 - 长 Token：长 Token 是一种在客户端存储时间较长的令牌，例如用户登录后生成的 Token。长 Token 主要用于身份验证和授权，并在一段时间内不需要刷新新的 Token。长 Token 的有效期通常较长，因此在客户端不需要频繁地请求新的 Token。
-
 
 access token
 
@@ -105,15 +100,13 @@ refresh token
 
 总之，长短 Token 各有优缺点，因此在选择使用哪种 Token 时需要考虑应用的安全需求、用户的使用习惯和客户端的资源消耗等方面。
 
-
 Ticket：
 
 Ticket 是一种在客户端与服务器之间进行身份验证和授权时使用的令牌。Ticket 用于登录和身份验证，例如用户名和密码。Ticket 的有效期通常较长，例如在 OAuth2 授权码模式中，Ticket 的有效期通常为几分钟。Ticket 通常由服务器生成，并通过 HTTP 响应头或 JSON 数据返回给客户端。客户端在后续的请求中需要携带 Ticket 来登录和身份验证。
 
-
 ### spa的理解
 
- - 深入理解spa
+- 深入理解spa
 
 Single Page Application（简称 SPA）是一种 Web 应用或 Web 网站，其中所有的交互和用户界面都发生在浏览器中，而不需要与服务器进行交互。SPA 通常使用客户端脚本库（如 Vue.js、React 或 Angular）来构建用户界面，并使用 RESTful API 与后端服务器进行数据交互。
 
@@ -148,8 +141,6 @@ SPA 和 MPA 的优缺点如下：
 
 总之，SPA 和 MPA 都是 Web 应用或 Web 网站的架构设计方式，它们都使用客户端脚本库来构建用户界面，并使用 RESTful API 与后端服务器进行数据交互。选择哪种方式主要取决于应用的需求和特点，以及开发团队的技术栈和经验。
 
-
-
 ### app首次渲染需要依赖10个接口,这10个接口都很重要，加载登陆信息和权限信息的等等，有什么优化方案
 
 针对这种情况，可以采用以下优化方案：
@@ -159,7 +150,6 @@ SPA 和 MPA 的优缺点如下：
 
 预加载
 使用\<link>标签预加载API接口，这样可以减少页面加载时间，提高用户体验。例如，可以使用\<link>标签加载API接口的JSONP数据：
-
 
 ```HTML
 <link rel="preload" href="/api/user/login" as="jsonp" />
@@ -224,6 +214,7 @@ loadData();
 针对服务器性能问题，可以考虑以下优化方案：
 
 调整服务器配置，例如调整线程数、数据库连接数等，以提高服务器的处理能力。
+
 - 使用缓存技术，例如使用CDN缓存静态资源，或者使用分布式缓存如Redis。
 - 使用负载均衡技术和反向代理技术，提高服务器的并发处理能力。
 - 对API接口进行优化，例如减少请求参数、优化数据库查询等，以减少服务器负担。
@@ -243,9 +234,7 @@ loadData();
 交互响应：用户与骨架屏的交互响应实时传递到后台，实现实时的页面响应。
 骨架屏的实现方式也多种多样，可以是使用CSS动画、JavaScript模拟等方式。不同的实现方式可以根据实际需求进行调整，以达到最佳效果。
 
-
 ### bff
-
 
 - 介绍
 
@@ -265,7 +254,6 @@ BFF模式也有一些缺点，例如：
 
 总之，BFF模式是一种将后端和前端的处理逻辑分离的架构设计模式，可以提高系统的可扩展性、稳定性，但同时也增加了请求延迟、后端压力和系统复杂性。在实际应用中，需要根据具体需求进行权衡和选择。
 
-
 - bff与REST API
 
 BFF（Backend Forwarding Frontend）和REST API之间存在一些联系，因为它们都涉及到后端服务与前端进行数据交互的方式。
@@ -276,14 +264,9 @@ REST API是一种基于HTTP的API设计规范，它定义了一组标准的方�
 
 虽然BFF模式和REST API在设计上有一些区别，但它们之间存在着一些联系。BFF模式将请求转发给不同的后端服务，每个后端服务可以使用REST API的方法来处理请求。因此，BFF模式可以与REST API相互配合使用，以提高系统的可扩展性和稳定性。
 
-
-
-###  [0.1+0.2===0.30000000000000004](https://zhuanlan.zhihu.com/p/22328524)
-
+### [0.1+0.2===0.30000000000000004](https://zhuanlan.zhihu.com/p/22328524)
 
 ### [String.prototype.localeCompare](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare)
-
-
 
 localeCompare 方法是 JavaScript 字符串对象的一个方法，用于比较两个字符串的大小。它主要用于比较字符串的 Unicode 值，以便在某些语言环境下进行排序。
 
@@ -292,6 +275,7 @@ localeCompare 方法的语法如下：
 ```js
 str1.localeCompare(str2, [locale, [options]])
 ```
+
 其中，str1 和 str2 是需要比较的两个字符串。locale 是一个可选参数，表示用于比较字符串的语言环境。options 是一个可选参数，表示用于比较字符串的选项。
 
 localeCompare 方法的返回值是一个整数，表示两个字符串的大小关系：
@@ -315,6 +299,56 @@ if (result > 0) {
  console.log(str1 + ' is equal to ' + str2);
 }
 ```
+
 在这个例子中，我们使用了 'en-US' 作为语言环境参数。这将根据英语的规则对 str1 和 str2 进行排序。如果需要使用其他语言环境进行比较，可以将其传递给 localeCompare 方法。
 
 需要注意的是，localeCompare 方法比较的是字符串的 Unicode 值，而不是它们在屏幕上的显示顺序。因此，它可能会受到字符串的字体和显示设置的影响。
+
+### [react DSL](https://zhuanlan.zhihu.com/p/647107471)
+
+React DSL (领域特定语言) 解析器和运行时是一个工具，允许开发人员使用自定义的领域特定语言编写React应用程序。解析器和运行时组成部分一起工作，将使用自定义语言编写的代码转换为React可以理解的格式，然后由React JavaScript运行时执行。
+
+解析器将输入的自定义代码转换为可以理解的格式，通常涉及将输入分词并将其解析为树结构，然后生成相应的React代码。运行时将生成的React代码执行，渲染UI组件并处理任何必要的状态管理。
+
+以下是一个简单的示例，说明如何可能的工作：
+
+```js
+// 输入DSL代码
+const component = {
+ type: 'div',
+ props: {
+   children: 'Hello, world!'
+ }
+}
+
+// 解析器输出
+const parserOutput = {
+ type: 'React.createElement',
+ arguments: [
+   'div',
+   {
+     children: 'Hello, world!'
+   }
+ ]
+}
+
+// 运行时输入
+const runtimeInput = {
+ type: 'React.createElement',
+ arguments: [
+   'div',
+   {
+     children: 'Hello, world!'
+   }
+ ]
+}
+
+// 执行的React代码
+React.createElement('div', {
+ children: 'Hello, world!'
+})
+```
+
+在这个例子中，解析器从输入DSL代码生成解析器输出，然后将解析器输出传递给运行时输入。运行时输入然后被执行，产生与原始React代码直接写入相同的输出。
+
+React DSL解析器和运行时可以用于简化开发过程，使新开发者更容易加入，并提高整体代码质量，通过强制遵循一致的编码风格和减少错误的可能性来提高代码质量。
