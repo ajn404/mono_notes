@@ -1,16 +1,6 @@
-<script setup lang="ts" name="javascript">
-import { EditorView, basicSetup } from "codemirror"
-import { javascript } from "@codemirror/lang-javascript"
-import { ref, shallowRef, nextTick } from 'vue'
-
-nextTick(()=>{
-    const parent = document.querySelector("#editor");
-    let view = new EditorView({
-        extensions: [basicSetup, javascript()],
-        parent: parent || document.body
-    })
-})
-
+<script setup  name="javascript">
+import useJavaScript from './cJavascript';
+useJavaScript();
 </script>
 
 <template>
