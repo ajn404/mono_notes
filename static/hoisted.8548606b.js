@@ -1,0 +1,1 @@
+import{_ as t}from"./preload-helper.5bd54887.js";t(()=>import("./impress.75aea281.js"),[]).then(()=>{impress().init(),"ontouchstart"in document.documentElement&&(document.querySelector(".hint").innerHTML="<p>Swipe left or right to navigate</p>")});

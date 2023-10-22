@@ -1,0 +1,1 @@
+import{S as o}from"./index.71abee58.js";import"./index.9fb136d3.js";import"./directive-helpers.ea3d1013.js";import"./_commonjsHelpers.de833af9.js";import"./preload-helper.5bd54887.js";import"./typeof.b6c3327d.js";import"./_commonjs-dynamic-modules.302442b1.js";const t=document.querySelector(".editor"),i=new o;t?.appendChild(i);
