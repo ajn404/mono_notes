@@ -14,8 +14,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "pnpm  -F @notes/docs dev",
-    "editor": "pnpm -F @notes/playground dev:hmr",
-    "all": "concurrently \"pnpm run docs\" \"pnpm run editor\"",
     "cz": "git add .&&cz&&git push",
     "prepare": "husky install",
     "format:check": "prettier --plugin-search-dir=. --check .",

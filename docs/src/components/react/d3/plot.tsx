@@ -9,7 +9,7 @@ export default () => {
 
   
     const initPot = async () => {
-        let url = `${import.meta.env.BASE_URL}assets/vaccines.json`
+        let url = `${import.meta.env.BASE_URL}/assets/vaccines.json`
         let data:any = await fetch(url);
         data = await data.json();
 
