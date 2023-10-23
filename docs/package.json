@@ -23,6 +23,7 @@
         "@blocksuite/lit": "^0.8.0",
         "@blocksuite/store": "^0.8.0",
         "@codemirror/lang-javascript": "^6.2.1",
+        "@observablehq/plot": "^0.6.11",
         "@react-three/drei": "^9.83.9",
         "@react-three/fiber": "^8.14.1",
         "@resvg/resvg-js": "^2.4.1",

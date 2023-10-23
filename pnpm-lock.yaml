@@ -48,6 +48,7 @@ importers:
       '@blocksuite/store': ^0.8.0
       '@codemirror/lang-javascript': ^6.2.1
       '@divriots/jampack': ^0.11.2
+      '@observablehq/plot': ^0.6.11
       '@react-three/drei': ^9.83.9
       '@react-three/fiber': ^8.14.1
       '@resvg/resvg-js': ^2.4.1
@@ -120,6 +121,7 @@ importers:
       '@blocksuite/lit': 0.8.0_26cea88b77ef44b68177a425ab320e7f
       '@blocksuite/store': 0.8.0_yjs@13.6.8
       '@codemirror/lang-javascript': 6.2.1
+      '@observablehq/plot': 0.6.11
       '@react-three/drei': 9.88.0_20defa9420480634d86802de1d80512f
       '@react-three/fiber': 8.14.5_1a20d7590f3f71155ccfa1ad0027261f
       '@resvg/resvg-js': 2.4.1
@@ -1975,6 +1977,15 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
+  /@observablehq/plot/0.6.11:
+    resolution: {integrity: sha512-7f43OizjVcno6/lZ+IC/bIceud9ZYJa7PCnZTjHCf3utcaGXgLqC1qxpYLzNZTnVHpKTFfqoPY/jOuFC/kSWgA==}
+    engines: {node: '>=12'}
+    dependencies:
+      d3: 7.8.5
+      interval-tree-1d: 1.0.4
+      isoformat: 0.2.1
+    dev: false
+
   /@parse5/tools/0.3.0:
     resolution: {integrity: sha512-zxRyTHkqb7WQMV8kTNBKWb1BeOFUKXBXTBWuxg9H9hfvQB3IwP6Iw2U75Ia5eyRxPNltmY7E8YAlz6zWwUnjKg==}
     dependencies:
@@ -3588,6 +3599,10 @@ packages:
   /binary-extensions/2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
+    dev: false
+
+  /binary-search-bounds/2.0.5:
+    resolution: {integrity: sha512-H0ea4Fd3lS1+sTEB2TgcLoK21lLhwEJzlQv3IN47pJS976Gx4zoWe0ak3q+uYh60ppQxg9F16Ri4tS1sfD4+jA==}
     dev: false
 
   /bl/4.1.0:
@@ -5822,6 +5837,12 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
+  /interval-tree-1d/1.0.4:
+    resolution: {integrity: sha512-wY8QJH+6wNI0uh4pDQzMvl+478Qh7Rl4qLmqiluxALlNvl+I+o5x38Pw3/z7mDPTPS1dQalZJXsmbvxx5gclhQ==}
+    dependencies:
+      binary-search-bounds: 2.0.5
+    dev: false
+
   /intl-segmenter-polyfill-rs/0.1.6:
     resolution: {integrity: sha512-ycLBGCZU5p1z2ERJER0C0K+v87A7qIm2XClMQy1ppu6XWlbM45jGAgBIuoVjSjoK5aY21jm7o4eozDnCnX80Iw==}
     dev: false
@@ -6006,6 +6027,10 @@ packages:
 
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+
+  /isoformat/0.2.1:
+    resolution: {integrity: sha512-tFLRAygk9NqrRPhJSnNGh7g7oaVWDwR0wKh/GM2LgmPa50Eg4UfyaCO4I8k6EqJHl1/uh2RAD6g06n5ygEnrjQ==}
+    dev: false
 
   /isomorphic.js/0.2.5:
     resolution: {integrity: sha512-PIeMbHqMt4DnUP3MA/Flc0HElYjMXArsw1qwJZcm9sqR8mq3l8NYizFMty0pWwE/tzIGH3EKK5+jes5mAr85yw==}

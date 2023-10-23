@@ -101,5 +101,30 @@ if (result > 0) {
 
 需要注意的是，localeCompare 方法比较的是字符串的 Unicode 值，而不是它们在屏幕上的显示顺序。因此，它可能会受到字符串的字体和显示设置的影响。
 
+### [Array.prototype.flatMap()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap)
+
+flatMap 方法接受一个回调函数作为参数，该回调函数用于处理数组中的每个元素，并返回一个新的数组。flatMap 方法会遍历数组中的每个元素，并将回调函数返回的数组中的所有元素合并为一个新数组。
+
+flatMap 方法返回的新数组中的元素顺序与原始数组中的元素顺序相同。如果回调函数返回的数组中的元素不是数组类型，那么它们将被添加到新数组中，而不是将它们作为一个数组添加到新数组中。
+
+以下是一个 flatMap 方法的示例：
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+
+const doubledNumbers = numbers.flatMap(number => [number * 2, number * 3]);
+
+console.log(doubledNumbers); // [2, 4, 6, 8, 10, 3, 6, 9, 12, 15]
+```
+
+在这个示例中，我们有一个名为 numbers 的数组，其中包含一些整数。我们使用 flatMap 方法将 numbers 数组中的每个元素乘以 2 或 3，然后将结果作为一个新数组返回。最后，我们将新数组 doubledNumbers 输出到控制台。
+
+总之，flatMap 方法用于对数组进行变换操作，将数组中的每个元素转换为一个新数组，并将新数组中的所有元素合并为一个新数组。
+
+**flatMap() 方法是一个迭代方法。有关回调函数的详细说明，请参见 Array.prototype.map()。flatMap() 方法等同于调用 map(callbackFn, thisArg) 后再调用 flat(1)——对于每个元素，它都会生成一个新元素数组，并将生成的数组连接起来形成一个新数组。**
+
+
 ## 链接
+
+
 

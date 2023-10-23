@@ -1,0 +1,107 @@
+---
+title: plot in d3
+author: ajn404
+pubDatetime: 2023-10-23 10:34:00
+postSlug: plot
+featured: false
+draft: false
+tags:
+  - algorithm
+  - d3
+  - plot
+  - vaccines
+description:
+  "vaccines plot graph"
+---
+
+import Plot from "@components/react/d3/plot.tsx"
+
+<Plot  client:load/>
+
+```tsx
+import { useEffect, useRef, useState } from "react";
+import * as Plot from "@observablehq/plot";
+import data from "./vaccines.json"
+
+export default () => {
+    const div = useRef<HTMLDivElement | null>(null);
+    const states = ["Alaska", "Ala.", "Ark.", "Ariz.", "Calif.", "Colo.", "Conn.", "D.C.", "Del.", "Fla.", "Ga.", "Hawaii", "Iowa", "Idaho", "Ill.", "Ind.", "Kan.", "Ky.", "La.", "Mass.", "Md.", "Maine", "Mich.", "Minn.", "Mo.", "Miss.", "Mont.", "N.C.", "N.D.", "Neb.", "N.H.", "N.J.", "N.M", "Nev.", "N.Y.", "Ohio", "Okla.", "Ore.", "Pa.", "R.I.", "S.C.", "S.D.", "Tenn.", "Texas", "Utah", "Va.", "Vt.", "Wash.", "Wis.", "W.Va.", "Wyo."]
+    let vaccines = data
+        .flatMap(({ title: disease, data: { values: { data } } }) => data
+            .map(([date, stateIndex, cases]) => ({
+                disease,
+                date: new Date(`${date}-01-01`),
+                state: states[stateIndex],
+                cases
+            })));
+    let introductions = data
+        .map(({ title: disease, data: { chart_options: { vaccine_year } } }) => ({
+            disease,
+            date: new Date(Date.UTC(vaccine_year, (vaccine_year % 1) * 12, 1))
+        }));
+
+
+    const disease = "Measles"
+
+    const initPot = () => {
+        const plot = Plot.plot({
+            // width: 900,
+            // height: 930,
+            marginBottom: 30,
+            padding: 0,
+            round: false,
+            label: null,
+            x: { axis: "top" },
+            color: {
+                scheme: "purd",
+                legend: true,
+                type: "sqrt",
+                label: "每10万人中的病例"
+            },
+            marks: [
+                Plot.barX(vaccines.filter(d => d.disease === disease), {
+                    x: "date",
+                    y: "state",
+                    interval: "year",
+                    inset: 0.5,
+                    fill: "cases",
+                    title: "cases"
+                }),
+                // Plot.ruleX([introductions.find(d => d.disease === disease)], {
+                //     x: "date"
+                // }),
+                Plot.text([introductions.find(d => d.disease === disease)], {
+                    x: "date",
+                    dy: 4,
+                    lineAnchor: "top",
+                    frameAnchor: "bottom",
+                    text: (d) => `${d.date.getUTCFullYear()}\nVaccine introduced`
+                })
+            ],
+            document
+        })
+        return plot;
+    }
+
+
+    useEffect(() => {
+        let plot = initPot();
+        div.current?.appendChild(plot);
+        return () => {
+
+        }
+    })
+
+    return <>
+        <h2>Measles</h2>
+        <div  ref={div} ></div>
+    </>
+}
+```
+
+
+## 链接
+
+- [observer](https://observablehq.com/@observablehq/plot-impact-of-vaccines)
+-  http://graphics.wsj.com/infectious-diseases-and-vaccines/
+-  [observable plot](https://observablehq.com/plot/)
