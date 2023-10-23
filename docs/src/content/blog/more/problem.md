@@ -82,3 +82,7 @@ autoreconf 是一个用于自动配置 GNU 软件包的工具，通常在安装�
 一开始更改action中的build命令,添加[increase-memory-limit](https://www.npmjs.com/package/increase-memory-limit),命令中添加cross-env,例如`cross-env LIMIT=2048 increase-memory-limit`，这样只是添加运行内存大小，并没有实质解决问题
 
 后来分析提交的文件，才知道是mdx文件太大了，mdx需要做很多js处理，如果不引入组件，其实完全没必要使用mdx，改成md就好了
+
+😭
+
+不，并没好
