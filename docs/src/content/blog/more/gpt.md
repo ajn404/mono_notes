@@ -234,6 +234,24 @@ loadData();
 交互响应：用户与骨架屏的交互响应实时传递到后台，实现实时的页面响应。
 骨架屏的实现方式也多种多样，可以是使用CSS动画、JavaScript模拟等方式。不同的实现方式可以根据实际需求进行调整，以达到最佳效果。
 
+涉及到一个叫做[Progressive Hydration](https://developer.aliyun.com/article/1256959)的概念
+
+### Progressive Hydration
+
+Progressive Hydration 是一种在应用程序加载时，逐渐地、渐进地加载数据的技术。与传统的全加载（All-at-Once）hydration 相比，Progressive Hydration 允许在应用程序加载时仅加载所需的数据，从而提高应用程序的性能和响应速度。
+
+Progressive Hydration 通常使用 JavaScript 中的数据驱动组件（Data-Driven Components）和 React 的状态管理库（如 React-Redux）来实现。在这些库中，组件可以根据需要加载数据，并在数据加载完成后将其传递给组件。
+
+Progressive Hydration 的优势包括：
+
+- 减少页面加载时间：Progressive Hydration 允许在应用程序加载时仅加载所需的数据，从而减少页面加载时间。
+- 改善用户体验：Progressive Hydration 可以在应用程序加载期间提供一些基本数据，从而提高用户体验。
+- 提高应用程序性能：Progressive Hydration 允许在应用程序加载期间执行后台任务，从而提高应用程序性能。
+
+Progressive Hydration 适用于需要大量数据加载的应用程序，例如 CMS 应用程序、电子商务网站或新闻网站。但是，Progressive Hydration 可能不适用于所有应用程序，因为它需要额外的库和配置。
+
+总之，Progressive Hydration 是一种在应用程序加载时逐渐加载数据的技术，可以提高应用程序的性能和响应速度。
+
 ### bff
 
 - 介绍
