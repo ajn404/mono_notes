@@ -26,6 +26,10 @@ const __dirname = path.dirname(__filenameNew)
 console.log('dir name', __dirname);
 // https://astro.build/config
 export default defineConfig({
+    experimental:{
+        assets:true,
+        viewTransitions: true,
+    },
     server: {
         port: 3333,
         open: true,
