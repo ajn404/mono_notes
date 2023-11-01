@@ -1,29 +1,27 @@
 import { defineConfig } from "astro/config";
+
+import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import lit from '@astrojs/lit';
 import vue from '@astrojs/vue';
-// import vue  from "@vitejs/plugin-vue";
+
+import sitemap from "@astrojs/sitemap";
+import copy from 'rollup-plugin-copy';
+import css from 'rollup-plugin-css-only'
+
+import { remarkReadingTime } from "./plugin/remark-reading-time.mjs";
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkToc from "remark-toc";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import remarkCollapse from "remark-collapse";
-import sitemap from "@astrojs/sitemap";
-import mdx from "@astrojs/mdx";
-import { remarkReadingTime } from "./plugin/remark-reading-time.mjs";
-import copy from 'rollup-plugin-copy';
-import css from 'rollup-plugin-css-only'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+
 import path from 'path';
 import { fileURLToPath } from 'url'
 
-// import commonjs from '@rollup/plugin-commonjs';
-// import resolve from '@rollup/plugin-node-resolve';
-
-
 const __filenameNew = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filenameNew)
-console.log('dir name', __dirname);
 // https://astro.build/config
 export default defineConfig({
     experimental:{
